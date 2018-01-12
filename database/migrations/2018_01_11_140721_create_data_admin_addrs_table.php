@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserAddrTable extends Migration
+class CreateDataAdminAddrsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateUserAddrTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_addr', function (Blueprint $table) {
+        Schema::create('data_admin_addrs', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->string('name', 50)->unique();
             $table->string('password',255)->unique();
-            $table->string('email',255)->unique();
-            $table->string('phone',11)->unique();
-            $table->smallInteger('status')->unique();
-            // $table->timestamps();
+            $table->integer('status');
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -32,6 +28,6 @@ class CreateUserAddrTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_addr');
+        Schema::dropIfExists('data_admin_addrs');
     }
 }
