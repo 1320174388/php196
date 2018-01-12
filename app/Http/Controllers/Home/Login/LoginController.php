@@ -68,10 +68,10 @@ class LoginController extends Controller
         $data = $request->except('_token');
 
 
-        //判断验证码是否正确
-        // if(($data['code']) != session('code')){
-        // 	return back()->with('errors','验证码错误');
-        // }
+        // 判断验证码是否正确
+        if(($data['code']) != session('code')){
+        	return back()->with('errors','验证码错误');
+        }
 
         //判断是否是用户名邮箱还是手机号登录
         $name='';
@@ -125,7 +125,7 @@ class LoginController extends Controller
 		//验证传输过来的内容是否符合规则
 		
 		$this->validate($request, [
-            'name' => ['required','between:6,18','regex:/^[a-zA-Z]+[0-9]+/'],
+            'name' => ['required','between:6,18','regex:/[a-zA-Z]+[0-9]*/'],
             'email' => 'required|email',
             'password' => 'required|between:6,18|alpha_dash',
             'repwd' => 'required|same:password',
@@ -144,8 +144,8 @@ class LoginController extends Controller
 
 		  //判断验证码是否正确
   		if(($request['code']) != session('code')){
-          	return back()->with('errors','验证码错误');
-          }
+          return back()->with('errors','验证码错误');
+      }
 
 		  //获取要用的内容
         $data = $request->except('_token','code','repwd');

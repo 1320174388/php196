@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 //登录页面
 Route::get('/login','Home\Login\LoginController@login');
 //登录验证路由
@@ -30,3 +29,20 @@ Route::post('/zcajax','Home\Login\LoginController@zcajax');
 
 //验证码路由
 Route::get('/code/captcha/{tmp}', 'Home\Login\LoginController@captcha');
+
+Route::resource('/admin/user', 'Admin/UserController@index');
+
+//后台登录页面路由
+Route::get('admin/login','Admin\LoginController@login');
+
+//登录页面的验证码
+Route::get('admin/yzm','Admin\LoginController@yzm');
+
+//登录页面的处理逻辑
+Route::post('admin/dologin','Admin\LoginController@dologin');
+
+//加密演示
+Route::get('crypt','Admin\LoginController@crypt');
+
+//session
+Route::get('session','Admin\LoginController@session');
