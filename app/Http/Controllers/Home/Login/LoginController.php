@@ -40,7 +40,7 @@ class LoginController extends Controller
 	    // 获取验证码的内容
 	    $phrase = $builder->getPhrase();
 	    // 把内容存入session
-	    \Session::flash('code', $phrase);
+	    \Session::put('code', $phrase);
 	    // 生成图片
 	    header("Cache-Control: no-cache, must-revalidate");
 	    header("Content-Type:image/jpeg");
@@ -125,14 +125,14 @@ class LoginController extends Controller
 		//验证传输过来的内容是否符合规则
 		
 		$this->validate($request, [
-            'name' => ['required','between:6,18','regex:/[a-zA-Z]+[0-9]*/'],
+            'name' => ['required','between:6,18','regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/'],
             'email' => 'required|email',
             'password' => 'required|between:6,18|alpha_dash',
             'repwd' => 'required|same:password',
         ],[
         	'name.required' => '请输入账号',
         	'name.between' => '账号的长度必须在6-18位',
-          'name.regex' => '账号的第一位必须为字母',
+          'name.regex' => '账号必须有字母和数字',
         	'password.required'=> '请输入密码',
         	'password.between' => '密码的长度必须在6-18位',
         	'password.alpha_dash' => '密码必须是字母数字下划线',
@@ -142,34 +142,40 @@ class LoginController extends Controller
         	'repwd.same' => '确认密码与密码不一致',
         ]);
 
+
+       //让验证码都变成小写
+      strtolower($request['code']);
+      strtolower(session('code'));
+
 		  //判断验证码是否正确
-  		if(($request['code']) != session('code')){
+  		if($request['code'] != session('code')){
+
           return back()->with('errors','验证码错误');
       }
-
+      
 		  //获取要用的内容
-        $data = $request->except('_token','code','repwd');
+      $data = $request->except('_token','code','repwd');
 
         //加密密码
-        $data['password'] = Crypt::encrypt($data['password']);
-        $data['status'] = 1;
+      $data['password'] = Crypt::encrypt($data['password']);
+      $data['status'] = 1;
 
         //实例化一个model表
-        $data_user = new data_user;
+      $data_user = new data_user;
 
         //添加数据
-        foreach($data as $k=>$v){
-        	$data_user->$k = $v;
-        }
+      foreach($data as $k=>$v){
+        $data_user->$k = $v;
+      }
         //发送添加
-        $res = $data_user -> save();
+      $res = $data_user -> save();
 
         //判断是否添加成功
-        if($res){
-       		return redirect('/login')->with('errors','注册成功,请登录');
-       	}else{
-       		return back()->with('errors','注册失败')->withInput();;
-       	}
+      if($res){
+       	return redirect('/login')->with('errors','注册成功,请登录');
+      }else{
+       	return back()->with('errors','注册失败')->withInput();;
+      }
       
 	}
 

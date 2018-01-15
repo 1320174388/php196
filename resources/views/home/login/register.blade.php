@@ -8,7 +8,8 @@
 @section('content')
   <div  class="alert alert-danger">
     <ul>
-      <li id="niubiclass" style="color:red"></li>
+      <li id="errorname" class="error" style="color:red"></li>
+      <li id="erroremail" class="error" style="color:red"></li>
     </ul>
   </div>
 
@@ -62,25 +63,34 @@
 
       var val = $(this).val();
       
-      // alert(name);
       $.ajax({
           type: "post",
           url: "{{ url('/zcajax') }}",
           data: {'name':name,'val':val},
           success:function(data){
-            if(data==1){
-              $('#niubiclass').text('用户名已存在');
-              $('#btn').on('click',function(){
-                return false;
-              })
-            }else if(data==2){
-              $('#niubiclass').text('邮箱已被注册');
-              $('#btn').on('click',function(){
-                return false;
-              })
-            }else{
-              $('#niubiclass').text('');
-              $('#btn').unbind('click');
+            if(name=='name'){
+              if(data==1){
+                $('#error'+name).text('用户名已存在');
+                $('#btn').on('click',function(){
+                  return false;
+                })
+              }else{
+                $('#error'+name).text('');
+                $('#btn').unbind('click');
+              }
+
+            }
+            
+            if(name=='email'){
+              if(data==2){
+                $('#error'+name).text('邮箱已被注册');
+                $('#btn').on('click',function(){
+                  return false;
+                })
+              }else{
+                $('#error'+name).text('');
+                $('#btn').unbind('click');
+              }
             }
           },
 
