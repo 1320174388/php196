@@ -44,3 +44,18 @@ Route::get('crypt','Admin\LoginController@crypt');
 
 //session
 Route::get('session','Admin\LoginController@session');
+
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
+
+
+//后台首页
+    Route::get('index','LoginController@index');
+
+//退出登录
+    Route::get('logout','LoginController@logout');
+
+//用户模块
+    Route::resource('user','UserController');
+
+
+});

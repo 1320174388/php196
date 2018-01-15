@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -16,6 +15,7 @@ require_once app_path().'/Org/code/Code.class.php';
 use Gregwar\Captcha\PhraseBuilder;
 use Illuminate\Support\Facades\Input;
 use App\Models\data_admin_addr;
+use Session;
 
 class LoginController extends Controller
 {
@@ -28,7 +28,7 @@ class LoginController extends Controller
      */
     public function login()
     {
-        return view('admin.login');
+        return view('admin.login.login');
     }
 
     /*
@@ -97,7 +97,7 @@ class LoginController extends Controller
           return back()->with('errors','密码错误');
         }
 
-dd(11);
+// dd(11);
 
 
 
@@ -106,10 +106,22 @@ dd(11);
 
         Session::put('user',$user);
 
-        // return redirect('admin/index');
+        return redirect('admin/index');
 
     }
-    
+
+    public function index()
+    {
+        return view('admin.user.index');
+    }
+
+    // 退出登录
+    public function logout()
+    {
+        session()->forget('user');
+        return redirect('admin/login');
+    }
+
      /*public function crypt()
     {
 
