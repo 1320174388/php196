@@ -55,19 +55,19 @@
     <div  id="container" id="map_wrap" class="map-wrap"></div> 
     <div class="map-navbar group">
      <div id="city_section" class="bs-dropdown module-city">
-      <select id="address_option" class="city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
-        <option value="北京">北京</option>
-        <option value="上海">上海</option>
-        <option value="广东">广东</option>
-        <option value="深圳">深圳</option>
+      <select id="selecte_1" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
+        <option value="0">北京</option>
+        <option value="1">上海</option>
+        <option value="2">广东</option>
+        <option value="3">深圳</option>
       </select>
-      <select id="address_option" class="city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
-        <option value="北京市">北京市</option>
-        <option value="上海市">上海市</option>
+      <select id="selecte_2" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
+        <option value="0">北京市</option>
+        <option value="1">上海市</option>
       </select>
-      <select id="address_option" class="city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
-        <option value="昌平区">昌平区</option>
-        <option value="朝阳区">朝阳区</option>
+      <select id="selecte_3" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
+        <option value="0">昌平区</option>
+        <option value="1">朝阳区</option>
       </select>
      </div>
      <div class="module-locate map_search"> 
@@ -109,7 +109,8 @@
   <script src="http://map.qq.com/api/js?v=2.exp&amp;key=IZIBZ-73ARP-2SPDH-LXOGG-BRP3K-4WFCZ"></script>
   <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
     <script>
-
+      var lat = null;
+      var lng = null;
       var geocoder,map,marker = null;
       var init = function(event) {
           var map = new qq.maps.Map(document.getElementById("container"),{
@@ -141,25 +142,21 @@
               map:map,
               animation: qq.maps.MarkerAnimation.BOUNCE,
               title:'点击购物'
-            }); 
+            });
             marker.setIcon(icon);  
             qq.maps.event.addListener(map, 'click', function(event) {
                 marker.setMap(null);      
             });
+
+            lat = event.latLng.lat;
+            lng = event.latLng.lng;
+            geocoder.getAddress(event.latLng);
           });
 
           //调用地址解析类
           geocoder = new qq.maps.Geocoder({
               complete : function(result){
                 map.setCenter(result.detail.location);
-                //创建标记
-                var marker = new qq.maps.Marker({
-                    map:map,
-                    position: result.detail.location,
-                    animation: qq.maps.MarkerAnimation.BOUNCE,
-                    title:'点击购物'
-                });
-                marker.setIcon(icon);
                 //添加到提示窗
                 var info = new qq.maps.InfoWindow({
                     map: map
@@ -168,10 +165,17 @@
           });
       }
 
-      function codeAddress() {
+      var sel_1 = $('selecte_1').val();
+      var sel_2 = $('selecte_1').val();
+      var sel_3 = $('selecte_1').val();
+
+      function codeAddress(addr) {
           var address = document.getElementById("address").value;
+          if(addr){
+            address = addr;
+          }
           //通过getLocation();方法获取位置信息值
-          geocoder.getLocation(address);
+          geocoder.getLocation(sel_1+'-'+sel_2+'-'+sel_3+address);
       }
 
       //异步加载地图库函数文件
@@ -187,10 +191,13 @@
       }
         
       window.onload = loadScript; // dom文档加载结束开始加载 此段代码
-
-      $('#address_option').on('change',function(){
-        console.log($(this).index());
-        var addr = $(this).val();
+      $('.address_option').on('change',function(){
+          var val = $(this).val(); // 获取select选择的val值
+          var addr = $(this).children().eq(val).text(); // 获取当前option内容
+          sel_1 = $('selecte_1').val();
+          sel_2 = $('selecte_1').val();
+          sel_3 = $('selecte_1').val();
+          geocoder.getLocation();
       });
 
   </script>
