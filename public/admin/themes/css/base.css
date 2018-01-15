@@ -1,0 +1,527 @@
+/*
+*  author: AUI
+*  base.css
+*  http://azenui.com/
+*  http://www.a-ui.cn/
+*/
+::-webkit-scrollbar {
+	display: none;
+}
+
+::-moz-placeholder {
+	color: #aaa;
+}
+
+::-webkit-input-placeholder {
+	color: #aaa;
+}
+
+:-ms-input-placeholder {
+	color: #aaa;
+}
+
+html {
+	color: #333;
+}
+
+body {
+	min-width: 1200px;
+}
+
+html,body {
+	margin: 0;
+	height: 100%;
+	font-family: "Myriad Set Pro","Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+img {
+	border: 0;
+}
+
+body {
+	background: #fff;
+	color: #666;
+	font: 12px/150% Arial,Verdana, "microsoft yahei";
+}
+
+html, body, div, dl, dt, dd, ol, ul, li, h1, h2, h3, h4, h5, h6, p, blockquote, pre, button, fieldset, form, input, legend, textarea, th, td {
+	margin: 0;
+	padding: 0;
+}
+
+article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+audio,canvas,progress,video {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+a {
+	text-decoration: none;
+	color: #08acee;
+}
+
+a:active,a:hover {
+	outline: 0;
+}
+
+button {
+	outline: 0;
+}
+
+mark {
+	color: #000;
+	background: #ff0;
+}
+
+small {
+	font-size: 80%;
+}
+
+img {
+	border: 0;
+}
+
+button,input,optgroup,select,textarea {
+	margin: 0;
+	font: inherit;
+	color: inherit;
+	outline: none;
+}
+
+li {
+	list-style: none;
+}
+
+i {
+	font-style: normal;
+}
+
+a {
+	color: #666;
+}
+
+a:hover {
+	color: #000;
+}
+
+em {
+	font-style: normal;
+}
+
+h2, h3 {
+	font-family: "microsoft yahei";
+	font-weight: 100;
+}
+
+table {
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-spacing: 0;
+}
+
+table td {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+/*table tr:nth-child(odd) {*/
+/*background: #F4F4F4;*/
+/*}*/
+table td:nth-child(even) {
+	color: #666;
+}
+
+table tr:nth-child(2) {
+	background: #fff;
+	color: #888;
+}
+
+table.aui-tab-data tr {
+	background: #fff;
+}
+
+table.aui-tab-data tr:nth-child(odd) {
+	background-color: #F5F5F5;
+}
+
+table.aui-tab-data tr th {
+	padding: 10px;
+}
+
+table.aui-tab-data tr td {
+	padding: 10px;
+}
+
+.clearfix::after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.clearfix {
+}
+
+.finance-btn-ma {
+	margin-left: 50px;
+}
+
+/* m_zlxg */
+.m_zlxg {
+	width: 84px;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+	float: left;
+	margin: 0 10px 0 0;
+	display: inline;
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAAAcCAIAAABwAg+XAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpGNUQzRDQyMUE3MUFFMzExQjQ3OEJBODQ3QkEwQ0ZEMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4REZDRENENEQwRUQxMUU3QkU3MkNFQTEzRjJFMUU2NiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4REZDRENEM0QwRUQxMUU3QkU3MkNFQTEzRjJFMUU2NiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjk0NkFDMUQzRjNBMzExRTM4NzY4ODgzNzYzRkJCREUxIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjk0NkFDMUQ0RjNBMzExRTM4NzY4ODgzNzYzRkJCREUxIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+933MRQAAAYRJREFUeNrkmcHNgzAMheMkbRmgUkW34NANULlxoDt0pc7VIfp3BhDYfeCfiHaE2AjkA5cv79kxgV6vl7MaEXd5PptiFnHk3Pv9N8NPuCxFIGHx/8pHJ8b8PgVa4R1HU+jM5H2CJ1u6C20aniO2RR94ZF7hnc8VcxiG/X4vS8DqzDwnASXvc8ZeaptBPo4jES073NzXQwjphZzhITXIY4x4ao4nvGACHlKDHPqr8trh4QUT8En/BD9N0+94m2s8Ho/n8wn9d7td3/eXy+V+v3+tS8bwt9vtcDjA9hC8KIq2bWEBbXv5w59Op7quITuYr9drWZYg1xIwUfNN0xyPR6wCknmaI2JmEzWPgO27rtME2H4JcZw/vJq8qiqtc1S+DnnkDdge5Bhs0kLobKe7vYmaV2Cdc7atzsSEt9U8Dfwm4H/U1tzKVqci62CjLkhfeJtun+kRnkdbX9BIz6rExTCfV8okFFZ4MXaSQ1G2+7wteHbiEzwZ+LD9Ul5GrXuy/LvqI8AA10+o8SbRk4sAAAAASUVORK5CYII=');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.m_zlxg p {
+	width: 71px;
+	padding-left: 10px;
+	overflow: hidden;
+	line-height: 30px;
+	color: #333333;
+	font-size: 12px;
+	font-family: "å¾®è½¯é›…é»‘";
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.m_zlxg2 {
+	position: absolute;
+	top: 28px;
+	border: 1px solid #e5e5e5;
+	background: #fff;
+	width: 84px;
+	display: none;
+	max-height: 224px;
+	-height: 224px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	white-space: nowrap;
+}
+
+.m_zlxg2 li {
+	line-height: 28px;
+	white-space: nowrap;
+	padding-left: 10px;
+	color: #333333;
+	font-size: 12px;
+}
+
+.m_zlxg2 li:hover {
+	color: #7a5a21;
+	background: #ddd;
+}
+
+.finance-city-form {
+	float: left;
+	position: relative;
+}
+
+.finance-btn-ma1 {
+	margin-left: 175px;
+}
+
+/*---------------------------------------date css--------------------------------------------*/
+.date_picker {
+	width: 238px;
+	height: 28px;
+	line-height: 28px;
+	padding-left: 8px;
+}
+
+.date_selector, .date_selector * {
+	width: auto;
+	height: auto;
+	border: none;
+	background: none;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	text-decoration: none;
+}
+
+.date_selector {
+	background: #fbfbfb;
+	border: 1px solid #ccc;
+	padding: 10px;
+	z-index: 100000;
+	display: none;
+	margin-top: -78px;
+	margin-left: -170px;
+	border-radius: 3px;
+	box-shadow: 0 0 5px #aaa;
+	width: 270px;
+	left: 0;
+	position: absolute;
+}
+
+.date_selector_ieframe {
+	position: absolute;
+	z-index: 99999;
+	display: none;
+}
+
+.date_selector .nav {
+	width: 240px;
+}
+
+.date_selector .nav p {
+	clear: none;
+}
+
+.date_selector .month_nav, .date_selector .year_nav {
+	margin: 0 0 3px 0;
+	padding: 0;
+	display: block;
+	position: relative;
+	text-align: center;
+}
+
+.date_selector .month_nav {
+	float: left;
+	width: 55%;
+}
+
+.date_selector .year_nav {
+	float: right;
+	width: 42%;
+	margin-right: -8px;
+}
+
+.date_selector .month_name, .date_selector .year_name {
+	font-weight: bold;
+	line-height: 20px;
+}
+
+.date_selector .button {
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 18px;
+	height: 18px;
+	line-height: 16px;
+	font-weight: bold;
+	color: #5985c7;
+	text-align: center;
+	font-size: 12px;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+.date_selector .button:hover, .date_selector .button.hover {
+	background: #5985c7;
+	color: #fff;
+	cursor: pointer;
+	border-color: #3a930d;
+}
+
+.date_selector .prev {
+	left: 0;
+}
+
+.date_selector .next {
+	right: 0;
+}
+
+.date_selector table {
+	border-spacing: 0;
+	border-collapse: collapse;
+	clear: both;
+	margin: 0;
+	width: 220px;
+}
+
+.date_selector th, .date_selector td {
+	width: 2.5em;
+	height: 2em;
+	padding: 0 !important;
+	text-align: center !important;
+	color: #666;
+	font-weight: normal;
+}
+
+.date_selector th {
+	font-size: 12px;
+}
+
+.date_selector td {
+	border: 1px solid #f1f1f1;
+	line-height: 2em;
+	text-align: center;
+	white-space: nowrap;
+	color: #5985c7;
+	background: #fff;
+}
+
+.date_selector td.today {
+	background: #eee;
+}
+
+.date_selector td.unselected_month {
+	color: #ccc;
+}
+
+.date_selector td.selectable_day {
+	cursor: pointer;
+}
+
+.date_selector td.selected {
+	background: #2b579a;
+	color: #fff;
+	font-weight: bold;
+}
+
+.date_selector td.selectable_day:hover, .date_selector td.selectable_day.hover {
+	background: #5985c7;
+	color: #fff;
+}
+
+.finance-mask {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.4;
+	background: #000;
+	opacity: 0.2;
+	filter: Alpha(opacity=20);
+	z-index: 920;
+}
+
+.template-popup {
+	width: 360px;
+	height: 220px;
+	position: fixed;
+	z-index: 9999;
+	left: 50%;
+	top: 50%;
+	margin-left: -180px;
+	margin-top: -110px;
+	text-align: center;
+	background: #fff;
+	padding: 0 15px;
+}
+
+.template-popup-title {
+	width: 100%;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	position: relative;
+}
+
+.template-popup-title h2 {
+	font-size: 14px;
+	text-align: center;
+}
+
+.template-popup-title a {
+	float: right;
+}
+
+.template-popup-input select {
+	background: #f5f5f5;
+	border-radius: 2px;
+	display: inline-block;
+	width: 100%;
+	border: 1px solid #999;
+	height: 32px;
+	margin-top: 1px;
+	vertical-align: middle;
+	background: #fff;
+	padding-left: 10px;
+	margin-bottom: 10px;
+}
+
+.template-popup-input textarea {
+	width: 100%;
+	background: #f5f5f5;
+	border: 1px solid #e5e5e5;
+	padding: 10px;
+	height: 130px;
+	resize: none
+}
+
+.template-popup-button {
+	padding-top: 5px;
+}
+
+.template-popup-button a {
+	background: #fff;
+	border: 1px solid #1e82d4;
+	display: block;
+	float: left;
+	color: #1e82d4;
+	font-size: 12px;
+	text-decoration: inherit;
+	width: 100px;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+}
+
+.template-popup-button .template-popup-button-cancel {
+	background: #1e82d4;
+	color: #fff;
+	border: 1px solid #1e82d4;
+	float: right;
+}
+
+.finance-close {
+	width: 15px;
+	height: 15px;
+	display: block;
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAA3ElEQVQ4T6WSsQ2DMBBFbZBwywimQKJkgeyQBdJkkijKAJGyQCaIWCASI6Q8mcYjpHWBHR0KFhgfRIrb8/v2/f85++NwZKuqktbaWinVbGmVZVmnaZoDQDvAUspcCNFyzq8AcKcEvmDT9/2+67rXAP8iEILIeHhNIAYu4JgABUbhqYBz7pEkyXHcMfRi9u3psCiKnRDiaa29KKXOMROj8PhVY8why7IblcICDndci3EGU+ZQAh5ec5WK0deTMdZSroZFcs6dsMr+Zew3AOitbuMKeEdr/Saj2hLB+Qe2IJsQBK5uIgAAAABJRU5ErkJggg==');
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+	right: 5px;
+	top: 10px;
+}
+
+.finance-export {
+	background: #16b89d;
+	color: #fff;
+	width: 120px;
+	text-align: center;
+	height: 38px;
+	line-height: 38px;
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.finance-listBg-title .red {
+	color: #ee1212;
+}
