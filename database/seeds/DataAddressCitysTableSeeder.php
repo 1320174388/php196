@@ -12,10 +12,6 @@ class DataAddressCitysTableSeeder extends Seeder
      */
     public function run()
     {
-        
-
-        \DB::table('data_address_citys')->delete();
-        
         \DB::table('data_address_citys')->insert(array (
             0 => 
             array (
