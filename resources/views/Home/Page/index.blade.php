@@ -73,7 +73,7 @@
      <div class="module-locate map_search"> 
       <div class="map-block dark search-bar group"> 
        <input id="address" class="search-input" type="search" placeholder="请输入你的订餐地址（学校，写字楼或街道）" /> 
-       <a class="glyph-search search-btn search_btn" onclick="codeAddress()" role="button"></a> 
+       <a id="aa" class="glyph-search search-btn search_btn" onclick="codeAddress()" role="button"></a> 
       </div> 
      </div> 
      <div id="entry" class="map-block module-locate module-entry ui_hide"> 
@@ -135,24 +135,6 @@
                 anchor
             );
 
-          //添加监听事件   获取鼠标单击事件
-          qq.maps.event.addListener(map, 'click', function(event) {
-            var marker=new qq.maps.Marker({
-              position:event.latLng, 
-              map:map,
-              animation: qq.maps.MarkerAnimation.BOUNCE,
-              title:'点击购物'
-            });
-            marker.setIcon(icon);  
-            qq.maps.event.addListener(map, 'click', function(event) {
-                marker.setMap(null);      
-            });
-
-            lat = event.latLng.lat;
-            lng = event.latLng.lng;
-            geocoder.getAddress(event.latLng);
-          });
-
           //调用地址解析类
           geocoder = new qq.maps.Geocoder({
               complete : function(result){
@@ -161,21 +143,37 @@
                 var info = new qq.maps.InfoWindow({
                     map: map
                 });
+
+                var marker = new qq.maps.Marker({
+                  position:result.detail.location,
+                  map:map,
+                  animation: qq.maps.MarkerAnimation.BOUNCE,
+                  title:'点击购物'
+                });
+                marker.setIcon(icon);
+                info.open(); 
+                info.setContent('<div style="text-align:center;white-space:nowrap;'+'margin:20px 50px;"><b><a href="#">点&nbsp;击&nbsp;购&nbsp;物</a></b></div>');
+                info.setPosition(result.detail.location);
+                $("#aa").on('click', function(){
+                    marker.setMap(null); 
+                    info.close();
+                });
               }
           });
       }
 
-      var sel_1 = $('selecte_1').val();
-      var sel_2 = $('selecte_1').val();
-      var sel_3 = $('selecte_1').val();
+      var sel_1 = $('#selecte_1').children().eq(0).text();
+      var sel_2 = $('#selecte_2').children().eq(0).text();
+      var sel_3 = $('#selecte_3').children().eq(0).text();
 
-      function codeAddress(addr) {
+      function codeAddress() {
           var address = document.getElementById("address").value;
-          if(addr){
-            address = addr;
+          if(address){
+            //通过getLocation();方法获取位置信息值
+            geocoder.getLocation(sel_1+'-'+sel_2+'-'+sel_3+'-'+address);
+          }else{
+            geocoder.getLocation(sel_1+'-'+sel_2+'-'+sel_3);
           }
-          //通过getLocation();方法获取位置信息值
-          geocoder.getLocation(sel_1+'-'+sel_2+'-'+sel_3+address);
       }
 
       //异步加载地图库函数文件
@@ -192,12 +190,20 @@
         
       window.onload = loadScript; // dom文档加载结束开始加载 此段代码
       $('.address_option').on('change',function(){
+        
           var val = $(this).val(); // 获取select选择的val值
           var addr = $(this).children().eq(val).text(); // 获取当前option内容
-          sel_1 = $('selecte_1').val();
-          sel_2 = $('selecte_1').val();
-          sel_3 = $('selecte_1').val();
-          geocoder.getLocation();
+
+          val1 = $('#selecte_1').val();
+          val2 = $('#selecte_2').val();
+          val3 = $('#selecte_3').val();
+
+          sel_1 = $('#selecte_1').children().eq(val1).text();
+          sel_2 = $('#selecte_2').children().eq(val2).text();
+          sel_3 = $('#selecte_3').children().eq(val3).text();
+
+          console.log(sel_1,sel_2,sel_3);
+          codeAddress();
       });
 
   </script>
