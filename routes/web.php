@@ -59,3 +59,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 	Route::resource('user','UserController');
 
 });
+
+// 店家后台
+Route::get('/shop/register','Shop\ShopController@register');
+Route::post('/shop/doreg','Shop\ShopController@doreg');
