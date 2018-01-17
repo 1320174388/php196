@@ -24,6 +24,17 @@ Route::get('/register','Home\Login\LoginController@register');
 Route::post('/register','Home\Login\LoginController@Prove');
 //验证账号密码是否存在的路由
 Route::post('/zcajax','Home\Login\LoginController@zcajax');
+//忘记密码路由
+Route::get('/forget','Home\Login\LoginController@forget');
+//忘记密码验证路由
+Route::post('/forget','Home\Login\LoginController@vcforget');
+//协议路由
+Route::get('/agreement','Home\Login\LoginController@agreement');
+
+
+
+
+
 
 
 //验证码路由
@@ -63,3 +74,5 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 // 店家后台
 Route::get('/shop/register','Shop\ShopController@register');
 Route::post('/shop/doreg','Shop\ShopController@doreg');
+//发送邮件路由
+Route::post('/mail','Mail\Mail\MailController@mail');
