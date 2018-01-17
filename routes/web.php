@@ -49,6 +49,7 @@ Route::get('session','Admin\LoginController@session');
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
 
 	//后台首页
+	
 	Route::get('index','LoginController@index');
 
 	//退出登录
@@ -58,3 +59,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 	Route::resource('user','UserController');
 
 });
+
+//订单路由
+Route::get('home/order', 'Home\Order\OrderController@order');
