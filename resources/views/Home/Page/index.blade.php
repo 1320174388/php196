@@ -56,18 +56,10 @@
     <div class="map-navbar group">
      <div id="city_section" class="bs-dropdown module-city">
       <select id="selecte_1" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
-        <option value="0">北京</option>
-        <option value="1">上海</option>
-        <option value="2">广东</option>
-        <option value="3">深圳</option>
       </select>
       <select id="selecte_2" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
-        <option value="0">北京市</option>
-        <option value="1">上海市</option>
       </select>
       <select id="selecte_3" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
-        <option value="0">昌平区</option>
-        <option value="1">朝阳区</option>
       </select>
      </div>
      <div class="module-locate map_search"> 
@@ -109,6 +101,15 @@
   <script src="http://map.qq.com/api/js?v=2.exp&amp;key=IZIBZ-73ARP-2SPDH-LXOGG-BRP3K-4WFCZ"></script>
   <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
     <script>
+      @foreach($province as $p)
+        $('#selecte_1').append('<option value="{{ $p->id }}">{{ $p->name }}</option>');
+      @endforeach
+      @foreach($city as $c)
+        $('#selecte_2').append('<option value="{{ $c->id }}">{{ $c->name }}</option>');
+      @endforeach
+      @foreach($town as $t)
+        $('#selecte_3').append('<option value="{{ $t->id }}">{{ $t->name }}</option>');
+      @endforeach
       var lat = null;
       var lng = null;
       var geocoder,map,marker = null;
@@ -162,17 +163,14 @@
           });
       }
 
-      var sel_1 = $('#selecte_1').children().eq(0).text();
-      var sel_2 = $('#selecte_2').children().eq(0).text();
-      var sel_3 = $('#selecte_3').children().eq(0).text();
-
       function codeAddress() {
+          var addr = $('option:checked').text()
           var address = document.getElementById("address").value;
           if(address){
             //通过getLocation();方法获取位置信息值
-            geocoder.getLocation(sel_1+'-'+sel_2+'-'+sel_3+'-'+address);
+            geocoder.getLocation(addr+'-'+address);
           }else{
-            geocoder.getLocation(sel_1+'-'+sel_2+'-'+sel_3);
+            geocoder.getLocation(addr);
           }
       }
 
@@ -189,20 +187,51 @@
       }
         
       window.onload = loadScript; // dom文档加载结束开始加载 此段代码
-      $('.address_option').on('change',function(){
-        
-          var val = $(this).val(); // 获取select选择的val值
-          var addr = $(this).children().eq(val).text(); // 获取当前option内容
+      
+      var val1 = null;
+      var val2 = null;
+      var val3 = null;
 
+      $('#selecte_1').on('change',function(){
+          val1 = $('#selecte_1').val();
+          $.ajax({
+            url:"/home/address",
+            type:'post',
+            async:true,
+            data:{pr:val1,'_token':'{{ csrf_token() }}' },
+            success:function(data){
+                $('#selecte_2').empty();
+                $.each(data['city'],function(i,n){
+                  $('#selecte_2').append("<option value='"+n.id+"'>"+n.name+"</option>");
+                });
+                $('#selecte_3').empty();
+                $.each(data['town'],function(i,n){
+                  $('#selecte_3').append("<option value='"+n.id+"'>"+n.name+"</option>");
+                });
+            },
+            dataType:'json'
+          });
+      });
+      
+      $('#selecte_2').on('change',function(){
           val1 = $('#selecte_1').val();
           val2 = $('#selecte_2').val();
-          val3 = $('#selecte_3').val();
+          $.ajax({
+            url:"/home/address",
+            type:'post',
+            async:true,
+            data:{pr:val1,ci:val2,'_token':'{{ csrf_token() }}' },
+            success:function(data){
+                $('#selecte_3').empty();
+                $.each(data['town'],function(i,n){
+                  $('#selecte_3').append("<option value='"+n.id+"'>"+n.name+"</option>");
+                });
+            },
+            dataType:'json'
+          });
+      });
 
-          sel_1 = $('#selecte_1').children().eq(val1).text();
-          sel_2 = $('#selecte_2').children().eq(val2).text();
-          sel_3 = $('#selecte_3').children().eq(val3).text();
-
-          console.log(sel_1,sel_2,sel_3);
+      $('#selecte_3').on('change',function(){
           codeAddress();
       });
 

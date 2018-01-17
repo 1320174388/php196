@@ -12,6 +12,7 @@
 */
 // 前台首页
 Route::get('/','Home\Page\PageController@index');
+Route::post('/home/address','Home\Page\PageController@address');
 
 //登录页面
 Route::get('/login','Home\Login\LoginController@login');
