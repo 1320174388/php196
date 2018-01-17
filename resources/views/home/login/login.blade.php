@@ -27,7 +27,7 @@
       </div> 
       <div class="form-helper"> 
        <label class="login-checkbox"> <input class="login-remember" type="checkbox" name="remember" checked="" /> 下次自动登录 </label> 
-       <a class="g-link js_link_register" href="register.html">忘记密码</a> 
+       <a class="g-link js_link_register" href="{{ url('/forget') }}">忘记密码</a> 
       </div> 
       <button class="g-btn g-btn-l g-btn-submit" type="submit">登录</button> 
      </form> 
