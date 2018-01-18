@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','后台首页')
+@section('title','管理员管理')
 @section('content')
 
 		<div class="finance-content-middle">
@@ -97,4 +97,5 @@
 				</div>
 			</div>
 		</div>
-@stop
+@endsection
+</html>
