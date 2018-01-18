@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="/ad/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+    <link rel="stylesheet" href="/ad/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> 
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/themes/css/base.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/themes/css/home.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url('/admin/favicon.ico') }}">
@@ -20,6 +21,9 @@
             </div>
             <div class="finance-header-content-fr clearfix">
                 <div class="finance-header-user">
+                    <span>
+                        <img src="/uploads/default.jpg" />
+                    </span>
                     <em><b><big>管理员：{{ session('user')->name }}</big></b></em>
                 </div>
                 <a href="{{ url('admin/logout') }}"><b><big>退出</big></b></a>

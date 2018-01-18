@@ -58,8 +58,8 @@
                         </div></p>
 
 						<p><div class="form-group">
-							<input type="submit"  style="width: 100px; margin-left: 100px;" value="添加">
-	                        <input type="button" class="back" style="width: 100px; margin-left: 20px;" onclick="history.go(-1)" value="返回">
+							<input type="submit"  style="width: 160px; height: 40px; background: #1e82d4; color:white; margin-left: 70px;" value="添加">
+	                        <input type="button" class="back" style="width: 160px; height: 40px; background: #1e82d4; color:white; margin-left: 30px;" onclick="history.go(-1)" value="返回">
 	                    </div></p>
 					</form>
 				</div>
