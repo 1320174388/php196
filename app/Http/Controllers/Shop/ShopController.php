@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_address_province;
+use App\Models\data_rest;
 
 class ShopController extends Controller
 {
@@ -27,6 +28,14 @@ class ShopController extends Controller
     public function doreg(Request $request){
 
         $data = $request->except('_token');
+        dd($data);
+        $rest = new data_rest;
+        $rest->name = $data['name'];
+        $rest->cityCode = $data['cityCode'];
+        $rest->nameid = $data['nameid'];
+        $rest->numberid = $data['numberid'];
+        $rest->phone = $data['phone'];
+        $rest->introduce = $data['introduce'];
 
     }
 }
