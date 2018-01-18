@@ -40,8 +40,6 @@ Route::get('/agreement','Home\Login\LoginController@agreement');
 //验证码路由
 Route::get('/code/captcha/{tmp}', 'Home\Login\LoginController@captcha');
 
-Route::resource('/admin/user', 'Admin/UserController@index');
-
 //后台登录页面路由
 Route::get('admin/login','Admin\LoginController@login');
 
@@ -54,20 +52,21 @@ Route::post('admin/dologin','Admin\LoginController@dologin');
 //加密演示
 Route::get('crypt','Admin\LoginController@crypt');
 
-//session
-Route::get('session','Admin\LoginController@session');
-
-// 后台集成模块
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
 
-	//后台首页
-	Route::get('index','LoginController@index');
+//后台首页
+    Route::get('index','LoginController@index');
 
-	//退出登录
-	Route::get('logout','LoginController@logout');
+//退出登录
+    Route::get('logout','LoginController@logout');
+ 
+//用户模块
+    Route::resource('user','UserController');
+    Route::get('user','UserController@index');
 
-	//用户模块
-	Route::resource('user','UserController');
+    Route::post('user/show','UserController@show');
+
+    Route::post('user/insert','UserController@insert');
 
 });
 
