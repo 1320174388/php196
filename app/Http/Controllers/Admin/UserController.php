@@ -19,6 +19,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+
 //        1. 获取所有的数据，显示到列表中
        // $data = User::get();
 //        向模板绑定变量的三种方法
