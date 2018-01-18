@@ -19,25 +19,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
-//        1. 获取所有的数据，显示到列表中
-       // $data = User::get();
-//        向模板绑定变量的三种方法
-//        方法一：[]
-       return view('admin.user.glylist');
-//        方法二：with
-//        return view('admin.user.list')->with('data',$data);
-//        方法三： compact()
-//        return view('admin.user.list',compact('data'));
-
-
-//        2. 获取分页数据
-//
-//        $data = User::orderBy('user_id','asc')->paginate(2);
-//        return view('admin.user.list',compact('data'));
-
-
-//        3. 单条件搜索
 //        获取用户提交过来的搜索条件
         $name = $request->input('name','');
         $num = $request->input('num','10');

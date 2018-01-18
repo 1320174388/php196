@@ -83,9 +83,14 @@
 									    已被禁用
 									@endif
 		                        </td>
-
-		                        <td>
-		                            <a href="javascript:;" onclick="delUser({{ $v->id }})">禁用</a>
+		                        <td class="disable">
+		                            <a href="" onclick="delUser({{ $v->id }})">@if ( $v->status === 1 )
+									    超级管理员
+									@elseif ( $v->status === 2 )
+									    禁用
+									@else
+									     <a style="color: black; opacity: 0.3" href="javascript:;"> 已被禁用</a>
+									@endif</a>
 		                        </td>
 		                    </tr>
 		                     @endforeach
