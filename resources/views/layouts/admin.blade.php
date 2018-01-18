@@ -4,9 +4,12 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
+    <link rel="stylesheet" href="/ad/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/themes/css/base.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/themes/css/home.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url('/admin/favicon.ico') }}">
+    <link rel="stylesheet" href="/ad/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="{{ url('/admin/themes/js/jquery-3.2.1.min.js') }}"></script>
 </head>
 <body>
     <header id="finance-header">
@@ -25,7 +28,6 @@
     </div>
 </header>
 
-<section id="finance-content">
     <div class="finance-content clearfix">
         <div class="finance-content-nav menu">
             <div class="menuParent">
@@ -35,7 +37,7 @@
                 <div class="menuList">
                     <a href="{{ url('admin/user') }}">管理员管理</a>
                     <a href="{{ url('admin/user/create') }}">添加管理员</a>
-                    <a href="#">普通用户管理</a>
+                    <a href="{{ url('admin/user/show') }}">普通用户管理</a>
                 </div>
             </div>
             <div class="menuParent">
@@ -95,6 +97,25 @@
 	{{--在父模板中定义子模板需要实现的部分的占位符--}}
     	@section('content')
     	@show
-</section>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var menuParent = $('.menu > .ListTitlePanel > div');//menu div
+        var menuList = $('.menuList');
+        $('.menu > .menuParent > .ListTitlePanel > .ListTitle').each(function(i) { //list
+            $(this).click(function(){
+                if($(menuList[i]).css('display') == 'none'){
+                    $(menuList[i]).slideDown(300);
+                }
+                else{
+                    $(menuList[i]).slideUp(300);
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

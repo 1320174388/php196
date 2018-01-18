@@ -1,10 +1,10 @@
 @extends('layouts.admin')
-@section('title','后台首页')
+@section('title','普通用户管理')
 @section('content')
-
+ 
 		<div class="finance-content-middle">
 			<div class="finance-content-middle-form">
-				<form action="{{ url('/admin/user') }}" method="get">
+				<form action="{{ url('/admin/user/show') }}" method="get">
                             	<div class="row">
                             		<div class="col-md-2">
                             			<select name="num" class="form-control">
@@ -72,7 +72,9 @@
 		                        <td class="id">{{ $v->id }}</td>
                                 <td class="name">{{ $v->name }}</td>
                                 <td class="email">{{ $v->email }}</td>
-                             	<td class="avatar"><img width="50" src="/uploads/{{ $v->avatar }}" alt="{{ $v->avatar }}"></td>
+                             	<td class="avatar">
+                             	<!-- <img width="50" src="/uploads/{{ $v->avatar }}" alt="{{ $v->avatar }}"> -->
+                             	</td>
                              	<td class="phone">{{ $v->phone }}</td>
 		                        <td class="award-name">
 									@if ( $v->status === 1 )
@@ -97,4 +99,5 @@
 				</div>
 			</div>
 		</div>
-@stop
+@endsection
+</html>

@@ -15,11 +15,12 @@ class CreateDataUsersTable extends Migration
     {
         Schema::create('data_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',50)->unique();
-            $table->string('password',255);
-            $table->string('email',255)->unique();
-            $table->string('phone',11)->unique()->nullable();
-            $table->integer('status');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('phone');
+            $table->string('avatar');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
