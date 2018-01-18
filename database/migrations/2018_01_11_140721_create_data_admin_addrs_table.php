@@ -16,7 +16,10 @@ class CreateDataAdminAddrsTable extends Migration
         Schema::create('data_admin_addrs', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->string('name', 50)->unique();
+            $table->string('email', 50)->unique();
+            $table->string('phone', 11)->unique();
             $table->string('password',255);
+            $table->string('avatar');
             $table->integer('status');
         });
     }
