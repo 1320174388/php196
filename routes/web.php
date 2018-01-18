@@ -71,8 +71,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 
 });
 
-// 店家后台
-Route::get('/shop/register','Shop\ShopController@register');
-Route::post('/shop/doreg','Shop\ShopController@doreg');
 //发送邮件路由
 Route::post('/mail','Mail\Mail\MailController@mail');
+
+
+// 店家后台
+// 申请店铺
+Route::get('/shop/register','Shop\ShopController@register');
+// 写入数据
+Route::post('/shop/doreg','Shop\ShopController@doreg');

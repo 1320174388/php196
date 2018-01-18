@@ -25,6 +25,8 @@ class ShopController extends Controller
     }
 
     public function doreg(Request $request){
-        
+
+        $data = $request->except('_token');
+
     }
 }
