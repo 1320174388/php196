@@ -38,10 +38,18 @@
   <div class="homepage-container"> 
    <header class="homepage-header"> 
     <h1 class="header-logo"><i class="glyph-logo-eleme glyph"></i>php196,外卖系统</h1> 
-    <div class="header-account"> 
-     <a class="link" href="{{ url('login') }}">登录</a> / 
-     <a class="link" href="{{ url('register') }}">注册</a> 
-    </div> 
+    @if(session('user'))
+      <div class="header-account"> 
+       <a class="link" href="">{{ session('user')->name }}</a> / 
+       <a class="link" href="{{ url('/logout') }}">退出</a> 
+      </div> 
+    @else
+      <div class="header-account"> 
+       <a class="link" href="{{ url('login') }}">登录</a> / 
+       <a class="link" href="{{ url('register') }}">注册</a> 
+      </div> 
+    @endif
+    
    </header> 
    <div class="map-container"> 
     <div id="mask" class="map-mask ui_hide"></div> 
@@ -93,7 +101,7 @@
    </div> 
    <footer class="homepage-footer"> 
     <a class="footer-nav" href="http://ele.me/mobile" target="_blank">手机应用</a> 
-    <a class="footer-nav" href="http://kaidian.ele.me" target="_blank">我要开店</a> 
+    <a class="footer-nav" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
     <a class="footer-nav" href="http://ele.me/links" target="_blank">友情链接</a> 
     <a class="footer-nav" href="http://ele.me/sitemap" target="_blank">网站地图</a> 
    </footer> 

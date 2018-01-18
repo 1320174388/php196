@@ -28,14 +28,20 @@ class ShopController extends Controller
     public function doreg(Request $request){
 
         $data = $request->except('_token');
-        dd($data);
+        
         $rest = new data_rest;
         $rest->name = $data['name'];
+        $rest->user_id = $data['user_id'];
         $rest->cityCode = $data['cityCode'];
         $rest->nameid = $data['nameid'];
         $rest->numberid = $data['numberid'];
         $rest->phone = $data['phone'];
         $rest->introduce = $data['introduce'];
+        $res = $rest->save();
+
+        if($res){
+            return '等待审核';
+        }
 
     }
 }

@@ -47,7 +47,7 @@
 
   <footer class="site-footer group" role="contentinfo"> 
    <div class="container"> 
-    <p class="sfooter-line"> <a class="sfooter-link" href="http://kaidian.ele.me">我要开店</a> | <a class="sfooter-link" href="contact.html">联系我们</a> | <a class="sfooter-link" href="http://ele.me/about/agreement">服务条款和协议</a> | <a class="sfooter-link" href="sitemaps.html">站点地图</a> | <a class="sfooter-link" href="http://ele.me/jobs">加入我们</a> </p> 
+    <p class="sfooter-line"> <a class="sfooter-link" href="http://kaidian.ele.me">我要开店</a> | <a class="sfooter-link" href="">联系我们</a> | <a class="sfooter-link" href="">服务条款和协议</a> | <a class="sfooter-link" href="{{ url('/') }}">站点地图</a>
    </div> 
   </footer>
 

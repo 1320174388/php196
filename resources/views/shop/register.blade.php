@@ -41,8 +41,8 @@
                 <span class="font">请填写身份信息</span>
             </p>
             <span class="line"></span>
-            <input name="name_id" placeholder="请输入真实姓名" data-sign="phone" maxlength="20" />
-            <input name="number_id" placeholder="请输入身份证号" data-sign="phone" maxlength="20" />
+            <input name="nameid" placeholder="请输入真实姓名" data-sign="phone" maxlength="20" />
+            <input name="numberid" placeholder="请输入身份证号" data-sign="phone" maxlength="20" />
             <p>
                 <span class="sign"></span>
                 <span class="font">请填写餐厅电话</span>
@@ -59,6 +59,8 @@
         <div class="title">
             <span id="submit" class="btn btn_enable">提 交</span>
         </div>
+
+        <input name="user_id" type="hidden" value="{{ session('user')->id }}">
     </form>
     <div class="author">
     </div>
