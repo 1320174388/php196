@@ -6,23 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_user;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 use Gregwar\Captcha\CaptchaBuilder; 
 use Gregwar\Captcha\PhraseBuilder;
 
 class LoginController extends Controller
 {
-    // 显示一个登录的主页   
-    // 作者 王洋鹏
-    public function login()
-    {
-      $title = '登录';
-    	return view('home.login.login',['title' => $title]);
-    }
 
-
-    
-    // 生成一个验证码
+	 // 生成一个验证码
+	 // 作者 王洋鹏
 	public function captcha($tmp)
 	{
 	    $phrase = new PhraseBuilder;
@@ -47,8 +40,16 @@ class LoginController extends Controller
 	    $builder->output();
 	}
 
+    // 显示一个登录的主页   
+    
+    public function login()
+    {
+      $title = '登录';
+    	return view('home.login.login',['title' => $title]);
+    }
 
-	//验证提交的信息是否正确
+
+	//登录验证
 	public function Verification(Request $request)
 	{
 		
@@ -66,6 +67,7 @@ class LoginController extends Controller
 
 		    //获取传输的值
         $data = $request->except('_token');
+
 
 
         //判断验证码是否正确
@@ -90,6 +92,9 @@ class LoginController extends Controller
         //查询
         $user = data_user::where($name,$data['name'])->first();
 
+        if($user->status == 0){
+       		return back()->with('errors','您的用户已经被禁用')->withInput();
+       	}
 
        		//如果没有此用户,返回用户名错误
        	if(!$user){
@@ -108,6 +113,15 @@ class LoginController extends Controller
 
         return redirect('/');
 	}
+
+	//退出登录
+	public function logout()
+	{
+		\Session::forget('user');
+		return redirect('/login')->with('errors','退出成功');
+	}
+
+
 
 
   //显示一个注册页面
@@ -150,7 +164,8 @@ class LoginController extends Controller
 		  //判断验证码是否正确
   		if($request['code'] != session('code')){
 
-          	return back()->with('errors','验证码错误')->withInput();
+          return back()->with('errors','验证码错误')->withInput();
+          
       }
 
 		  //获取要用的内容
@@ -159,6 +174,7 @@ class LoginController extends Controller
         //加密密码
       $data['password'] = Crypt::encrypt($data['password']);
       $data['status'] = 1;
+      
 
         //实例化一个model表
       $data_user = new data_user;
@@ -216,9 +232,9 @@ class LoginController extends Controller
       }
 
       // 判断邮件中的验证码是否一致
-      // if($request['yzm'] != \Cookie::get('yzm')){
-      //       return back()->with('errors','邮箱验证失败')->withInput();
-      // }
+      if($request['yzm'] != \Cookie::get('yzm')){
+            return back()->with('errors','邮箱验证失败')->withInput();
+      }
 
       //接受传输过来的数据
       $data = $request->except('_token','code','yzm','repwd');

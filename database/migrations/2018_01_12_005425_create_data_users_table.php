@@ -18,7 +18,7 @@ class CreateDataUsersTable extends Migration
             $table->string('name',50)->unique();
             $table->string('password',255);
             $table->string('email',255)->unique();
-            $table->string('phone',11);
+            $table->string('phone',11)->unique()->nullable();
             $table->integer('status');
             $table->timestamps();
         });
