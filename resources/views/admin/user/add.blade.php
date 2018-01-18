@@ -50,7 +50,7 @@
 							<em>*(必填)</em>
 						</p>
 						<p><div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">头像</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label">头像:</label>
 
                             <div class="col-sm-10">
                                 <input type="file" name="avatar" id="inputPassword3" >

@@ -72,7 +72,7 @@
 		                        <td class="id">{{ $v->id }}</td>
                                 <td class="name">{{ $v->name }}</td>
                                 <td class="email">{{ $v->email }}</td>
-                             	<td class="avatar"><img width="50" src="/uploads/{{ $v->avatar }}" alt="{{ $v->avatar }}"></td>
+                             	<td class="avatar"><img src="/uploads/{{ $v->avatar }}" alt="{{ $v->avatar }}"></td>
                              	<td class="phone">{{ $v->phone }}</td>
 		                        <td class="award-name">
 									@if ( $v->status === 1 )
