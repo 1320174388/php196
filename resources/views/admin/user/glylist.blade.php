@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','后台首页')
+@section('title','管理员管理')
 @section('content')
 
 		<div class="finance-content-middle">
@@ -34,19 +34,19 @@
 
                             		<div class="col-md-3">
 		                                <div class="input-group">
-		                                	<input type="text" name="name" class="form-control" style="border-radius: 4px;" value="{{ $where['name'] }}">
+		                                	<input type="text" name="name" class="form-control" placeholder="请输入用户名" style="border-radius: 4px;" value="{{ $where['name'] }}">
 		                                	
 					                    </div>
                             		</div>
                             		<div class="col-md-3">
 		                                <div class="input-group">
-		                                	<input type="text" name="phone" class="form-control" style="border-radius: 4px;" value="{{ $where['phone'] }}">
+		                                	<input type="text" name="phone" class="form-control" placeholder="请输入手机号" style="border-radius: 4px;" value="{{ $where['phone'] }}">
 		                                	
 					                    </div>
                             		</div>
-                            		<div class="col-md-3">
+                            		<div class="col-md-4">
 		                                <div class="input-group">
-		                                	<input type="text" name="email" class="form-control" value="{{ $where['email'] }}">
+		                                	<input type="text" name="email" class="form-control" placeholder="请输入邮箱" value="{{ $where['email'] }}">
 		                                	<span class="input-group-btn">
 					                      		<button class="btn btn-info btn-flat" style="line-height:20px; height: 33px;border-radius: 3px;">搜索一下</button>
 					                    	</span>
@@ -56,7 +56,7 @@
                             	</div>
                             	</form>
 				<div class="finance-add-agent finance-add-agent-color">
-					<table class="table" style="font-size: 15px;">
+					<table class="table" style="font-size: 15px;" >
 						<tbody>
 							<tr>
 	                            <th>ID</th>
@@ -88,8 +88,8 @@
 									    超级管理员
 									@elseif ( $v->status === 2 )
 									    禁用
-									@else
-									     <a style="color: black; opacity: 0.3" href="javascript:;"> 已被禁用</a>
+									@elseif ( $v->status === 3 )
+										启用
 									@endif</a>
 		                        </td>
 		                    </tr>

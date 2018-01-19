@@ -80,12 +80,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     Route::post('user/insert','UserController@insert');
 
 });
+// 管理员详情
+Route::get('/admin/usershow/glyuser/{name}','Admin\UsershowController@glyuser');
+// 详情页面
+Route::post('/admin/usershow/update','Admin\UsershowController@update');
 
 //订单路由
 Route::get('home/order', 'Home\Order\OrderController@order');
 
 //发送邮件路由
 Route::post('/mail','Mail\Mail\MailController@mail');
+
 
 // 店家后台
 // 申请店铺
