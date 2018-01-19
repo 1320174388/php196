@@ -31,7 +31,7 @@ class ShopController extends Controller
             'name' => 'required|max:20',
             'nameid' => 'required|max:4',
             'numberid' => 'required|min:18|max:18',
-            'phone' => 'required|min:11|max:11',
+            'phone' => ['required','min:11','max:11','regex:/1[0-9]{9}/'],
             'introduce' => 'required',
         ],[
             'name.required' => '请输入店铺名称',
@@ -44,6 +44,7 @@ class ShopController extends Controller
             'phone.required' => '请输入正确手机号码',
             'phone.min' => '请输入正确手机号码',
             'phone.max' => '请输入正确手机号码',
+            'phone.regex' => '请输入正确手机号码',
             'introduce.required' => '请输入店铺详情',
         ]);
 
