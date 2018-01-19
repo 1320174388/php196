@@ -68,8 +68,8 @@ class LoginController extends Controller
         $data = $request->except('_token');
 
 
-        // 判断验证码是否正确
-        if(($data['code']) != session('code')){
+        //判断验证码是否正确
+        if($data['code'] != session('code')){
         	return back()->with('errors','验证码错误');
         }
 
@@ -149,12 +149,11 @@ class LoginController extends Controller
 
 		  //判断验证码是否正确
   		if($request['code'] != session('code')){
-
-          return back()->with('errors','验证码错误');
+          	return back()->with('errors','验证码错误')->withInput();
       }
-      
+
 		  //获取要用的内容
-      $data = $request->except('_token','code','repwd');
+       $data = $request->except('_token','code','repwd');
 
         //加密密码
       $data['password'] = Crypt::encrypt($data['password']);
@@ -174,30 +173,109 @@ class LoginController extends Controller
       if($res){
        	return redirect('/login')->with('errors','注册成功,请登录');
       }else{
-       	return back()->with('errors','注册失败')->withInput();;
+       	return back()->with('errors','注册失败')->withInput();
       }
       
 	}
 
 
-  //ajax
-  //验证账号密码是否存在
-  public function zcajax(Request $request){
+  //忘记密码
+  public function forget()
+  {
+    $title = '忘记密码';
+    return view('home.login.forget',['title' => $title]);
+  }
 
-    $name = $request['name'];
-    $val = $request['val'];
+  //忘记密码验证
+  public function vcforget(Request $request){
 
-    $user = data_user::where($name,$val)->first();
+    //验证传输过来的是否符合规则
+      $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|between:6,18|alpha_dash',
+            'repwd' => 'required|same:password',
+        ],[
+          'password.required'=> '请输入密码',
+          'password.between' => '密码的长度必须在6-18位',
+          'password.alpha_dash' => '密码必须是字母数字下划线',
+          'email.required' => '请填写合法邮箱',
+          'email.email' => '请输入合法邮箱',
+          'repwd.required' => '请输入确认密码',
+          'repwd.same' => '确认密码与密码不一致',
+        ]);
 
-    if(isset($user) && $user->name == $val){
-      return json_encode(1);
-    }elseif(isset($user) && $user->email == $val){
-      return json_encode(2);
-    }else{
-      return json_encode(NULL);
-    }
+       //让验证码都变成小写
+      strtolower($request['code']);
+      strtolower(session('code'));
+
+      //判断验证码是否正确
+      if($request['code'] != session('code')){
+
+            return back()->with('errors','验证码错误')->withInput();
+      }
+
+      // 判断邮件中的验证码是否一致
+      // if($request['yzm'] != \Cookie::get('yzm')){
+      //       return back()->with('errors','邮箱验证失败')->withInput();
+      // }
+
+      //接受传输过来的数据
+      $data = $request->except('_token','code','yzm','repwd');
+
+      //查询是否有该数据
+      $data_user = data_user::where('email',$data['email'])->first();
+
+     
+
+      //原来的密码和现在输入的密码相同
+      if( $data['password'] == Crypt::decrypt($data_user->password) ){
+        return redirect('/login')->with('errors','修改密码成功,请登录');
+      }
+
+      //加密密码
+      $data_user->password = Crypt::encrypt($data['password']);
+
+
+
+      //发送执行
+      $res = $data_user->save(); 
+
+      //判断修改成功还是失败。
+      if($res){
+          return redirect('/login')->with('errors','修改密码成功,请登录');
+      }else{
+          return back()->with('errors','修改密码失败')->withInput();
+      }
 
   }
+
+
+    //协议的路由
+    //展示一个协议页面
+    public function agreement()
+    {
+      return view('home.login.agreement');
+    }
+
+
+    //ajax
+    //验证账号密码是否存在
+    public function zcajax(Request $request){
+
+      $name = $request['name'];
+      $val = $request['val'];
+
+      $user = data_user::where($name,$val)->first();
+
+      if(isset($user) && $user->name == $val){
+        return json_encode(1);
+      }elseif(isset($user) && $user->email == $val){
+        return json_encode(2);
+      }else{
+        return json_encode(NULL);
+      }
+
+    }
 
 
 }

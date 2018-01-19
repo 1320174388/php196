@@ -38,7 +38,7 @@
        <img id="captcha_img" class="captcha-img" data-action="login" src="{{ url('/code/captcha/9') }}" alt="验证码" onclick="this.src='{{ url('/code/captcha/9') }}?'+Math.random()" title="请填写验证码" /> 
       </div> 
       <div class="form-helper form-text"> 
-       <a class="g-link" href="" target="_blank">使用条款和协议</a> 
+       <a class="g-link" href="{{ url('/agreement') }}" target="_blank">使用条款和协议</a> 
       </div> 
       <button id="btn" class="g-btn g-btn-l g-btn-submit" type="submit">同意协议并注册</button> 
      </form> 
@@ -98,5 +98,5 @@
       });
 
     });
-  </script>>
+  </script>
 @stop
