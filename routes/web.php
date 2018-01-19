@@ -86,6 +86,6 @@ Route::post('/mail','Mail\Mail\MailController@mail');
 
 // 店家后台
 // 申请店铺
-Route::get('/shop/register','Shop\ShopController@register');
+Route::get('/shop/register','Shop\ShopController@register')->middleware('homeislogin');
 // 写入数据
 Route::post('/shop/doreg','Shop\ShopController@doreg');

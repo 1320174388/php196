@@ -22,45 +22,54 @@
     <form id="form" action="{{ url('/shop/doreg') }}" method="post" class="center">
         {{ csrf_field() }}
         <div id="centerBody" class="center_body">
+            @if (count($errors) > 0)
+                @if(is_object($errors))
+                  @foreach ($errors->all() as $error)
+                    <span class="font" style="color:red;">{{ $error }}</span>
+                  @endforeach
+                @else
+                    <span class="font" style="color:red;">{{ $errors }}</span>
+                @endif
+            @endif
             <p>
                 <span class="sign"></span>
                 <span class="font">请填写店铺名称</span>
             </p>
             <span class="line"></span>
-            <input name="name" placeholder="请输入您的餐店名称" data-sign="shopname" maxlength="20" />
+            <input name="name" value="{{ old('name') }}" placeholder="请输入您的餐店名称" data-sign="shopname" maxlength="20" />
             <p>
                 <span class="sign"></span>
                 <span class="font">请选择店铺地址</span>
             </p>
             <span class="line"></span>
-            <select id="selecte_1" ></select>
-            <select id="selecte_2" ></select>
+            <select id="selecte_1"></select>
+            <select id="selecte_2"></select>
             <select id="selecte_3" name="cityCode"></select>
             <p>
                 <span class="sign"></span>
                 <span class="font">请填写身份信息</span>
             </p>
             <span class="line"></span>
-            <input name="nameid" placeholder="请输入真实姓名" data-sign="phone" maxlength="20" />
-            <input name="numberid" placeholder="请输入身份证号" data-sign="phone" maxlength="20" />
+            <input name="nameid" value="{{ old('nameid') }}" placeholder="请输入真实姓名" data-sign="phone" maxlength="20" />
+            <input name="numberid"  value="{{ old('numberid') }}" placeholder="请输入身份证号" data-sign="phone" maxlength="20" />
             <p>
                 <span class="sign"></span>
                 <span class="font">请填写餐厅电话</span>
             </p>
             <span class="line"></span>
-            <input name="phone" placeholder="请输入餐店电话" data-sign="phone" maxlength="20" />
+            <input name="phone" value="{{ old('phone') }}" placeholder="请输入餐店电话" data-sign="phone" maxlength="20" />
             <p>
                 <span class="sign"></span>
                 <span class="font">请填写餐店介绍</span>
             </p>
             <span class="line"></span>
-            <textarea name="introduce" placeholder="请输入店铺的信息" data-null="true" data-sign="detailed" maxlength="100" ></textarea>
+            <textarea name="introduce" placeholder="请输入店铺的信息" data-null="true" data-sign="detailed" maxlength="100" >{{ old('introduce') }}</textarea>
         </div>
         <div class="title">
             <span id="submit" class="btn btn_enable">提 交</span>
         </div>
 
-        <input name="user_id" type="hidden" value="{{ session('user')->id }}">
+        <input name="user_id" value="{{ old('user_id') }}" type="hidden" value="{{ session('home_user')->id }}">
     </form>
     <div class="author">
     </div>

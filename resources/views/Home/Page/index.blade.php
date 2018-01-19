@@ -40,7 +40,7 @@
     <h1 class="header-logo"><i class="glyph-logo-eleme glyph"></i>php196,外卖系统</h1> 
     @if(session('user'))
       <div class="header-account"> 
-       <a class="link" href="">{{ session('user')->name }}</a> / 
+       <a class="link" href="">{{ session('home_user')->name }}</a> / 
        <a class="link" href="{{ url('/logout') }}">退出</a> 
       </div> 
     @else
