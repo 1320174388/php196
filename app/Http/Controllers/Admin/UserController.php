@@ -108,7 +108,7 @@ class UserController extends Controller
 
         $res1 = \DB::table('data_admin_addrs')->insert($data);
         if($res1){
-            return redirect('/admin/user/index')->with(['info' => '添加成功']);
+            return redirect('/admin/user/glylist')->with(['info' => '添加成功']);
         }else{
             return back();
         }
@@ -140,5 +140,25 @@ class UserController extends Controller
                 ]
             ]);
     }
-    
+
+     /*public function update($id){
+
+            $stu = data_admin_addr::find($id); // 先将要修改的数据查到
+
+            if ($stu->status == 2) {
+                $stu->status = 0;
+            }else if($stu->status == 1){
+                $stu->status = 2;
+            }else if($stu->status == 0){
+                $stu->status = 1;
+            }
+
+            $res = $stu->save();      // 执行修改操作
+            if($res){
+                return 111;
+            }else{
+                return 222;
+            }
+    }*/
+
 }

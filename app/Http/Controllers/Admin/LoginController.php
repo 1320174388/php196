@@ -104,9 +104,9 @@ class LoginController extends Controller
 //  4. 如果有效就登录到后台，验证失败就返回到添加页面
 //  将用户的登录状态保存到session
 
-        Session::put('user',$user);
+        Session::put('admin_user',$user);
 
-        return redirect('admin/index');
+        return redirect('admin/user/index');
 
     }
 
@@ -118,7 +118,7 @@ class LoginController extends Controller
     // 退出登录
     public function logout()
     {
-        session()->forget('user');
+        session()->forget('admin_user');
         return redirect('admin/login');
     }
 
