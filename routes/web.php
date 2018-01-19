@@ -81,11 +81,19 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 
 });
 
+//订单路由
+Route::get('home/order', 'Home\Order\OrderController@order');
+
 //发送邮件路由
 Route::post('/mail','Mail\Mail\MailController@mail');
 
 // 店家后台
 // 申请店铺
-Route::get('/shop/register','Shop\ShopController@register')->middleware('homeislogin');
+Route::get('/shop/register','Shop\ShopController@register');
 // 写入数据
 Route::post('/shop/doreg','Shop\ShopController@doreg');
+
+//个人中心页面
+Route::get('/home/personal','Home\Personal\PersonalController@personal');
+
+Route::post('/home/personal/upload', 'Home\Personal\PersonalController@upload');

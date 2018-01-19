@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Crypt;
 
 class Data_UsersTableSeeder extends Seeder
 {
@@ -12,6 +13,21 @@ class Data_UsersTableSeeder extends Seeder
     public function run()
     {
         $data = [];
+
+        $str = '123123';
+        $strs = Crypt::encrypt($str);
+
+        $tmp['name'] = 'qwe123';
+        $tmp['email'] = '123123@123.php';
+        $tmp['password'] = $strs;
+        $tmp['phone'] = '12312312312';
+        $tmp['status'] = 1;
+        $tmp['avatar'] = 'default.jpg';
+        $tmp['created_at'] = date('Y-m-d H:i:s',time());
+        $tmp['updated_at'] = date('Y-m-d H:i:s',time());
+
+        $data[] = $tmp; 
+
         for( $i = 0; $i<100; $i++){
         	$tmp['name'] = 'P_'.str_random('8');
         	$tmp['email'] = str_random('10').'@sina.com';
