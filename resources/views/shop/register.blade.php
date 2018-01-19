@@ -69,7 +69,7 @@
             <span id="submit" class="btn btn_enable">提 交</span>
         </div>
 
-        <input name="user_id" value="{{ old('user_id') }}" type="hidden" value="{{ session('home_user')->id }}">
+        <input name="user_id" type="hidden" value="{{ session('home_user')->id }}">
     </form>
     <div class="author">
     </div>
