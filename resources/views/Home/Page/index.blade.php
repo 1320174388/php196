@@ -8,7 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" /> 
   <link class="usemin" rel="stylesheet" href="/Home/css/global.48e3a844.css" /> 
   <link class="usemin" rel="stylesheet" href="/Home/css/homepage.8efdfd7c.css" />
-  <script type="text/javascript" src="/home/js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/home/spigPet/js/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="/home/spigPet/js/spig.js"></script>
+  <link rel="stylesheet" href="/home/spigPet/css/spigPet.css" type="text/css"/>
   <style type="text/css">
     html,body{
         width:100%;
@@ -28,13 +30,23 @@
     }
     #container{
         min-width:600px;
-        min-height:767px;
+        min-height:500px;
     }
     .btn{
         width:142px;
     }
   </style>
- <body class="homepage"> 
+  <script type="text/javascript">
+    var isindex = true;
+    var visitor = true;
+  </script>
+ <body class="homepage" style="height:650px;"> 
+  <!--小人只在首页显示 start*-->
+  <div id="spig" class="spig">
+      <div id="message">正在加载中……</div>
+      <div id="mumu" class="mumu"></div>
+  </div>
+  <!--小人end*-->
   <div class="homepage-container"> 
    <header class="homepage-header"> 
     <h1 class="header-logo"><i class="glyph-logo-eleme glyph"></i>php196,外卖系统</h1> 
