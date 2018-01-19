@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class IsLogin
+class HomeIsLogin
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,10 @@ class IsLogin
     public function handle($request, Closure $next)
     {
         //如果用户已经登录
-        if(session('admin_user')){
+        if(session('home_user')){
             return $next($request);
         }else{
-            return redirect('admin/login')->with('errors','请先登录');
+            return redirect('/login')->with('errors','请先登录');
         }
-
     }
 }

@@ -27,7 +27,33 @@ class ShopController extends Controller
 
     public function doreg(Request $request){
 
+        $this->validate($request,[
+            'name' => 'required|max:20',
+            'nameid' => 'required|max:4',
+            'numberid' => 'required|min:18|max:18',
+            'phone' => 'required|min:11|max:11',
+            'introduce' => 'required',
+        ],[
+            'name.required' => '请输入店铺名称',
+            'name.max' => '请输入一个正经店名!',
+            'nameid.required' => '请输入真实姓名',
+            'nameid.max' => '请输入真实姓名',
+            'numberid.required' => '请输入合法身份证号',
+            'numberid.min' => '请输入合法身份证号',
+            'numberid.max' => '请输入合法身份证号',
+            'phone.required' => '请输入正确手机号码',
+            'phone.min' => '请输入正确手机号码',
+            'phone.max' => '请输入正确手机号码',
+            'introduce.required' => '请输入店铺详情',
+        ]);
+
         $data = $request->except('_token');
+
+        $user = data_rest::where('user_id',$data['user_id'])->first();
+
+        if($user){
+            return view('shop.noapply');
+        }
         
         $rest = new data_rest;
         $rest->name = $data['name'];
@@ -36,12 +62,12 @@ class ShopController extends Controller
         $rest->nameid = $data['nameid'];
         $rest->numberid = $data['numberid'];
         $rest->phone = $data['phone'];
+        $rest->status = 1;
         $rest->introduce = $data['introduce'];
         $res = $rest->save();
 
         if($res){
-            return '等待审核';
+            return view('shop.apply');
         }
-
     }
 }
