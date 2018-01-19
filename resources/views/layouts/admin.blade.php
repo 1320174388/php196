@@ -4,8 +4,6 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
-
-    <link rel="stylesheet" href="/ad/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> 
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/themes/css/base.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/themes/css/home.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url('/admin/favicon.ico') }}">
@@ -22,9 +20,9 @@
             <div class="finance-header-content-fr clearfix">
                 <div class="finance-header-user">
                     <span>
-                        <img src="/uploads/default.jpg" />
+                        <img src="/uploads/{{ session('admin_user')->avatar }}" />
                     </span>
-                    <em><b><big>管理员：{{ session('user')->name }}</big></b></em>
+                    <em><b><big>管理员：<a href="{{ url('admin/usershow/glyuser') }}/{{ session('admin_user')->name }}">{{ session('admin_user')->name }}</a></big></b></em>
                 </div>
                 <a href="{{ url('admin/logout') }}"><b><big>退出</big></b></a>
             </div>
@@ -35,7 +33,7 @@
     <div class="finance-content clearfix">
         <div class="finance-content-nav menu">
             <div class="menuParent">
-                <div class="ListTitlePanel">
+                <div class="ListTitlePanel" style="background-color: #1e82d4;">
                     <h3 class="ListTitle">用户管理</h3>
                 </div>
                 <div class="menuList">

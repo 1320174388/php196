@@ -80,12 +80,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     Route::post('user/insert','UserController@insert');
 
 });
+// 管理员详情
+Route::get('/admin/usershow/glyuser/{name}','Admin\UsershowController@glyuser');
+// 详情页面
+Route::post('/admin/usershow/update','Admin\UsershowController@update');
 
 //订单路由
 Route::get('home/order', 'Home\Order\OrderController@order');
 
 //发送邮件路由
 Route::post('/mail','Mail\Mail\MailController@mail');
+
 
 // 店家后台
 // 申请店铺
@@ -95,5 +100,8 @@ Route::post('/shop/doreg','Shop\ShopController@doreg');
 
 //个人中心页面
 Route::get('/home/personal','Home\Personal\PersonalController@personal');
-
 Route::post('/home/personal/upload', 'Home\Personal\PersonalController@upload');
+
+//前台修改密码
+Route::get('/home/personal/pwdindex', 'Home\Personal\PersonalController@pwdindex');
+Route::post('/home/personal/pwd', 'Home\Personal\PersonalController@pwd');

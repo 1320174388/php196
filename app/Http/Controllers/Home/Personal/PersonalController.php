@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home\Personal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_user_detail;
+use App\Models\data_user;
+use Illuminate\Support\Facades\Validator;
 
 class PersonalController extends Controller
 {
@@ -13,12 +15,14 @@ class PersonalController extends Controller
     public function personal()
     {
 
-    	return view('Home.personal.member_index');
+        $user = data_user::find(1);
+        // dd($user['name']);
+    	return view('Home.personal.member_index', compact('user'));
     }
 
     public function upload(Request $request)
     {
-    	
+    
     	//是否有图片
     	if($request->hasFile('himg')){
     		//获取上传图片
@@ -37,62 +41,54 @@ class PersonalController extends Controller
 
             }
         }
-    	}
     }
 
+    public function pwdindex()
+    {
+        return view('home.personal.member_pwd');
+    }
 
+    public function pwd(Request $request)
+    {  
+        $pwd = $request->except('_token');
 
-    //ajax
-    // public function txajax(Request $request)
-    // {
+        // $this->validate($request, [
+        //     'old_password' => 'required|between:6,18|dash',
+        //     'new_password' => 'required|between:6,18|dash',
+        //     'news_password' => 'required|between:6,18|dash',
+        // ], [
+        //     'old_password.required' => '旧密码不能为空',
+        //     'old_password.between' => '旧密码必须是6 - 18位',
+        //     'old_password.dash' => '旧密码必须是字母数字下划线', 
+        //     'new_password.required' => '新密码不能为空',
+        //     'new_password.between' => '新密码必须是6 - 18位',
+        //     'new_password.dash' => '新密码必须是字母数字下划线',
 
+        // ]);
 
+        $rule = [
+            'old_password' => 'required|between:6,18|dash',
+            'new_password' => 'required|between:6,18|dash',
+            'news_password' => 'required|between:6,18|dash',
+        ];
 
-    // 	$file = $request->except('_token');
-    // 	dd($file);
+        $mess = [
+            'old_password.required' => '旧密码不能为空',
+            'old_password.between' => '旧密码必须是6 - 18位',
+            'old_password.dash' => '旧密码必须是字母数字下划线', 
+            'new_password.required' => '新密码不能为空',
+            'new_password.between' => '新密码必须是6 - 18位',
+            'new_password.dash' => '新密码必须是字母数字下划线',
+        ];
 
+        $validator = Validator::make($pwd, $rule, $mess);
 
-    	// $file = $request->input('img');
+        dd($validator);
 
-    	// dd($file);
+        $pwd = $pwd->old_password;
+        $pwds = $pwd->new_password;
 
-    	//处理上传
-      
-        // if($request->hasFile('file'))
-     //    if($request->hasFile("file")){ //判断是否有上传
-	            
-	    //         $myfile = $request->file("file");//获取上传信息
-	            
-	    //         dd($myfile);
+        dd($pwd, $pwds);
 
-	    //         if($myfile->isValid()){ // 确认上传的文件是否成功
-
-	    //             $picname = $myfile->getClientOriginalName(); // 获取文件名
-
-	    //             dd($picname);
-
-	    // 			$ent = $myfile->getClientOriginalExtension();// 获取扩展名
-	                
-	    //             $filename = time().rand(1000,9999).".".$ent; // 拼接文件名
-	    // 			$myfile->move("./myuploads",$filename); // 移动上传文件
-	                                
-	    //             return response($filename); // 输出内容
-	    //             exit();
-	    //         }
-	    //     }
-
-
-    	// $data = new data_user_detail;
-
-    	// $data->pic = $file;
-
-    	// $res = $data->save();
-
-    	// if($res){
-    	// 	return 1;
-    	// }else{
-    	// 	return 2;
-    	// }
-
-
-
+    }
+}

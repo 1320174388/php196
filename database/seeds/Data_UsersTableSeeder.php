@@ -22,7 +22,7 @@ class Data_UsersTableSeeder extends Seeder
         $tmp['password'] = $strs;
         $tmp['phone'] = '12312312312';
         $tmp['status'] = 1;
-        $tmp['avatar'] = 'default.jpg';
+        $tmp['avatar'] = 'default1.jpg';
         $tmp['created_at'] = date('Y-m-d H:i:s',time());
         $tmp['updated_at'] = date('Y-m-d H:i:s',time());
 
@@ -33,8 +33,8 @@ class Data_UsersTableSeeder extends Seeder
         	$tmp['email'] = str_random('10').'@sina.com';
         	$tmp['password'] = encrypt('123456');
         	$tmp['phone'] = '127'.mt_rand(10000000,99999999);
-        	$tmp['status'] = mt_rand(0,3);
-            $tmp['avatar'] = 'default.jpg';
+        	$tmp['status'] = mt_rand(0,1);
+            $tmp['avatar'] = 'default'.mt_rand(1,4).'.jpg';
         	$tmp['created_at'] = date('Y-m-d H:i:s',time());
         	$tmp['updated_at'] = date('Y-m-d H:i:s',time());
         	$data[] = $tmp; 
