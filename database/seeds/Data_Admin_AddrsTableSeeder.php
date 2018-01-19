@@ -19,7 +19,7 @@ class Data_Admin_AddrsTableSeeder extends Seeder
             'password' => $strs,
             'email' => '112511@qq.com',
             'phone' => '11251138581',
-            'avatar' => 'default.jpg',
+            'avatar' => 'default2.jpg',
             'status' => 1,
         ]);
         $data = [];
@@ -28,7 +28,7 @@ class Data_Admin_AddrsTableSeeder extends Seeder
             $tmp['password'] = encrypt('123456');
             $tmp['email'] = str_random('10').'@sina.com';
             $tmp['phone'] = '127'.mt_rand(10000000,99999999);
-            $tmp['avatar'] = 'default.jpg';
+            $tmp['avatar'] = 'default'.mt_rand(1,4).'.jpg';
             $tmp['status'] = mt_rand(2,3);
             $data[] = $tmp;
         }
