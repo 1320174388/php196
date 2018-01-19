@@ -25,7 +25,7 @@
        <li> <a href="member_invite.html"> <i class="icon-gift"></i> 邀请好友 <span style="color: #fff; background: red; padding: 0 5px; border-radius: 4px;">HOT</span> </a> </li> 
        <li class="divider"></li> 
        <li class="nav-header">安全中心</li> 
-       <li> <a href="member_pwd.html"> <i class="icon-cog"></i> 修改密码 </a> </li> 
+       <li> <a href="{{ url('/home/personal/pwdindex') }}"> <i class="icon-cog"></i> 修改密码 </a> </li> 
        <li> <a href="member_safe_set.html"> <i class="icon-lock"></i> 安全设置 </a> </li> 
        <li class="divider"></li> 
        <li class="nav-header">在线支付</li> 
@@ -55,7 +55,7 @@
             
           </div> 
           <div class="safety-level-wrapper"> 
-           <h5>hjl416148489</h5> 
+           <h5>{{ session('name') }}</h5> 
            <p> <span class="text-gray">安全等级：</span> <a class="user-safety-level full" href="member_safe_set.html" title="太棒了，您已达到最高安全等级"> 高 </a> </p> 
           </div> 
          </div> 
@@ -66,14 +66,17 @@
             <strong class="">0</strong> 元
            </div> 
            <div class="relative"> 
-            <div id="tool-kit-step1" class="toolkit-charge hide">
+            <div style="display:none" id="tool-kit-step1" class="toolkit-charge hide">
              <span id="step1_cancel" class="toolkit-close">&times;</span>
-            </div> 
+            </div>
             <a class="btn btn-yellow" href="member_charge.html">立刻充值</a> 
            </div> 
           </div> 
          </div> 
         </div> 
+  
+      
+
         <ul class="related-info clearfix"> 
          <li> <i class="icon-point"></i>积分： 2800点 <a href="gift.html">兑换礼品</a> </li> 
          <li> <i class="icon-order"></i>完成订单： <a href="member_order.html">0</a>张（一个月内完成） </li> 

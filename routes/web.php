@@ -95,5 +95,8 @@ Route::post('/shop/doreg','Shop\ShopController@doreg');
 
 //个人中心页面
 Route::get('/home/personal','Home\Personal\PersonalController@personal');
-
 Route::post('/home/personal/upload', 'Home\Personal\PersonalController@upload');
+
+//前台修改密码
+Route::get('/home/personal/pwdindex', 'Home\Personal\PersonalController@pwdindex');
+Route::post('/home/personal/pwd', 'Home\Personal\PersonalController@pwd');
