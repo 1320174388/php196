@@ -3,27 +3,24 @@
  <head> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" /> 
   <script type="text/javascript">
-    
-      
+
   </script> 
   <title>个人中心 - 首页</title> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  
-  
-
-
   <link href="{{ asset('home/css/forward_201503262210.css') }}" type="text/css" rel="stylesheet" /> 
  
-  <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png?v=2" /> 
-  <link rel="shortcut icon" href="images/favicon.ico?v=2" type="image/x-icon" /> 
-  <script src="js/cdn_detect.js"></script> 
+  <link rel="apple-touch-icon-precomposed" href="/home/images/apple-touch-icon.png?v=2" /> 
+  <link rel="shortcut icon" href="/home/images/favicon.ico?v=2" type="image/x-icon" /> 
+  <script type="text/javascript" src="{{ asset('/home/js/cdn_detect.js') }}"></script> 
   <script>
-if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="CDNDown=1; domain=ele.me; expires="+d.toUTCString()+"; path=/";if(!window.localStorage.getItem("CDNBackup")){window.localStorage.setItem("CDNBackup",1);location.reload(true)}}
+  // if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="CDNDown=1; domain=ele.me; expires="+d.toUTCString()+"; path=/";if(!window.localStorage.getItem("CDNBackup")){window.localStorage.setItem("CDNBackup",1);location.reload(true)}}
 </script> 
 
-  <script type="text/javascript" src="js/head_201503262210.js"></script> 
+  <script type="text/javascript" src="{{ asset('/home/js/head_201503262210.js') }}"></script> 
+    <!-- // <script type="text/javascript" src="{{ asset('home/js/foot_201503262210.js') }}"></script>  -->
+  <script type="text/javascript" src="{{ asset('/home/js/profile_201503262210.js') }}"></script> 
  </head> 
  <!--[if IE 8]><body class="lt-ie9 lt-ie10"><![endif]--> 
  <!--[if IE 9]><body class="lt-ie10"><![endif]--> 
@@ -148,13 +145,13 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
        </div> 
       </div> 
       <div class="eleme_dropdown topbar-user-nav"> 
-       <a class="e_toggle tnav-link tnav-username" data-id="175519">hjl416148..<i class="caret"></i></a> 
+       <a class="e_toggle tnav-link tnav-username" data-id="175519">SESSION{{ session('name') }}<i class="caret"></i></a> 
        <ul class="e_dropdown topbar-user-dropdown"> 
         <li><a rel="nofollow" href="member_index.html"><i class="icon-profile"></i>个人中心</a></li> 
         <li><a rel="nofollow" href="member_collect_shop.html"><i class="icon-fav"></i>我的收藏</a></li> 
         <li><a rel="nofollow" href="member_addr.html"><i class="icon-address"></i>我的地址</a></li> 
         <li><a rel="nofollow" href="member_safe_set.html"><i class="icon-config"></i>安全设置</a></li> 
-        <li class="divider"></li> 
+        <li class="divider"></li>
         <li><a rel="nofollow" href="/logout"><i class="icon-logout"></i>退出登录</a></li> 
        </ul> 
       </div> 
@@ -179,7 +176,6 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
    </footer> 
   </div> 
 
-  <script src="{{ asset('/home/js/jquery-1.8.3.min.js') }}"></script>
 
   <script type="text/javascript">
     $.ajaxSetup({
@@ -189,8 +185,3 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
             });
   </script>
 
- @section('js')
-
-
-
- @show
