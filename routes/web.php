@@ -94,9 +94,14 @@ Route::post('/mail','Mail\Mail\MailController@mail');
 
 // 店家后台
 // 申请店铺
-Route::get('/shop/register','Shop\ShopController@register');
-// 写入数据
-Route::post('/shop/doreg','Shop\ShopController@doreg');
+Route::get('/shop/register','Shop\ShopController@register')->middleware('homeislogin');
+Route::post('/shop/doreg','Shop\ShopController@doreg')->middleware('homeislogin');
+
+// 店铺管理
+Route::get('/shop/admin','Shop\AdminController@index')->middleware('homeislogin');
+Route::get('/shop/admin/user','Shop\AdminController@userInfo')->middleware('homeislogin');
+Route::get('/shop/admin/ident','Shop\AdminController@identify')->middleware('homeislogin');
+Route::get('/shop/admin/webSet','Shop\AdminController@webSet')->middleware('homeislogin');
 
 //个人中心页面
 Route::get('/home/personal','Home\Personal\PersonalController@personal');
