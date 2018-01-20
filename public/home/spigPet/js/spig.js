@@ -3,7 +3,6 @@
 jQuery(document).ready(function ($) {
     $("#spig").mousedown(function (e) {
         var home_user_true = $("#home_user_true").html();
-        console.log(home_user_true);
         if(e.which==3){
         showMessage("秘密通道:<br />"+home_user_true,200);
         }
