@@ -112,8 +112,12 @@
     </div> 
    </div> 
    <footer class="homepage-footer"> 
-    <a class="footer-nav" href="http://ele.me/mobile" target="_blank">手机应用</a> 
-    <a class="footer-nav" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
+    <a class="footer-nav" href="http://ele.me/mobile" target="_blank">手机应用</a>
+    @if($rest)
+      <a class="footer-nav" href="{{ url('/shop/admin') }}" target="_blank">我的店铺</a> 
+    @else
+      <a class="footer-nav" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
+    @endif 
     <a class="footer-nav" href="http://ele.me/links" target="_blank">友情链接</a> 
     <a class="footer-nav" href="http://ele.me/sitemap" target="_blank">网站地图</a> 
    </footer> 

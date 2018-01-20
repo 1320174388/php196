@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_address_province;
+use App\Models\data_rest;
 
 // 城市联动分类查询表
 
@@ -27,7 +28,16 @@ class PageController extends Controller
 		// 获取所有区县的信息
     	$town = $city_addr->data_address_town()->get(); 
 
-    	return view('home.page.index',['province'=>$province,'city'=>$city,'town'=>$town,'town'=>$town]);
+        $id = session('home_user')->id;
+
+        $rest = data_rest::where('user_id',$id)->first();
+
+        if($rest){
+            return view('home.page.index',['province'=>$province,'city'=>$city,'town'=>$town,'rest'=>$rest]);
+        }else{
+            return view('home.page.index',['province'=>$province,'city'=>$city,'town'=>$town]);
+        }
+    	
     }
 
     public function address(Request $request){
