@@ -50,13 +50,13 @@
   <div class="homepage-container"> 
    <header class="homepage-header"> 
     <h1 class="header-logo"><i class="glyph-logo-eleme glyph"></i>php196,外卖系统</h1> 
-    @if(session('user'))
-      <div class="header-account"> 
+    @if(session('home_user'))
+      <div id="home_user_true" class="header-account"> 
        <a class="link" href="">{{ session('home_user')->name }}</a> / 
-       <a class="link" href="{{ url('/logout') }}">退出</a> 
+       <a  class="link" href="{{ url('/logout') }}">退出</a> 
       </div> 
     @else
-      <div class="header-account"> 
+      <div id="home_user_true" class="header-account"> 
        <a class="link" href="{{ url('login') }}">登录</a> / 
        <a class="link" href="{{ url('register') }}">注册</a> 
       </div> 

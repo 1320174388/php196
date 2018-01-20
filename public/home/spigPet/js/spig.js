@@ -2,8 +2,10 @@
 //右键菜单
 jQuery(document).ready(function ($) {
     $("#spig").mousedown(function (e) {
+        var home_user_true = $("#home_user_true").html();
+        console.log(home_user_true);
         if(e.which==3){
-        showMessage("秘密通道:<br /><a href=\"/login\" title=\"登录\">登录</a>    <a href=\"/register\" title=\"注册\">注册</a>",200);
+        showMessage("秘密通道:<br />"+home_user_true,200);
         }
     });
     $("#spig").bind("contextmenu", function(e) {
