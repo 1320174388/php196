@@ -113,7 +113,7 @@
    </div> 
    <footer class="homepage-footer"> 
     <a class="footer-nav" href="http://ele.me/mobile" target="_blank">手机应用</a>
-    @if($rest)
+    @if(session('home_user_rest'))
       <a class="footer-nav" href="{{ url('/shop/admin') }}" target="_blank">我的店铺</a> 
     @else
       <a class="footer-nav" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
