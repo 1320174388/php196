@@ -188,7 +188,7 @@
       }
 
       function codeAddress() {
-          var addr = $('option:checked').text()
+          var addr = $('option:checked').text();
           var address = document.getElementById("address").value;
           if(address){
             //通过getLocation();方法获取位置信息值
