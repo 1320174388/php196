@@ -7,7 +7,7 @@
     <div class="wash-paper clearfix" id="profile"> 
      <nav class="profile-nav"> 
       <ul class="nav nav-list"> 
-       <li class="active"> <a href="member_index.html"> <i class="icon-user icon-white"></i> 个人中心 </a> </li> 
+       <li class="active"> <a href="{{ url('/home/personal') }}"> <i class="icon-user icon-white"></i> 个人中心 </a> </li> 
        <li class="divider"></li> 
        <li class="nav-header">饿单中心</li> 
        <li> <a href="member_order.html"> <i class="icon-calendar"></i> 最近一个月 </a> </li> 
@@ -46,7 +46,7 @@
           <form id="art_form" action="{{ url('/home/personal/upload') }}" method="post">
               {{ csrf_field() }}
               <input id="himg" name="himg" type="file" style="display:none" multipart="true" >
-              <div>
+              <div style="">
                 <a id="alj" onclick="alj()">上传<br />头像</a>
               </div>
               <button style="display:none" id="btn1"></button>
@@ -55,7 +55,7 @@
             
           </div> 
           <div class="safety-level-wrapper"> 
-           <h5>{{ session('name') }}</h5> 
+           <h5>{{ session('home_user')->name }}</h5> 
            <p> <span class="text-gray">安全等级：</span> <a class="user-safety-level full" href="member_safe_set.html" title="太棒了，您已达到最高安全等级"> 高 </a> </p> 
           </div> 
          </div> 
@@ -69,7 +69,7 @@
             <div style="display:none" id="tool-kit-step1" class="toolkit-charge hide">
              <span id="step1_cancel" class="toolkit-close">&times;</span>
             </div>
-            <a class="btn btn-yellow" href="member_charge.html">立刻充值</a> 
+            <a class="btn btn-yellow" href="member_charge.html">立刻充值</a>
            </div> 
           </div> 
          </div> 

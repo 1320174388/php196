@@ -99,9 +99,9 @@ Route::get('/shop/register','Shop\ShopController@register');
 Route::post('/shop/doreg','Shop\ShopController@doreg');
 
 //个人中心页面
-Route::get('/home/personal','Home\Personal\PersonalController@personal');
+Route::get('/home/personal','Home\Personal\PersonalController@personal')->middleware('homeislogin');
 Route::post('/home/personal/upload', 'Home\Personal\PersonalController@upload');
 
 //前台修改密码
-Route::get('/home/personal/pwdindex', 'Home\Personal\PersonalController@pwdindex');
+Route::get('/home/personal/pwdindex', 'Home\Personal\PersonalController@pwdindex')->middleware('homeislogin');
 Route::post('/home/personal/pwd', 'Home\Personal\PersonalController@pwd');

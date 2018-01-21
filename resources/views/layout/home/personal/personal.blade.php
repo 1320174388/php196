@@ -101,7 +101,7 @@
   <div class="full-content-wrapper"> 
    <header id="topbar" role="banner"> 
     <div class="container clearfix"> 
-     <a id="logo" href="index.html" title="饿了么" alt="饿了么" role="logo"> <i class="default-logo"></i> </a> 
+     <a id="logo" href="{{ url('/home/personal') }}" title="饿了么" alt="饿了么" role="logo"> <i class="default-logo"></i> </a> 
      <div class="mobile-wrap"> 
       <a id="topbar_mobile" class="topbar-mobile" href="/mobile" target="_blank" onclick="_gaq.push(['_trackEvent', 'topbar', 'click_mobile']);"><i class="icon-mobile"></i>手机客户端</a> 
       <div id="popup_mobile" class="popup-mobile"> 
@@ -145,7 +145,7 @@
        </div> 
       </div> 
       <div class="eleme_dropdown topbar-user-nav"> 
-       <a class="e_toggle tnav-link tnav-username" data-id="175519">SESSION{{ session('name') }}<i class="caret"></i></a> 
+       <a class="e_toggle tnav-link tnav-username" data-id="175519">{{ session('home_user')->name }}<i class="caret"></i></a> 
        <ul class="e_dropdown topbar-user-dropdown"> 
         <li><a rel="nofollow" href="member_index.html"><i class="icon-profile"></i>个人中心</a></li> 
         <li><a rel="nofollow" href="member_collect_shop.html"><i class="icon-fav"></i>我的收藏</a></li> 

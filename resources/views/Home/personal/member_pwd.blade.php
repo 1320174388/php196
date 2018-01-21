@@ -1,11 +1,12 @@
 @extends('layout.home.personal.personal')
 @section('content')
+
      <span class="breadcrumb-divider">/</span> 修改密码 
     </nav> 
     <div class="wash-paper clearfix" id="profile"> 
      <nav class="profile-nav"> 
       <ul class="nav nav-list"> 
-       <li> <a href="member_index.html"> <i class="icon-user"></i> 个人中心 </a> </li> 
+       <li> <a href="{{ url('/home/personal') }}"> <i class="icon-user"></i> 个人中心 </a> </li> 
        <li class="divider"></li> 
        <li class="nav-header">饿单中心</li> 
        <li> <a href="member_order.html"> <i class="icon-calendar"></i> 最近一个月 </a> </li> 
@@ -35,7 +36,22 @@
        <h2>修改密码</h2> 
       </div> 
       <div class="content-inner profile-changepwd"> 
+    
        <form action="{{ url('/home/personal/pwd') }}" class="form-horizontal" method="post" id="changepwd_form">
+        
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+          <ul>
+            @if(is_object($errors))
+              @foreach ($errors->all() as $error)
+              <li class="aaaa" style="color:red">{{ $error }}</li>
+              @endforeach
+            @else
+                <li class="aaaa" style="color:green">{{ $errors }}</li>
+            @endif
+          </ul>
+        </div>
+      @endif
         <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
         {{ csrf_field() }}
         <fieldset> 

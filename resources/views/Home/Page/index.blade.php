@@ -35,12 +35,14 @@
     }
   </style>
  <body class="homepage"> 
+    <h1><a href="{{ url('/home/personal') }}">个人中心</a></h1>
+
   <div class="homepage-container"> 
    <header class="homepage-header"> 
     <h1 class="header-logo"><i class="glyph-logo-eleme glyph"></i>php196,外卖系统</h1> 
-    @if(session('user'))
-      <div class="header-account"> 
-       <a class="link" href="">{{ session('home_user')->name }}</a> / 
+    @if(session('home_user'))
+      <div class="header-account">
+       <a class="link" href="">{{ session('home_user')->name }}</a>
        <a class="link" href="{{ url('/logout') }}">退出</a> 
       </div> 
     @else
