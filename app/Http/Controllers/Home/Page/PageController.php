@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_address_province;
 use App\Models\data_rest;
+use Session;
 
 // 城市联动分类查询表
 
@@ -28,12 +29,10 @@ class PageController extends Controller
 		// 获取所有区县的信息
     	$town = $city_addr->data_address_town()->get(); 
 
-        $id = session('home_user')->id;
-
-        $rest = data_rest::where('user_id',$id)->first();
-
-        if($rest){
-            return view('home.page.index',['province'=>$province,'city'=>$city,'town'=>$town,'rest'=>$rest]);
+        if(session('home_user')){
+            $id = session('home_user')->id;
+            Session::put('home_user_rest',data_rest::where('user_id',$id)->first());
+            return view('home.page.index',['province'=>$province,'city'=>$city,'town'=>$town]);
         }else{
             return view('home.page.index',['province'=>$province,'city'=>$city,'town'=>$town]);
         }
