@@ -106,11 +106,15 @@ Route::get('/shop/admin/ident','Shop\AdminController@identify')->middleware('hom
 // 分类管理
 Route::get('/shop/admin/addInfo','Shop\AdminController@addInfo')->middleware('homeislogin');
 // 执行添加
-Route::post('/shop/admin/doaddInfo','Shop\AdminController@doaddInfo');
+Route::post('/shop/admin/doaddInfo','Shop\AdminController@doaddInfo')->middleware('homeislogin');
 // 食品管理
 Route::get('/shop/admin/webSet','Shop\AdminController@webSet')->middleware('homeislogin');
 // 添加食品
-Route::post('/shop/admin/dowebSet','Shop\AdminController@dowebSet');
+Route::post('/shop/admin/dowebSet','Shop\AdminController@dowebSet')->middleware('homeislogin');
+// 编辑食品
+Route::get('/shop/admin/webEdit/{id}','Shop\AdminController@webEdit')->middleware('homeislogin');
+// 删除食品
+Route::get('/shop/admin/webDel/{id}','Shop\AdminController@webDel')->middleware('homeislogin');
 
 // 个人中心页面
 Route::get('/home/personal','Home\Personal\PersonalController@personal');

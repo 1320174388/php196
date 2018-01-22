@@ -17,12 +17,12 @@ class CreateDataRestFoodsTable extends Migration
         Schema::create('data_rest_foods', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);     //食品名称
-            $table->string('cate_id', 50);  //食品类别
-            $table->string('price');   //食品价格
+            $table->integer('cate_id');  //食品类别
+            $table->string('price',20);   //食品价格
             $table->string('img', 255);     //食品图片
-            $table->tinyInteger('stock');   //库存
-            $table->tinyInteger('sales');   //销量
-            $table->timestamps();
+            $table->integer('stock');   //库存
+            $table->integer('sales');   //销量
+            $table->integer('user_id');   //user_id
         });
     }
 

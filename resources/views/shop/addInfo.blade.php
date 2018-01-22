@@ -101,5 +101,8 @@
 		@if(session('shop_error_2'))
 			alert('这个分类下有子级分类不可删除');
 		@endif
+		@if(session('shop_error_3'))
+			alert('这个分类下有食品不可删除');
+		@endif
 	</script>
 @stop
