@@ -151,20 +151,21 @@ class PersonalController extends Controller
     public function delete($id)
     {
 
+
             $res = data_user_addr::find($id)->delete();
-            
+
 
             if($res){
             $data = [
                 'status'=>0,
                 'message'=>'删除成功'
             ];
-            }else{
-                $data = [
-                    'status'=>1,
-                    'message'=>'删除失败'
-                ];
-            }
+        }else{
+            $data = [
+                'status'=>1,
+                'message'=>'删除失败'
+            ];
+        }
 
 //        return response()->json($data);
 //        json_encode($data);

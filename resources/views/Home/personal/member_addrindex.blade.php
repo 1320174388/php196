@@ -60,12 +60,12 @@
     </div> 
    </div> 
    <script>
-        public function del(id){
-
-          layer.confirm('您确定要删除吗？', {
+        function del(id){
+  
+            //询问框
+            layer.confirm('您确定要删除吗？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
-  
                 //向服务器发送ajax请求，删除当前id对应的用户数据
 //                $.post('请求的路由','携带的参数','处理成功后的返回结果')
                 $.post("{{ url('/home/personal/delete') }}/"+ id, {'_token':"{{csrf_token()}}"}, 
@@ -75,14 +75,20 @@
 //                    JSON.parse()
 //                    JSON.stringify()
                     if(data.status == 0){
-                            location.reload();
+                        layer.msg(data.message, {icon: 6});
+                        window.location.reload();
                     }else{
+                        layer.msg(data.message, {icon: 5});
 
-                          location.reload();
+                        window.location.reload();
                     }
 
                 })
-          }
+
+//
+            }, function(){
+
+            });
         }
     </script>
 @stop
