@@ -26,7 +26,7 @@ class AdminController extends Controller
 
     	$id = session('home_user')->id;
 
-    	$data = data_food_cate::where('user_id',$id)->get();
+    	$data = data_food_cate::wherein('user_id',[0,$id])->get();
 
     	if($data){
 	    	$parent = ShopClass::children($data);
@@ -38,19 +38,18 @@ class AdminController extends Controller
     }
     // 执行添加分类
     public function doaddInfo(Request $request){
-    	dd($request->all());
+        // 执行添加操作
     	if(!empty($request->input('add'))){
-
 
     		$this->validate($request,[
 	    		'name' => 'required',
 	    	],[
 	    		'name.required' => '您并没有填写分类名称',
 	    	]);
-	    	$data = $request->except('_token');
+	    	$data = $request->except('_token','add');
 
 	    	if(empty($data['pid'])){
-	    		$data['pid'] = 0;
+	    		$data['pid'] = 1;
 	    	}
 
 	    	if($data['pid'] > 0 ){
@@ -73,8 +72,8 @@ class AdminController extends Controller
 	    	}
 
     	}
-
-    	if(!empty($request->input('edit'))){
+        // 执行修改操作
+    	if(!empty($request->input('edit'))){ 
 
     		$this->validate($request,[
 	    		'name' => 'required',
@@ -84,6 +83,10 @@ class AdminController extends Controller
 	    	$data = $request->except('_token');
 
 	    	$id = $request->input('pid');
+
+            if($id = 1){
+                return back()->with('shop_error_0','1');
+            }
 
 	    	$cate = data_food_cate::where('id',$id)->first();
 	    	$cate->name = $request->input('name');
@@ -95,10 +98,20 @@ class AdminController extends Controller
     			return back();
     		}
     	}
-
+        // 执行删除操作
     	if(!empty($request->input('del'))){
 
     		$id = $request->input('pid');
+
+            if($id = 1){
+                return back()->with('shop_error_1','1');
+            }
+
+            $data = data_food_cate::where('pid',$id)->first();
+
+            if($data){
+                return back()->with('shop_error_2','1');
+            }
 
     		$cate = data_food_cate::where('id',$id)->first();
     		$res = $cate->delete();

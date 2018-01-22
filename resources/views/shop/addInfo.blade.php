@@ -65,10 +65,10 @@
 							<input type="text" name="name" style="width:100%; height:38px;">
 						</div>
 						<div class="td w20">
-							<button id="#button_add" class="button" style="width:100%;height:35px; color:blue;">添加</button>
+							<button id="button_add" class="button" style="width:100%;height:35px; color:blue;">添加</button>
 						</div>
 						<div class="td w20">
-							<button id="#button_edit" class="button" style="width:100%;height:35px; color:green;">修改</button>
+							<button id="button_edit" class="button" style="width:100%;height:35px; color:green;">修改</button>
 						</div>
 						<div class="td w20">
 							<button id="button_del" class="button" style="width:100%;height:35px; color:red;">删除</button>
@@ -92,5 +92,14 @@
 		$('#button_del').on('click',function(){
 			$('#form_btn').append('<input type="hidden" name="del" value="1" />');
 		});
+		@if(session('shop_error_0'))
+			alert('默认分类不可修改');
+		@endif
+		@if(session('shop_error_1'))
+			alert('默认分类不可删除');
+		@endif
+		@if(session('shop_error_2'))
+			alert('这个分类下有子级分类不可删除');
+		@endif
 	</script>
 @stop
