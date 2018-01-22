@@ -9,4 +9,5 @@ class data_address_town extends Model
 	public $table = 'data_address_towns';
 
     public $timestamps = false;
+
 }

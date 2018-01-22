@@ -50,7 +50,7 @@
   <div class="homepage-container"> 
    <header class="homepage-header"> 
     <h1 class="header-logo"><i class="glyph-logo-eleme glyph"></i>php196,外卖系统</h1> 
-    @if(session('user'))
+    @if(session('home_user'))
       <div class="header-account"> 
        <a class="link" href="">{{ session('home_user')->name }}</a> / 
        <a class="link" href="{{ url('/logout') }}">退出</a> 
