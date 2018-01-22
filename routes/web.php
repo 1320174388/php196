@@ -79,7 +79,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 
     Route::post('user/insert','UserController@insert');
 
+    //店铺路由
+	Route::get('shop','ShopController@index');
+	Route::post('list','ShopController@list');
+	Route::post('details','ShopController@details');
+
 });
+
+
+
+
+
 // 管理员详情
 Route::get('/admin/usershow/glyuser/{name}','Admin\UsershowController@glyuser');
 // 详情页面

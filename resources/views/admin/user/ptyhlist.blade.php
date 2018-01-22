@@ -105,4 +105,3 @@
 		</div>
 
 @endsection
-</html>
