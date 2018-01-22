@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\data_admin_addr;
-use Illuminate\Http\Request; 
+use App\Models\data_user;
+use Illuminate\Http\Request;
  
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -141,24 +142,42 @@ class UserController extends Controller
             ]);
     }
 
-     /*public function update($id){
+    public function update(Request $request)
+    {
+        $id = $request['id'];
 
-            $stu = data_admin_addr::find($id); // 先将要修改的数据查到
+        $user = data_user::where('id',$id)->first();
 
-            if ($stu->status == 2) {
-                $stu->status = 0;
-            }else if($stu->status == 1){
-                $stu->status = 2;
-            }else if($stu->status == 0){
-                $stu->status = 1;
-            }
 
-            $res = $stu->save();      // 执行修改操作
-            if($res){
-                return 111;
-            }else{
-                return 222;
-            }
-    }*/
+        if($user->status == 0 ){
+            $user->status = 1;
+            $user->save();
+            return 0;
+        }elseif($user->status == 1){
+            $user->status = 0;
+            $user->save();
+            return 1;
+        }
+
+    }
+
+    public function updategl(Request $request)
+    {
+        $id = $request['id'];
+
+        $user = data_admin_addr::where('id',$id)->first();
+
+
+        if($user->status == 2 ){
+            $user->status = 3;
+            $user->save();
+            return 2;
+        }elseif($user->status == 3){
+            $user->status = 2;
+            $user->save();
+            return 3;
+        }
+
+    }
 
 }
