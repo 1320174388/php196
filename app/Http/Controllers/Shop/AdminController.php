@@ -127,11 +127,64 @@ class AdminController extends Controller
     }
     // 食品列表
     public function webSet(){
-    	return view('shop.webSet');
+        $id = session('home_user')->id;
+
+        $data = data_food_cate::wherein('user_id',[0,$id])->get();
+
+        if($data){
+            $parent = ShopClass::children($data);
+            return view('shop.webSet',['parent'=>$parent]);
+        }else{
+            return view('shop.webSet');
+        }
     }
     // 添加食品
-    public function dowebSet(){
-    	dd('123123');
+    public function dowebSet(Request $request){
+
+        $this->validate($request,[
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'avatar' => 'required|image',
+        ],[
+            'name.required' => '请填写食品名称 ',
+            'price.required' => '请填写价格 ',
+            'price.numeric' => '价s格只能写入数字 ',
+            'stock.required' => '请填写库存 ',
+            'stock.numeric' => '库存只能写入数字 ',
+            'avatar.required' => '请上传头像',
+            'avatar.image' => '请上传正经头像',
+        ]);
+
+        $file = ShopClass::doUpload($request);
+
+        $data = $request->except('_token','avatar');
+        $data['sales'] = 0;
+        $data['avatar'] = $file;
+
+
+
+    	dd($data);
+    }
+
+    public function doUpload(Request $request) // 控制器
+    {
+        if($request->hasFile("upload")){ //判断是否有上传
+            
+            $myfile = $request->file("upload");//获取上传信息
+            
+            if($myfile->isValid()){ // 确认上传的文件是否成功
+
+                $picname = $myfile->getClientOriginalName(); // 获取文件名
+                $ent = $myfile->getClientOriginalExtension();// 获取扩展名
+                
+                $filename = time().rand(1000,9999).".".$ent; // 拼接文件名
+                $myfile->move("./myuploads",$filename); // 移动上传文件
+                                
+                return response($filename); // 输出内容
+                exit();
+            }
+        }
     }
 
 }

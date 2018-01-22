@@ -19,7 +19,19 @@
 	<div class="authority">
 		<div class="authority-head">
 			<div class="manage-head">
-				<h6 class="layout padding-left manage-head-con">食品管理</h6>
+				<h6 class="layout padding-left manage-head-con">食品管理
+					<b style="color:red">
+						@if (count($errors) > 0)
+					            @if(is_object($errors))
+					              @foreach ($errors->all() as $error)
+					                {{ $error }}
+					              @endforeach
+					            @else
+					                {{ $errors }}
+					            @endif
+					    @endif
+				    </b>
+				</h6>
 			</div>
 		</div>
 		<div class="authority-content">
@@ -52,26 +64,31 @@
 					<form action="{{ url('shop/admin/dowebSet') }}" method="post" enctype="multipart/form-data">
 						{{ csrf_field() }}
 						<div class="td w10">
-							<input type="text" name="name" style="width:100%;height:38px;">
+							<input type="text" name="name" style="width:100%;height:38px;" value="@if(!empty(session('shop_file_error')->name))shop_file_error')->name @endif{{ old('name') }}">
 						</div>
 						<div class="td w30">
-							<select name="cate_id" id="" style="width:100%; height:40px;"></select>
+							<select name="cate_id" id="" style="width:100%; height:40px;">
+								@if($parent){
+									@foreach($parent as $v)
+										<option value="{{ $v->id }}">{{ $v->name }}</option>
+									@endforeach
+								@endif
+							</select>
 						</div>
 						<div class="td w10">
-							<input type="text" name="price" style="width:100%;height:38px;">
+							<input type="text" name="price" style="width:100%;height:38px;" value="{{ old('price') }}">
 						</div>
 						<div class="td w10">
-							<input type="file" class="button" name="price" style="width:100%; height:35px;">
+							<input type="file" class="button" name="avatar" style="width:100%; height:35px;">
 						</div>
 						<div class="td w10">
-							<input type="text" name="stock" style="width:100%;height:38px;">
+							<input type="text" name="stock" style="width:100%;height:38px;" value="{{ old('stock') }}">
 						</div>
 						<div class="td w10">
-							<input type="text" name="sales" style="width:100%;height:38px;">
+							0
 						</div>
 						<div class="td w20">
-							<button class="button" style="width:49%;height:40px; color:blue;">添加</button>
-							<button class="button" style="width:49%;height:40px; color:red;">删除</button>
+							<button class="button" style="width:100%;height:40px; color:blue;">添加</button>
 						</div>
 					</form>
 					</div>
@@ -119,5 +136,5 @@
 @stop
 
 @section('js')
-
+	
 @stop
