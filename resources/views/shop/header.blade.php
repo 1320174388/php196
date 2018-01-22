@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>店铺 - 管理 - @yield('title')</title>
+		<title>餐店 - 管理 - @yield('title')</title>
 		<link rel="stylesheet" type="text/css" href="/Tpshop/Css/identify.css" />
 		<link rel="stylesheet" type="text/css" href="/Tpshop/Css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="/Tpshop/Css/account.css" />
@@ -12,6 +12,9 @@
 		<script type="text/javascript" src="/Tpshop/Js/haidao.offcial.general.js"></script>
 		<script type="text/javascript" src="/Tpshop/Js/select.js"></script>
 		<script type="text/javascript" src="/Tpshop/Js/haidao.validate.js"></script>
+		@section('css')
+
+		@show
 	</head>
 
 	<body>
@@ -41,7 +44,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="{{ url('shop/admin/user') }}">个人信息</a></li>
-							<li><a href="#">店铺信息</a></li>
+							<li><a href="#">餐店信息</a></li>
 						</ul>
 					</div>
 					</li>
@@ -88,7 +91,7 @@
 						<div class="sidebar-title">
 							<a>
 								<span class="icon"><b class="fl icon-arrow-down"></b></span>
-								<span class="text-normal">店铺管理</span>
+								<span class="text-normal">餐店管理</span>
 							</a>
 						</div>
 						<ul class="sidebar-trans">
@@ -110,20 +113,20 @@
 						<div class="sidebar-title">
 							<a>
 								<span class="icon"><b class="fl icon-arrow-down"></b></span>
-								<span class="text-normal">菜品管理</span>
+								<span class="text-normal">食品管理</span>
 							</a>
 						</div>
 						<ul class="sidebar-trans">
 							<li>
-								<a href="{{ url('shop/admin/webSet') }}">
-									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_author.png" width="16" height="16" /></b>
-									<span class="text-normal">菜品分类</span>
+								<a href="{{ url('shop/admin/addInfo') }}">
+									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_market.png" width="16" height="16" /></b>
+									<span class="text-normal">分类添加</span>
 								</a>
 							</li>
 							<li>
-								<a href="#">
-									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_market.png" width="16" height="16" /></b>
-									<span class="text-normal">菜品列表</span>
+								<a href="{{ url('shop/admin/webSet') }}">
+									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_author.png" width="16" height="16" /></b>
+									<span class="text-normal">食品列表</span>
 								</a>
 							</li>
 						</ul>

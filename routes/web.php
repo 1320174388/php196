@@ -99,12 +99,22 @@ Route::post('/shop/doreg','Shop\ShopController@doreg')->middleware('homeislogin'
 
 // 店铺管理
 Route::get('/shop/admin','Shop\AdminController@index')->middleware('homeislogin');
+// 账号管理
 Route::get('/shop/admin/user','Shop\AdminController@userInfo')->middleware('homeislogin');
+// 实名认证
 Route::get('/shop/admin/ident','Shop\AdminController@identify')->middleware('homeislogin');
+// 分类管理
+Route::get('/shop/admin/addInfo','Shop\AdminController@addInfo')->middleware('homeislogin');
+// 执行添加
+Route::post('/shop/admin/doaddInfo','Shop\AdminController@doaddInfo');
+// 食品管理
 Route::get('/shop/admin/webSet','Shop\AdminController@webSet')->middleware('homeislogin');
+// 添加食品
+Route::post('/shop/admin/dowebSet','Shop\AdminController@dowebSet');
 
-//个人中心页面
+// 个人中心页面
 Route::get('/home/personal','Home\Personal\PersonalController@personal');
+// 执行添加
 Route::post('/home/personal/upload', 'Home\Personal\PersonalController@upload');
 
 //前台修改密码
