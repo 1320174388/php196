@@ -11,7 +11,7 @@ class data_user_addr extends Model
     public function data_user()
     {
     	return $this->belongsTo('App\Models\data_user', 'user_id', 'id');
-
-
+	
     }
+	
 }

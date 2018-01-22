@@ -2,46 +2,14 @@
 
 
 @section('content')
-     <span class="breadcrumb-divider">/</span> 个人中心 
-    </nav> 
-    <div class="wash-paper clearfix" id="profile"> 
-     <nav class="profile-nav"> 
-      <ul class="nav nav-list"> 
-       <li class="active"> <a href="{{ url('/home/personal') }}"> <i class="icon-user icon-white"></i> 个人中心 </a> </li> 
-       <li class="divider"></li> 
-       <li class="nav-header">饿单中心</li> 
-       <li> <a href="member_order.html"> <i class="icon-calendar"></i> 最近一个月 </a> </li> 
-       <li> <a href="member_order_month.html"> <i class="icon-list-alt"></i> 一个月之前 </a> </li> 
-       <li> <a href="member_comments.html"> <i class="icon-star-empty"></i> 未点评饿单 </a> </li> 
-       <li> <a href="member_order_refund.html"> <i class="icon-file"></i> 退单中饿单 </a> </li> 
-       <li class="divider"></li> 
-       <li class="nav-header">我的收藏</li> 
-       <li> <a href="member_collect_shop.html"> <i class="icon-heart"></i> 我收藏的餐厅 </a> </li> 
-       <li> <a href="member_collect_food.html"> <i class="icon-star"></i> 我收藏的美食 </a> </li> 
-       <li class="divider"></li> 
-       <li class="nav-header">账户相关</li> 
-       <li> <a href="member_addr.html"> <i class="icon-list"></i> 我的地址 </a> </li> 
-       <li> <a href="member_red_packet.html"> <i class="icon-tag"></i> 我的红包 </a> </li> 
-       <li> <a href="member_invite.html"> <i class="icon-gift"></i> 邀请好友 <span style="color: #fff; background: red; padding: 0 5px; border-radius: 4px;">HOT</span> </a> </li> 
-       <li class="divider"></li> 
-       <li class="nav-header">安全中心</li> 
-       <li> <a href="{{ url('/home/personal/pwdindex') }}"> <i class="icon-cog"></i> 修改密码 </a> </li> 
-       <li> <a href="member_safe_set.html"> <i class="icon-lock"></i> 安全设置 </a> </li> 
-       <li class="divider"></li> 
-       <li class="nav-header">在线支付</li> 
-       <li> <a href="member_schedule.html"> <i class="icon-eye-open"></i> 收支明细 </a> </li> 
-      </ul> 
-     </nav> 
-     <div class="main-content"> 
-      <div class="content-header"> 
-       <h2>个人中心</h2> 
+    @section('name', '个人中心')
+       <h2>个人中心</h2>
       </div> 
       <div class="content-inner profile-index"> 
        <div class="account-status clearfix"> 
         <div class="clearfix"> 
          <div class="col-left"> 
           <div class="avatar"> 
-          
 
           <form id="art_form" action="{{ url('/home/personal/upload') }}" method="post">
               {{ csrf_field() }}
@@ -74,8 +42,6 @@
           </div> 
          </div> 
         </div> 
-  
-      
 
         <ul class="related-info clearfix"> 
          <li> <i class="icon-point"></i>积分： 2800点 <a href="gift.html">兑换礼品</a> </li> 

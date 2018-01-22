@@ -105,3 +105,7 @@ Route::post('/home/personal/upload', 'Home\Personal\PersonalController@upload');
 //前台修改密码
 Route::get('/home/personal/pwdindex', 'Home\Personal\PersonalController@pwdindex')->middleware('homeislogin');
 Route::post('/home/personal/pwd', 'Home\Personal\PersonalController@pwd');
+//地址
+Route::get('/home/personal/addrindex', 'Home\Personal\PersonalController@addrindex');
+Route::post('/home/personal/addradd', 'Home\Personal\PersonalController@addradd');
+Route::post('/home/personal/delete/{id}', 'Home\Personal\PersonalController@delete');

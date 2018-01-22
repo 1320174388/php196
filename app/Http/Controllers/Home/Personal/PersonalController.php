@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\data_user_detail;
 use App\Models\data_user;
 use Illuminate\Support\Facades\Validator;
+use App\Models\data_user_addr;
 
 
 class PersonalController extends Controller
@@ -112,5 +113,62 @@ class PersonalController extends Controller
 
             }
         }
+    }
+
+    public function addrindex()
+    {
+
+        $user_addr = data_user_addr::get();
+
+        return view('home.personal.member_addrindex', compact('user_addr'));
+    }
+
+    public function addradd(Request $request)
+    {
+
+        $newaddr = $request->except('_token');
+        // dd($newaddr);
+        $addr = new data_user_addr;
+        // dd($newaddr['address']);
+
+        $addr->address = $newaddr['address'];
+
+        $addr->addr_phone = $newaddr['addr_phone'];
+
+        $addr->user_id = $newaddr['user_id'];
+
+        $address = $addr->save();
+
+        if($address){
+
+            return redirect('/home/personal/addrindex')->with('errors', '添加成功');
+        }else
+        {
+            return back()->with('errors', '添加失败请重新添加');
+        }
+    }
+
+    public function delete($id)
+    {
+
+            $res = data_user_addr::find($id)->delete();
+            
+
+            if($res){
+            $data = [
+                'status'=>0,
+                'message'=>'删除成功'
+            ];
+            }else{
+                $data = [
+                    'status'=>1,
+                    'message'=>'删除失败'
+                ];
+            }
+
+//        return response()->json($data);
+//        json_encode($data);
+
+        return $data;
     }
 }
