@@ -53,7 +53,7 @@
     @if(session('home_user'))
       <div id="home_user_true" class="header-account"> 
        <a class="link" href="">{{ session('home_user')->name }}</a> / 
-       <a  class="link" href="{{ url('/logout') }}">退出</a> 
+       <a  class="link" href="{{ url('/logout') }}">退出</a>
       </div> 
     @else
       <div id="home_user_true" class="header-account"> 

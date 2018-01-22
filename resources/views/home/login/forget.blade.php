@@ -60,7 +60,7 @@
     var mail = null;
 
     $('#yzm').on('click',function(){
-      var i = 5;
+      var i = 60;
       name = $('#register_username').val();
       email =  $('#register_email').val();
 

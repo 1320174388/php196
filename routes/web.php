@@ -65,7 +65,7 @@ Route::get('crypt','Admin\LoginController@crypt');
 //后台
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
 
-//后台首页
+//后台首页（管理员列表）
     Route::get('index','LoginController@index');
 
 //退出登录
@@ -75,15 +75,43 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     Route::resource('user','UserController');
     Route::get('user','UserController@index');
 
+    // 修改权限
+    Route::post('user/update','UserController@update');
+    Route::post('user/updategl','UserController@updategl');
+
+    // 普通用户列表
     Route::post('user/show','UserController@show');
 
+    // 添加管理员
     Route::post('user/insert','UserController@insert');
 
+    // 管理员详情
+    Route::get('usershow/glyuser/{name}','Admin\UsershowController@glyuser');
+    // 详情页面
+    Route::post('usershow/update','Admin\UsershowController@update');
+
+    //角色相关的路由
+//    用户授权页面
+    Route::get('role/auth/{id}','RoleController@auth');
+//    添加用户授权逻辑
+    Route::post('role/doauth','RoleController@doAuth');
+    Route::resource('role','RoleController');
+
+    //权限相关的路由
+
+    Route::resource('permission','PermissionController');
+
+    //    分类模块
+    Route::resource('cate','CateController');
+    //修改排序的路由
+    Route::post('cate/changeorder','CateController@changeOrder');
+
+    //店铺路由
+	Route::get('shop','ShopController@index');
+	Route::post('list','ShopController@list');
+	Route::post('details','ShopController@details');
+
 });
-// 管理员详情
-Route::get('/admin/usershow/glyuser/{name}','Admin\UsershowController@glyuser');
-// 详情页面
-Route::post('/admin/usershow/update','Admin\UsershowController@update');
 
 //订单路由
 Route::get('home/order', 'Home\Order\OrderController@order');
@@ -116,11 +144,15 @@ Route::get('/shop/admin/webEdit/{id}','Shop\AdminController@webEdit')->middlewar
 // 删除食品
 Route::get('/shop/admin/webDel/{id}','Shop\AdminController@webDel')->middleware('homeislogin');
 
-// 个人中心页面
-Route::get('/home/personal','Home\Personal\PersonalController@personal');
-// 执行添加
+
+//个人中心页面
+Route::get('/home/personal','Home\Personal\PersonalController@personal')->middleware('homeislogin');
 Route::post('/home/personal/upload', 'Home\Personal\PersonalController@upload');
 
 //前台修改密码
-Route::get('/home/personal/pwdindex', 'Home\Personal\PersonalController@pwdindex');
+Route::get('/home/personal/pwdindex', 'Home\Personal\PersonalController@pwdindex')->middleware('homeislogin');
 Route::post('/home/personal/pwd', 'Home\Personal\PersonalController@pwd');
+//地址
+Route::get('/home/personal/addrindex', 'Home\Personal\PersonalController@addrindex');
+Route::post('/home/personal/addradd', 'Home\Personal\PersonalController@addradd');
+Route::post('/home/personal/delete/{id}', 'Home\Personal\PersonalController@delete');

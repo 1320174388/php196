@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/themes/css/base.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/themes/css/home.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url('/admin/favicon.ico') }}">
     <link rel="stylesheet" href="/ad/bootstrap/css/bootstrap.min.css">
+    <link href="{{ url('/bs/css/bootstrap.min.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ url('/admin/themes/js/jquery-3.2.1.min.js') }}"></script>
 </head>
 <body>
@@ -44,10 +46,10 @@
             </div>
             <div class="menuParent">
                 <div class="ListTitlePanel">
-                    <h3 class="ListTitle">代理商管理</h3>
+                    <h3 class="ListTitle">店铺管理</h3>
                 </div>
                 <div class="menuList">
-                    <a href="#">角色管理</a>
+                    <a href="{{ url('/admin/shop') }}">店铺列表</a>
                     <a href="#">员工管理</a>
                     <a href="#">业务流程配置</a>
                     <a href="#">金融机构管理</a>
@@ -68,12 +70,11 @@
             </div>
             <div class="menuParent">
                 <div class="ListTitlePanel">
-                    <h3 class="ListTitle">客户管理</h3>
+                    <h3 class="ListTitle">角色管理</h3>
                 </div>
                 <div class="menuList">
-                    <a href="#">客户列表</a>
-                    <a href="#">待分配客户管理</a>
-                    <a href="#">自由经纪人审核</a>
+                    <a href="{{ url('admin/role/create') }}">添加角色</a>
+                    <a href="{{ url('admin/role') }}">角色列表</a>
                 </div>
             </div>
             <div class="menuParent">
@@ -98,6 +99,7 @@
         </div>
 	{{--在父模板中定义子模板需要实现的部分的占位符--}}
     	@section('content')
+
     	@show
 
 
@@ -118,6 +120,18 @@
         });
     });
 </script>
+<script src="{{ url('/bs/js/jquery.min.js') }}"></script>
+<script src="{{ url('/bs/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript">
+$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+</script>
+@section('js')
+
+@show
 
 </body>
 </html>
