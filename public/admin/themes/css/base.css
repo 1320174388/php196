@@ -151,7 +151,6 @@ table td:nth-child(even) {
 
 table tr:nth-child(2) {
 	background: #fff;
-	color: #888;
 }
 
 table.aui-tab-data tr {

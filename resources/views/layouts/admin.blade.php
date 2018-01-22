@@ -68,12 +68,11 @@
             </div>
             <div class="menuParent">
                 <div class="ListTitlePanel">
-                    <h3 class="ListTitle">客户管理</h3>
+                    <h3 class="ListTitle">角色管理</h3>
                 </div>
                 <div class="menuList">
-                    <a href="#">客户列表</a>
-                    <a href="#">待分配客户管理</a>
-                    <a href="#">自由经纪人审核</a>
+                    <a href="{{ url('admin/role/create') }}">添加角色</a>
+                    <a href="{{ url('admin/role') }}">角色列表</a>
                 </div>
             </div>
             <div class="menuParent">
