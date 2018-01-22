@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_food_cate;
+use App\Models\data_rest_food;
 use App\FunClass\ShopClass;
 
 class AdminController extends Controller
@@ -84,7 +85,7 @@ class AdminController extends Controller
 
 	    	$id = $request->input('pid');
 
-            if($id = 1){
+            if($id == 1){
                 return back()->with('shop_error_0','1');
             }
 
@@ -103,7 +104,7 @@ class AdminController extends Controller
 
     		$id = $request->input('pid');
 
-            if($id = 1){
+            if($id == 1){
                 return back()->with('shop_error_1','1');
             }
 
@@ -113,7 +114,15 @@ class AdminController extends Controller
                 return back()->with('shop_error_2','1');
             }
 
+            $data = data_food_cate::where('id',$id)->first();
+            $data = $data->data_rest_food()->get();
+
+            if($data){
+                return back()->with('shop_error_3','1');
+            }
+
     		$cate = data_food_cate::where('id',$id)->first();
+
     		$res = $cate->delete();
 
     		if($res){
@@ -129,10 +138,14 @@ class AdminController extends Controller
     public function webSet(){
         $id = session('home_user')->id;
 
-        $data = data_food_cate::wherein('user_id',[0,$id])->get();
+        $cate = data_food_cate::wherein('user_id',[0,$id])->get();
+        $food = data_rest_food::where('user_id',$id)->paginate(6);
 
-        if($data){
-            $parent = ShopClass::children($data);
+        if($cate && $food){
+            $parent = ShopClass::children($cate);
+            return view('shop.webSet',['parent'=>$parent,'food'=>$food]);
+        }elseif($cate){
+            $parent = ShopClass::children($cate);
             return view('shop.webSet',['parent'=>$parent]);
         }else{
             return view('shop.webSet');
@@ -160,31 +173,34 @@ class AdminController extends Controller
 
         $data = $request->except('_token','avatar');
         $data['sales'] = 0;
-        $data['avatar'] = $file;
+        $data['img'] = $file;
+        $data['user_id'] = session('home_user')->id;
 
+        $food = new data_rest_food;
+        foreach($data as $k=>$v){
+            $food->$k = $v;
+        }
+        $res = $food->save();
 
+        if($res){
+            return redirect('shop/admin/webSet');
+        }else{
+            return back();
+        }
 
-    	dd($data);
     }
-
-    public function doUpload(Request $request) // 控制器
-    {
-        if($request->hasFile("upload")){ //判断是否有上传
-            
-            $myfile = $request->file("upload");//获取上传信息
-            
-            if($myfile->isValid()){ // 确认上传的文件是否成功
-
-                $picname = $myfile->getClientOriginalName(); // 获取文件名
-                $ent = $myfile->getClientOriginalExtension();// 获取扩展名
-                
-                $filename = time().rand(1000,9999).".".$ent; // 拼接文件名
-                $myfile->move("./myuploads",$filename); // 移动上传文件
-                                
-                return response($filename); // 输出内容
-                exit();
-            }
+    // 修改食品
+    public function webEdit($id){
+        
+    }
+    // 删除食品
+    public function webDel($id){
+        $food = data_rest_food::find($id);
+        $res = $food->delete();
+        if($res){
+            return redirect('shop/admin/webSet');
+        }else{
+            return back();
         }
     }
-
 }

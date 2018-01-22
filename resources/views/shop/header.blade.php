@@ -12,6 +12,9 @@
 		<script type="text/javascript" src="/Tpshop/Js/haidao.offcial.general.js"></script>
 		<script type="text/javascript" src="/Tpshop/Js/select.js"></script>
 		<script type="text/javascript" src="/Tpshop/Js/haidao.validate.js"></script>
+		@section('script')
+			
+		@stop
 		@section('css')
 
 		@show

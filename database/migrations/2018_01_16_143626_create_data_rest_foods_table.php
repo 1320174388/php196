@@ -22,6 +22,7 @@ class CreateDataRestFoodsTable extends Migration
             $table->string('img', 255);     //食品图片
             $table->integer('stock');   //库存
             $table->integer('sales');   //销量
+            $table->integer('user_id');   //user_id
         });
     }
 
