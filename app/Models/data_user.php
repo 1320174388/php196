@@ -17,4 +17,9 @@ class data_user extends Model
     {
         return $this->hasOne('App\Models\data_rest','user_id','id');
     }
+    
+    public function data_user_addr()
+    {
+    	return $this->hasMany('App\Models\data_user_addr', 'user_id', 'id');
+    }
 }
