@@ -8,7 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" /> 
   <link class="usemin" rel="stylesheet" href="/Home/css/global.48e3a844.css" /> 
   <link class="usemin" rel="stylesheet" href="/Home/css/homepage.8efdfd7c.css" />
-  <script type="text/javascript" src="/home/js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/home/spigPet/js/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="/home/spigPet/js/spig.js"></script>
+  <link rel="stylesheet" href="/home/spigPet/css/spigPet.css" type="text/css"/>
   <style type="text/css">
     html,body{
         width:100%;
@@ -28,23 +30,33 @@
     }
     #container{
         min-width:600px;
-        min-height:767px;
+        min-height:500px;
     }
     .btn{
         width:142px;
     }
   </style>
- <body class="homepage"> 
+  <script type="text/javascript">
+    var isindex = true;
+    var visitor = true;
+  </script>
+ <body class="homepage" style="height:650px;"> 
+  <!--小人只在首页显示 start*-->
+  <div id="spig" class="spig">
+      <div id="message">正在加载中……</div>
+      <div id="mumu" class="mumu"></div>
+  </div>
+  <!--小人end*-->
   <div class="homepage-container"> 
    <header class="homepage-header"> 
     <h1 class="header-logo"><i class="glyph-logo-eleme glyph"></i>php196,外卖系统</h1> 
-    @if(session('user'))
-      <div class="header-account"> 
+    @if(session('home_user'))
+      <div id="home_user_true" class="header-account"> 
        <a class="link" href="">{{ session('home_user')->name }}</a> / 
-       <a class="link" href="{{ url('/logout') }}">退出</a> 
+       <a  class="link" href="{{ url('/logout') }}">退出</a>
       </div> 
     @else
-      <div class="header-account"> 
+      <div id="home_user_true" class="header-account"> 
        <a class="link" href="{{ url('login') }}">登录</a> / 
        <a class="link" href="{{ url('register') }}">注册</a> 
       </div> 
@@ -100,8 +112,12 @@
     </div> 
    </div> 
    <footer class="homepage-footer"> 
-    <a class="footer-nav" href="http://ele.me/mobile" target="_blank">手机应用</a> 
-    <a class="footer-nav" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
+    <a class="footer-nav" href="http://ele.me/mobile" target="_blank">手机应用</a>
+    @if(session('home_user_rest'))
+      <a class="footer-nav" href="{{ url('/shop/admin') }}" target="_blank">我的店铺</a> 
+    @else
+      <a class="footer-nav" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
+    @endif 
     <a class="footer-nav" href="http://ele.me/links" target="_blank">友情链接</a> 
     <a class="footer-nav" href="http://ele.me/sitemap" target="_blank">网站地图</a> 
    </footer> 
@@ -172,7 +188,7 @@
       }
 
       function codeAddress() {
-          var addr = $('option:checked').text()
+          var addr = $('option:checked').text();
           var address = document.getElementById("address").value;
           if(address){
             //通过getLocation();方法获取位置信息值

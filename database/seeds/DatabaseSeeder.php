@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DataAddressTownsTableSeeder::class);
         $this->call(Data_UsersTableSeeder::class);
         $this->call(DataRestsTableSeeder::class);
+        $this->call(DataUserDetailsTableSeeder::class);
+        $this->call(DataFoodCatesTableSeeder::class);
     }
 }
