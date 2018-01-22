@@ -85,11 +85,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     // 添加管理员
     Route::post('user/insert','UserController@insert');
 
-    //店铺路由
-	Route::get('shop','ShopController@index');
-	Route::post('list','ShopController@list');
-	Route::post('details','ShopController@details');
-
     // 管理员详情
     Route::get('usershow/glyuser/{name}','Admin\UsershowController@glyuser');
     // 详情页面
@@ -110,8 +105,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     Route::resource('cate','CateController');
     //修改排序的路由
     Route::post('cate/changeorder','CateController@changeOrder');
-});
 
+    //店铺路由
+	Route::get('shop','ShopController@index');
+	Route::post('list','ShopController@list');
+	Route::post('details','ShopController@details');
+
+});
 
 //订单路由
 Route::get('home/order', 'Home\Order\OrderController@order');
