@@ -20,8 +20,6 @@ class CreateDataRestFoodsTable extends Migration
             $table->integer('cate_id');  //食品类别
             $table->string('price',20);   //食品价格
             $table->string('img', 255);     //食品图片
-            $table->integer('stock');   //库存
-            $table->integer('sales');   //销量
             $table->integer('user_id');   //user_id
         });
     }

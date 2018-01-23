@@ -140,7 +140,7 @@ Route::get('/shop/admin/webSet','Shop\AdminController@webSet')->middleware('home
 // 添加食品
 Route::post('/shop/admin/dowebSet','Shop\AdminController@dowebSet')->middleware('homeislogin');
 // 编辑食品
-Route::get('/shop/admin/webEdit/{id}','Shop\AdminController@webEdit')->middleware('homeislogin');
+Route::post('/shop/admin/webEdit/{id}','Shop\AdminController@webEdit')->middleware('homeislogin');
 // 删除食品
 Route::get('/shop/admin/webDel/{id}','Shop\AdminController@webDel')->middleware('homeislogin');
 
