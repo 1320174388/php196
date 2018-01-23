@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\data_food_cate;
 use App\Models\data_rest_food;
 use App\FunClass\ShopClass;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -156,27 +157,24 @@ class AdminController extends Controller
 
         $this->validate($request,[
             'name' => 'required',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric',
             'avatar' => 'required|image',
+            'price' => 'required|numeric',
         ],[
             'name.required' => '请填写食品名称 ',
-            'price.required' => '请填写价格 ',
-            'price.numeric' => '价s格只能写入数字 ',
-            'stock.required' => '请填写库存 ',
-            'stock.numeric' => '库存只能写入数字 ',
             'avatar.required' => '请上传头像',
             'avatar.image' => '请上传正经头像',
+            'price.required' => '请填写价格',
+            'price.numeric' => '餐品价格只能是数字',
         ]);
 
         $file = ShopClass::doUpload($request);
 
         $data = $request->except('_token','avatar');
-        $data['sales'] = 0;
         $data['img'] = $file;
         $data['user_id'] = session('home_user')->id;
 
         $food = new data_rest_food;
+
         foreach($data as $k=>$v){
             $food->$k = $v;
         }
@@ -190,8 +188,40 @@ class AdminController extends Controller
 
     }
     // 修改食品
-    public function webEdit($id){
-        
+    public function webEdit(Request $request,$id){
+
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'avatar' => 'image',
+        ],[
+            'name.required' => '请填写食品名称 ',
+            'avatar.image' => '请上传正经头像',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('shop/admin/webSet')->withErrors($validator);
+        }
+
+        $data = $request->except('_token','avatar');
+
+        if($request->all('avatar')){
+            $file = ShopClass::doUpload($request);
+            $data['img'] = $file;
+        }
+
+        $food = data_rest_food::find($id);
+
+        foreach($data as $k=>$v){
+            $food->$k = $v;
+        }
+        $res = $food->save();
+
+        if($res){
+            return redirect('shop/admin/webSet');
+        }else{
+            return back();
+        }
+
     }
     // 删除食品
     public function webDel($id){
