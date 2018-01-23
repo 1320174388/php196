@@ -209,6 +209,10 @@ class AdminController extends Controller
             $data['img'] = $file;
         }
 
+        if(!$data['img']){
+            unset($data['img']);
+        }
+
         $food = data_rest_food::find($id);
 
         foreach($data as $k=>$v){

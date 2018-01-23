@@ -124,8 +124,8 @@
 							<input type="text" name="price" style="width:100%;height:100%; display:none;" value="{{ $v->price }}" class="admin_edit">
 						</div>
 						<div class="td w20 ddd">
-							<a href=""><button class="button a_edit admin_none" style="width:49%;height:40px; color:blue;">编辑</button></a>
-							<a href="{{ url('shop/admin/webDel/'.$v->id) }}"><button class="button a_del admin_none" style="width:49%;height:40px; color:red;">删除</button></a>
+							<button class="button a_edit admin_none" style="width:49%;height:40px; color:blue;">编辑</button>
+							<a class="button a_del admin_none" style="width:49%;height:40px; color:red;" href="{{ url('shop/admin/webDel/'.$v->id) }}">删除</a>
 							<button class="button admin_edit" style="width:49%;height:40px; color:blue; display:none;">更新</button>
 							<button class="button x_edit admin_edit" style="width:49%;height:40px; color:red; display:none;">取消</button>
 						</div>
@@ -153,6 +153,8 @@
 			$('.margin-big-right').find('a').addClass('next disable');
 		});
 		$('.a_edit').on('click',function(){
+			$('.admin_edit').hide();
+			$('.admin_none').show();
 			$(this).parent().parent().parent().find('.admin_none').hide();
 			$(this).parent().parent().parent().find('.admin_edit').show();
 			return false;
@@ -163,8 +165,8 @@
 			return false;
 		});
 		$('.a_del').on('click',function(){
-			var dd = confirm('确定删除吗');
-			return dd;
+			var del = confirm('确定删除吗');
+			return del;
 		});
 	</script>
 @stop
