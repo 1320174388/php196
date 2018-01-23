@@ -136,11 +136,27 @@ class AdminController extends Controller
     	
     }
     // 食品列表
-    public function webSet(){
+    public function webSet(Request $request){
+
+        $name = $request->input('afs');
+        $cate_id = $request->input('cate_id');
+        $min = $request->input('min');
+        $max = $request->input('max');
         $id = session('home_user')->id;
 
         $cate = data_food_cate::wherein('user_id',[0,$id])->get();
-        $food = data_rest_food::where('user_id',$id)->paginate(6);
+
+        if(!$cate_id){
+            $cate_id = [];
+            foreach($cate as $v){
+                $cate_id[] = $v->id;
+            }
+        }
+
+        $food = data_rest_food::where('user_id',$id)
+                              ->where('name','like','%'.$name.'%')
+                              ->wherein('cate_id',$cate_id)
+                              ->paginate(4);
 
         if($cate && $food){
             $parent = ShopClass::children($cate);
