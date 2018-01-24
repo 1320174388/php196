@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Model
+class Data_Permission extends Model
 {
-    public $table = 'data_permission';
+    public $table = 'data_permissions';
 
     public $primaryKey = "id";
 

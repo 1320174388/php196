@@ -10,6 +10,9 @@
     <link rel="icon" type="image/x-icon" href="{{ url('/admin/favicon.ico') }}">
     <link rel="stylesheet" href="/ad/bootstrap/css/bootstrap.min.css">
     <link href="{{ url('/bs/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('admin/style/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/style/js/ch-ui.admin.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('layer/layer.js') }}"></script>
     <script type="text/javascript" src="{{ url('/admin/themes/js/jquery-3.2.1.min.js') }}"></script>
 </head>
 <body>
@@ -50,10 +53,6 @@
                 </div>
                 <div class="menuList">
                     <a href="{{ url('/admin/shop') }}">店铺列表</a>
-                    <a href="#">员工管理</a>
-                    <a href="#">业务流程配置</a>
-                    <a href="#">金融机构管理</a>
-                    <a href="#">金融产品管理</a>
                 </div>
             </div>
             <div class="menuParent">
@@ -75,25 +74,6 @@
                 <div class="menuList">
                     <a href="{{ url('admin/role/create') }}">添加角色</a>
                     <a href="{{ url('admin/role') }}">角色列表</a>
-                </div>
-            </div>
-            <div class="menuParent">
-                <div class="ListTitlePanel">
-                    <h3 class="ListTitle">绩效查询</h3>
-                </div>
-                <div class="menuList">
-                    <a href="#">绩效查询</a>
-                    <a href="#">绩效查询</a>
-                </div>
-            </div>
-            <div class="menuParent">
-                <div class="ListTitlePanel">
-                    <h3 class="ListTitle">轮播图管理</h3>
-                </div>
-                <div class="menuList">
-                    <a href="#">轮播图管理</a>
-                    <a href="#">轮播图管理</a>
-                    <a href="#">轮播图管理</a>
                 </div>
             </div>
         </div>

@@ -87,7 +87,7 @@ class AdminController extends Controller
 
 	    	$id = $request->input('pid');
 
-            if($id 、== 1){
+            if($id == 1){
                 return back()->with('shop_error_0','1');
             }
 
