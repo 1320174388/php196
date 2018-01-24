@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_rest;
 use App\Models\data_user;
+use Illuminate\Support\Facades\Redis;
 
 
 class ShopController extends Controller
@@ -51,14 +52,20 @@ class ShopController extends Controller
     	if($user->status == 0 ){
     		$user->status = 2;
     		$user->save();
+            $data_rest = data_rest::find($id);
+            Redis::hmset('home_user_rest',[$id=>$data_rest]);
     		return 0;
     	}elseif($user->status == 1 ){
     		$user->status = 2;
     		$user->save();
+            $data_rest = data_rest::find($id);
+            Redis::hmset('home_user_rest',[$id=>$data_rest]);
     		return 1;
     	}elseif($user->status == 2){
     		$user->status = 0;
     		$user->save();
+            $data_rest = data_rest::find($id);
+            Redis::hmset('home_user_rest',[$id=>$data_rest]);
     		return 2;
     	}
 

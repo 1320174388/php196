@@ -20,7 +20,7 @@
     <div class="finance-header">
         <div class="finance-header-content clearfix">
             <div class="finance-header-content-fl">
-                <h1>Fc_Kc后台管理</h1>
+                <font size="5"><a style="color: white;"href="/">Fc_Kc后台管理</a></font>
             </div>
             <div class="finance-header-content-fr clearfix">
                 <div class="finance-header-user">

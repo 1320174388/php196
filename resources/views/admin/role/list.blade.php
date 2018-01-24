@@ -46,8 +46,8 @@
             }, function(){
                 //向服务器发送ajax请求，删除当前id对应的用户数据
                 // $.post('请求的路由','携带的参数','处理成功后的返回结果')
-				dd(id);
-                $.post('{{ url('admin/user/') }}/'+id,
+                // dd(id);
+                $.post('{{ url('admin/usershow/') }}/'+id,
 					{'_method':'delete','_token':"{{csrf_token()}}"},
 				function (data) {
                     if(data.status == 0){
