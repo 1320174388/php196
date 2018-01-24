@@ -182,28 +182,7 @@ class UserController extends Controller
 
     }
 
-    public function destroy($id)
-    {
-        $res = \DB::table('data_role')->delete($id);
 
-        //如果删除成功
-        if($res){
-            $data = [
-                'status'=>0,
-                'message'=>'删除成功'
-            ];
-        }else{
-            $data = [
-                'status'=>1,
-                'message'=>'删除失败'
-            ];
-        }
-
-//        return response()->json($data);
-//        json_encode($data);
-
-        return $data;
-    }
 
     public function store(Request $request)
     {
@@ -261,7 +240,7 @@ class UserController extends Controller
                 }
             }
             DB::commit();
-            return redirect('admin/user/index')->with(['info' => '添加成功']);
+            return redirect('admin/user')->with(['info' => '添加成功']);
         }catch(Exception $e){
             DB::rollBack();
             return redirect()->back()

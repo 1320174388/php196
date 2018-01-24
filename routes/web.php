@@ -77,48 +77,51 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     Route::post('role/doauth','RoleController@doAuth');
     //    添加管理员授权逻辑
     Route::post('user/doauth','UserController@doAuth');
+    // 店铺详情
+    Route::post('list','ShopController@list');
+    // 店铺授权
+    Route::post('details','ShopController@details');
+
+    //删除
+    Route::resource('usershow','UsershowController');
+    // 修改角色
+    Route::post('role/update','RoleController@update');
+
+    // 管理员授权
+    Route::post('user/updategl','UserController@updategl');
+
+    // 修改角色（权限）
+    Route::get('role/{id}/edit','RoleController@edit');
+
+    // 用户模块
+    // 管理员授权页面
+    Route::get('user/auth/{id}','UserController@auth');
+
+    //角色相关的路由
+    // 角色授权页面
+    Route::get('role/auth/{id}','RoleController@auth');
+
 
 });
 
 //后台
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['islogin']],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['islogin','hasRole']],function(){
 
-//后台首页（管理员列表）
+    //后台首页（管理员列表）
     Route::resource('user','UserController');
 
-//用户模块
-    //    管理员授权页面
-    Route::get('user/auth/{id}','UserController@auth');
-
-    //角色相关的路由
-//    角色授权页面
-    Route::get('role/auth/{id}','RoleController@auth');
-
-//    修改角色（权限）
-    Route::get('role/{id}/edit','RoleController@edit');
+    //角色列表
     Route::resource('role','RoleController');
 
     // 管理员管理
     Route::post('user/update','UserController@update');
-    // 管理员授权
-    Route::post('user/updategl','UserController@updategl');
-
 
     // 添加管理员
     Route::post('user/insert','UserController@insert');
 
-    //删除
-    Route::post('user/{id}','UsershowController@destroy');
-//    修改角色
-//    Route::post('role/{id}','RoleController@update');
-
     //店铺路由
     //店铺列表
 	Route::get('shop','ShopController@index');
-	// 店铺详情
-	Route::post('list','ShopController@list');
-	// 店铺授权
-	Route::post('details','ShopController@details');
 
 });
 

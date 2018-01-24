@@ -83,4 +83,27 @@ class UsershowController extends Controller
             return back()-with(['info'=>'更新失败']);
         }
     }
+
+    public function destroy($id)
+    {
+        $res = \DB::table('data_roles')->delete($id);
+
+        //如果删除成功
+        if($res){
+            $data = [
+                'status'=>0,
+                'message'=>'删除成功'
+            ];
+        }else{
+            $data = [
+                'status'=>1,
+                'message'=>'删除失败'
+            ];
+        }
+
+//        return response()->json($data);
+//        json_encode($data);
+
+        return $data;
+    }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Data_Permission;
 use App\Models\Data_Role;
-use App\Models\data_user;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -153,19 +152,18 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $input = $request->all();
-        dd($input);
+        $id = $request['id'];
+//        dd($id);
 
         $user = Data_Role::find($id);
 
         $res = $user->update($input);
 
         if($res){
-
-
-            return redirect('admin/user')->with('msg','添加成功');
+            return redirect('admin/role')->with('msg','修改成功');
         }else{
             //如果添加失败，返回到修改页
             return back()->with('msg','修改失败');
@@ -173,14 +171,4 @@ class RoleController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

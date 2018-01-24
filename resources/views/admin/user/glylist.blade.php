@@ -92,7 +92,7 @@
 									@endif</a>
 							</td>
 							<td>
-								<a class="sq btn btn-primary btn-xs" href="{{ url('admin/user/auth/'.$v->id) }}">授权</a>
+								<a class="sq-4+6? btn btn-primary btn-xs" href="{{ url('admin/user/auth/'.$v->id) }}">授权</a>
 							</td>
 						</tr>
 					@endforeach
