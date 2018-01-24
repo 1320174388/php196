@@ -62,66 +62,67 @@ Route::post('admin/dologin','Admin\LoginController@dologin');
 //加密演示
 Route::get('crypt','Admin\LoginController@crypt');
 
-//后台
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
-
-//后台首页（管理员列表）
-    Route::get('index','LoginController@index');
-
 //退出登录
-    Route::get('logout','LoginController@logout');
- 
-//用户模块
-    Route::resource('user','UserController');
-    Route::get('user','UserController@index');
+Route::get('admin/logout','Admin\LoginController@logout');
 
-    // 修改权限
-    Route::post('user/update','UserController@update');
-    Route::post('user/updategl','UserController@updategl');
-
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
     // 普通用户列表
     Route::post('user/show','UserController@show');
+
+    // 个人详情（管理员）
+    Route::get('usershow/glyuser/{name}','UsershowController@glyuser');
+    // 修改个人详情页面（管理员）
+    Route::post('usershow/update','UsershowController@update');
+    // 添加用户授权逻辑
+    Route::post('role/doauth','RoleController@doAuth');
+    //    添加管理员授权逻辑
+    Route::post('user/doauth','UserController@doAuth');
+
+});
+
+//后台
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['islogin']],function(){
+
+//后台首页（管理员列表）
+    Route::resource('user','UserController');
+
+//用户模块
+    //    管理员授权页面
+    Route::get('user/auth/{id}','UserController@auth');
+
+    //角色相关的路由
+//    角色授权页面
+    Route::get('role/auth/{id}','RoleController@auth');
+
+//    修改角色（权限）
+    Route::get('role/{id}/edit','RoleController@edit');
+    Route::resource('role','RoleController');
+
+    // 管理员管理
+    Route::post('user/update','UserController@update');
+    // 管理员授权
+    Route::post('user/updategl','UserController@updategl');
+
 
     // 添加管理员
     Route::post('user/insert','UserController@insert');
 
-
-    // 管理员详情
-    Route::get('usershow/glyuser/{name}','Admin\UsershowController@glyuser');
-    // 详情页面
-    Route::post('usershow/update','Admin\UsershowController@update');
-
-    //角色相关的路由
-//    用户授权页面
-    Route::get('role/auth/{id}','RoleController@auth');
-//    添加用户授权逻辑
-    Route::post('role/doauth','RoleController@doAuth');
-    Route::resource('role','RoleController');
-
-    //权限相关的路由
-
-    Route::resource('permission','PermissionController');
-
-    //    分类模块
-    Route::resource('cate','CateController');
-    //修改排序的路由
-    Route::post('cate/changeorder','CateController@changeOrder');
+    //删除
+    Route::post('user/{id}','UsershowController@destroy');
+//    修改角色
+//    Route::post('role/{id}','RoleController@update');
 
     //店铺路由
+    //店铺列表
 	Route::get('shop','ShopController@index');
+	// 店铺详情
 	Route::post('list','ShopController@list');
+	// 店铺授权
 	Route::post('details','ShopController@details');
 
 });
 
 
-
-
-
-// 管理员详情
-Route::get('/admin/usershow/glyuser/{name}','Admin\UsershowController@glyuser');
-// 详情页面
-Route::post('/admin/usershow/update','Admin\UsershowController@update');
 
 //订单路由
 Route::get('home/order', 'Home\Order\OrderController@order');

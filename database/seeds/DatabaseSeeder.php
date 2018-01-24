@@ -21,5 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(DataRestsTableSeeder::class);
         $this->call(DataUserDetailsTableSeeder::class);
         $this->call(DataFoodCatesTableSeeder::class);
+        $this->call(DataRolesTableSeeder::class);
+        $this->call(DataPermissionsTableSeeder::class);
+        $this->call(IndexUserRoleTableSeeder::class);
+        $this->call(IndexRolePermissionTableSeeder::class);
     }
 }

@@ -101,7 +101,7 @@
 
 		<script type="text/javascript">
             $('.disable').on('click',function(){
-                var id  = $(this).offsetParent().siblings('.id').html();
+                    var id  = $(this).offsetParent().siblings('.id').html();
                 $.ajax({
                     url:"{{ url('admin/user/update') }}",
                     type:'post',
