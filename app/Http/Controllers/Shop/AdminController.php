@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\data_food_cate;
 use App\Models\data_rest_food;
 use App\FunClass\ShopClass;
+use Illuminate\Support\Facades\Redis;
 use Validator;
 
 class AdminController extends Controller
@@ -86,7 +87,7 @@ class AdminController extends Controller
 
 	    	$id = $request->input('pid');
 
-            if($id == 1){
+            if($id 、== 1){
                 return back()->with('shop_error_0','1');
             }
 
