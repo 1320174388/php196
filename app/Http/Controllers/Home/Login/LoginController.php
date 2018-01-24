@@ -116,6 +116,8 @@ class LoginController extends Controller
 	public function logout()
 	{
 		\Session::forget('home_user');
+    \Session::forget('home_user_rest');
+    \Session::forget('home_user_detail');
 		return redirect('/login')->with('errors','退出成功');
 	}
 

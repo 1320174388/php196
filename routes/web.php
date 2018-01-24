@@ -77,10 +77,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     Route::post('role/doauth','RoleController@doAuth');
     // 添加管理员授权逻辑
     Route::post('user/doauth','UserController@doAuth');
+
     // 店铺详情
     Route::post('list','ShopController@list');
-    // 店铺授权
+    // 审核通过
     Route::post('details','ShopController@details');
+    // 审核不通过
+    Route::post('del','ShopController@del');
 
     //删除
     Route::resource('usershow','UsershowController');
@@ -100,6 +103,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     //角色相关的路由
     // 角色授权页面
     Route::get('role/auth/{id}','RoleController@auth');
+
 
 
 });
@@ -133,8 +137,8 @@ Route::get('home/order', 'Home\Order\OrderController@order');
 Route::post('/mail','Mail\Mail\MailController@mail');
 
 // 申请店铺
-Route::get('/shop/register','Shop\ShopController@register')->middleware('homeislogin');
-Route::post('/shop/doreg','Shop\ShopController@doreg')->middleware('homeislogin');
+Route::get('/shop/register','Shop\ShopController@register');
+Route::post('/shop/doreg','Shop\ShopController@doreg');
 
 // 店家后台
 Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['homeislogin','isshop']],function(){
@@ -159,7 +163,6 @@ Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['homeislogin',
     Route::get('admin/webDel/{id}','AdminController@webDel');
 
 });
-
 
 //个人中心页面
 Route::get('/home/personal','Home\Personal\PersonalController@personal')->middleware('homeislogin');
