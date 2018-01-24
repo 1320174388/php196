@@ -138,29 +138,46 @@ class AdminController extends Controller
     // 食品列表
     public function webSet(Request $request){
 
-        $name = $request->input('afs');
+        $name = $request->input('name') ? $request->input('name') : '';
         $cate_id = $request->input('cate_id');
-        $min = $request->input('min');
-        $max = $request->input('max');
+        $min = $request->input('min') ? $request->input('min') : 0;
+        $max = $request->input('max') ? $request->input('max') : 100;
         $id = session('home_user')->id;
 
         $cate = data_food_cate::wherein('user_id',[0,$id])->get();
 
-        if(!$cate_id){
+        if(!$cate_id || $cate_id[0] == 1){
             $cate_id = [];
             foreach($cate as $v){
                 $cate_id[] = $v->id;
             }
         }
 
+        if($min > $max){
+            $res = $min;
+            $min = $max;
+            $max = $res;
+        }
+
         $food = data_rest_food::where('user_id',$id)
                               ->where('name','like','%'.$name.'%')
                               ->wherein('cate_id',$cate_id)
+                              ->where('price','>',$min)
+                              ->where('price','<',$max)
                               ->paginate(4);
 
         if($cate && $food){
             $parent = ShopClass::children($cate);
-            return view('shop.webSet',['parent'=>$parent,'food'=>$food]);
+            return view('shop.webSet',[
+                'parent'=>$parent,
+                'food'=>$food,
+                'where'=>[
+                    'name'=>$name,
+                    'cate_id'=>$cate_id,
+                    'min'=>$min,
+                    'max'=>$max,
+                ],
+            ]);
         }elseif($cate){
             $parent = ShopClass::children($cate);
             return view('shop.webSet',['parent'=>$parent]);

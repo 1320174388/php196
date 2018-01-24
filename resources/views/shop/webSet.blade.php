@@ -187,7 +187,7 @@
 				<div class="page">
 					<div class="page">
 						<ul class="offcial-page margin-top margin-big-right">
-							<li>{!! $food->render() !!}</li>
+							<li>{!! $food->appends($where)->render() !!}</li>
 						</ul>
 					</div>
 				</div>
