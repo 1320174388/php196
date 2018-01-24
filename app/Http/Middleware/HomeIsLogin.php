@@ -18,9 +18,7 @@ class HomeIsLogin
      */
     public function handle($request, Closure $next)
     {
-        if(session('home_user_rest') && session('home_user_detail')){
-            return $next($request);
-        }else if(session('home_user')){
+        if(session('home_user')){
 
             $user_id = session('home_user')->id;
 

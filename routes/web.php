@@ -110,6 +110,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 	Route::get('shop','ShopController@index');
 	Route::post('list','ShopController@list');
 	Route::post('details','ShopController@details');
+    Route::post('del','ShopController@del');
 
 });
 
@@ -125,25 +126,27 @@ Route::post('/mail','Mail\Mail\MailController@mail');
 Route::get('/shop/register','Shop\ShopController@register')->middleware('homeislogin');
 Route::post('/shop/doreg','Shop\ShopController@doreg')->middleware('homeislogin');
 
+Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['homeislogin','isshop']],function(){
 // 店铺管理
-Route::get('/shop/admin','Shop\AdminController@index')->middleware('homeislogin');
+Route::get('admin','AdminController@index');
 // 账号管理
-Route::get('/shop/admin/user','Shop\AdminController@userInfo')->middleware('homeislogin');
+Route::get('admin/user','AdminController@userInfo');
 // 实名认证
-Route::get('/shop/admin/ident','Shop\AdminController@identify')->middleware('homeislogin');
+Route::get('admin/ident','AdminController@identify');
 // 分类管理
-Route::get('/shop/admin/addInfo','Shop\AdminController@addInfo')->middleware('homeislogin');
+Route::get('admin/addInfo','AdminController@addInfo');
 // 执行添加
-Route::post('/shop/admin/doaddInfo','Shop\AdminController@doaddInfo')->middleware('homeislogin');
+Route::post('admin/doaddInfo','AdminController@doaddInfo');
 // 食品管理
-Route::get('/shop/admin/webSet','Shop\AdminController@webSet')->middleware('homeislogin');
+Route::get('admin/webSet','AdminController@webSet');
 // 添加食品
-Route::post('/shop/admin/dowebSet','Shop\AdminController@dowebSet')->middleware('homeislogin');
+Route::post('admin/dowebSet','AdminController@dowebSet');
 // 编辑食品
-Route::get('/shop/admin/webEdit/{id}','Shop\AdminController@webEdit')->middleware('homeislogin');
+Route::get('admin/webEdit/{id}','AdminController@webEdit');
 // 删除食品
-Route::get('/shop/admin/webDel/{id}','Shop\AdminController@webDel')->middleware('homeislogin');
+Route::get('admin/webDel/{id}','AdminController@webDel');
 
+});
 
 //个人中心页面
 Route::get('/home/personal','Home\Personal\PersonalController@personal')->middleware('homeislogin');
