@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'islogin' => \App\Http\Middleware\IsLogin::class,
         'homeislogin' => \App\Http\Middleware\HomeIsLogin::class,
         'hasRole' => \App\Http\Middleware\HasRole::class,
+        'isshop' => \App\Http\Middleware\isShop::class,
     ];
 }

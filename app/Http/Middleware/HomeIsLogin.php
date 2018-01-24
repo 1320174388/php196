@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Models\data_rest;
 use App\Models\data_user_detail;
+use Illuminate\Support\Facades\Redis;
 use Session;
 
 class HomeIsLogin
@@ -18,19 +19,26 @@ class HomeIsLogin
      */
     public function handle($request, Closure $next)
     {
-        if(session('home_user_rest') && session('home_user_detail')){
-            return $next($request);
-        }else if(session('home_user')){
+        if(session('home_user')){ // 判断用户
 
             $user_id = session('home_user')->id;
 
-            $rest = data_rest::where('user_id',$user_id)->first();
-            Session::put('home_user_rest',$rest);
+            $rest = Redis::hget('home_user_rest',$user_id);
+            $detail = Redis::hget('home_user_detail',$user_id);
 
-            $detail = data_user_detail::where('user_id',$user_id)->first();
-            Session::put('home_user_detail',$detail);
+            if($rest && $detail){
+                return $next($request);
+            }else{
 
-            return $next($request);
+                $rest = data_rest::where('user_id',$user_id)->first();
+                Redis::hmset('home_user_rest',[$user_id=>$rest]);
+
+                $detail = data_user_detail::where('user_id',$user_id)->first();
+                Redis::hmset('home_user_detail',[$user_id=>$detail]);
+                // dd(2);
+                return $next($request);
+            }
+            
         }else{
             return redirect('/login')->with('errors','请先登录');
         }
