@@ -8,6 +8,7 @@ use App\Models\data_user_detail;
 use App\Models\data_user;
 use Illuminate\Support\Facades\Validator;
 use App\Models\data_user_addr;
+use Illuminate\Support\Facades\Redis;
 
 
 class PersonalController extends Controller
@@ -102,6 +103,8 @@ class PersonalController extends Controller
                 $idh = session('home_user')->id;
 
                 $update = data_user::where('id', $idh)->update(['password' => encrypt($new_pwd)]);
+                $data_user = data_user::find($idh); // 获取当前修改这一条数据
+                Redis::hmset('home_user',[$idh=>$data_user]); // 同步Redis中
 
                 if($update)
                 {

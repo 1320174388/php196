@@ -129,30 +129,33 @@ Route::get('home/order', 'Home\Order\OrderController@order');
 //发送邮件路由
 Route::post('/mail','Mail\Mail\MailController@mail');
 
-
-// 店家后台
 // 申请店铺
 Route::get('/shop/register','Shop\ShopController@register')->middleware('homeislogin');
 Route::post('/shop/doreg','Shop\ShopController@doreg')->middleware('homeislogin');
 
-// 店铺管理
-Route::get('/shop/admin','Shop\AdminController@index')->middleware('homeislogin');
-// 账号管理
-Route::get('/shop/admin/user','Shop\AdminController@userInfo')->middleware('homeislogin');
-// 实名认证
-Route::get('/shop/admin/ident','Shop\AdminController@identify')->middleware('homeislogin');
-// 分类管理
-Route::get('/shop/admin/addInfo','Shop\AdminController@addInfo')->middleware('homeislogin');
-// 执行添加
-Route::post('/shop/admin/doaddInfo','Shop\AdminController@doaddInfo')->middleware('homeislogin');
-// 食品管理
-Route::get('/shop/admin/webSet','Shop\AdminController@webSet')->middleware('homeislogin');
-// 添加食品
-Route::post('/shop/admin/dowebSet','Shop\AdminController@dowebSet')->middleware('homeislogin');
-// 编辑食品
-Route::post('/shop/admin/webEdit/{id}','Shop\AdminController@webEdit')->middleware('homeislogin');
-// 删除食品
-Route::get('/shop/admin/webDel/{id}','Shop\AdminController@webDel')->middleware('homeislogin');
+// 店家后台
+Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['homeislogin','isshop']],function(){
+
+    // 店铺管理
+    Route::get('admin','AdminController@index');
+    // 账号管理
+    Route::get('admin/user','AdminController@userInfo');
+    // 实名认证
+    Route::get('admin/ident','AdminController@identify');
+    // 分类管理
+    Route::get('admin/addInfo','AdminController@addInfo');
+    // 执行添加
+    Route::post('admin/doaddInfo','AdminController@doaddInfo');
+    // 食品管理
+    Route::get('admin/webSet','AdminController@webSet');
+    // 添加食品
+    Route::post('admin/dowebSet','AdminController@dowebSet');
+    // 编辑食品
+    Route::post('admin/webEdit/{id}','AdminController@webEdit');
+    // 删除食品
+    Route::get('admin/webDel/{id}','AdminController@webDel');
+
+});
 
 
 //个人中心页面
