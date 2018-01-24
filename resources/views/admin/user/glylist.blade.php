@@ -66,6 +66,7 @@
 						<th>手机号</th>
 						<th>状态</th>
 						<th>操作</th>
+						<th>授权</th>
 					</tr>
 					@foreach($data as $k=>$v)
 						<tr>
@@ -89,6 +90,9 @@
 									@elseif($v->status == 3) 解封
 									@elseif($v->status == 2) 禁用
 									@endif</a>
+							</td>
+							<td>
+								<a class="sq btn btn-primary btn-xs" href="{{ url('admin/user/auth/'.$v->id) }}">授权</a>
 							</td>
 						</tr>
 					@endforeach
