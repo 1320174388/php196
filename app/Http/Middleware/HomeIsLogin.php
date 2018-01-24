@@ -31,11 +31,15 @@ class HomeIsLogin
             }else{
 
                 $rest = data_rest::where('user_id',$user_id)->first();
+                if(!$rest){
+                    return redirect('/shop/register');
+                }
                 Redis::hmset('home_user_rest',[$user_id=>$rest]);
+
 
                 $detail = data_user_detail::where('user_id',$user_id)->first();
                 Redis::hmset('home_user_detail',[$user_id=>$detail]);
-                // dd(2);
+
                 return $next($request);
             }
             

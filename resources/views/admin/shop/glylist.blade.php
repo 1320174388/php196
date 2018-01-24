@@ -50,12 +50,12 @@
 					<label for="exampleInputName2">店铺状态</label>
 					<select id="select"  class="form-control">
 					  <option value=""
-					  	@if(empty($where['status']))
+					  	@if($where['status']=="")
                     		selected
                     	@endif
                     	>全部</option>
 					  <option value="0"
-						@if($where['status']==0)
+						@if($where['status']==="0")
                     		selected
                     	@endif
 					  >禁用</option>
@@ -102,7 +102,16 @@
 									   已有店铺
 									@endif
 								</td>
-								<td><a class="xq btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">查看详情</a> | <a class="gl btn btn-primary btn-xs">@if($v->status == 0) 解封 @elseif($v->status == 1) 通过审核 @elseif($v->status == 2) 禁用 @endif</a></td>
+								<td><a class="xq btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">查看详情</a> | 
+								@if($v->status == 0) 
+									<a class="gl btn btn-primary btn-xs">解封 </a>
+								@elseif($v->status == 2) 
+								 	<a class="gl btn btn-primary btn-xs">禁用</a> 
+								@elseif($v->status == 1)
+									<a class="gl btn btn-primary btn-xs">通过审核</a> |
+									<a class="sh btn btn-primary btn-xs">审核失败</a></td>
+								@endif
+								
 							</tr>
 						@endforeach
 						</tbody>
@@ -198,6 +207,25 @@
 
 @section('js')
 	<script type="text/javascript">
+
+		$('.sh').on('click',function(){
+			var id  = $(this).offsetParent().siblings('.name').html();
+
+			$.ajax({
+				url:"{{ url('admin/del') }}",
+				type:'post',
+		        data:{'id':id},
+		        success:function(data){
+		        	if(data == 1){
+		        		location.reload();
+		        	}
+		        },
+		        dataType:'json',
+			});
+
+		});
+
+
 		$('.gl').on('click',function(){
 			var id  = $(this).offsetParent().siblings('.name').html();
 
