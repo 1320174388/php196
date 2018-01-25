@@ -160,4 +160,6 @@ Route::post('/home/personal/delete/{id}', 'Home\Personal\PersonalController@dele
 //购物车
 Route::get('/home/shop/index/{id}', 'Home\Shop\ShopController@index');
 Route::get('/home/shop/buy/{id}', 'Home\Shop\ShopController@buy');
-Route::get('/home/shop/details', 'Home\Shop\ShopController@details');
+Route::post('/home/shop/details', 'Home\Shop\ShopController@details');
+Route::post('/home/shop/addfood', 'Home\Shop\ShopController@addfood');
+Route::post('/home/shop/delfood', 'Home\Shop\ShopController@delfood');

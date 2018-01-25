@@ -125,8 +125,10 @@
 
    <div id="food_wrap" class="photo-wall group"> 
     @foreach( $food as $k=>$v)
-    <div id="wall_view_9957939" class="rst-block album-block eleme_view"> 
-     <a href="javascript:;" class="album-cover food_cover"> <img data-id="{{ $v->id }}" class="images_shop album-cover-img food_img" src="{{ asset('/shopUploads/'.$v->img) }}"/> </a> 
+    <div id="wall_view_9957939" class="rst-block album-block eleme_view">
+     <a href="javascript:;" class="album-cover food_cover"> 
+
+     <img data-id="{{ $v->id }}" class="images_shop album-cover-img food_img" src="{{ asset('/shopUploads/'.$v->img) }}"/> </a> 
      
      <a class="dish-favor favor_btn" title="收藏">♥</a> 
      <a class="photo-like like_btn" title="给这张图片点赞"> 赞<span class="photo-like-count like_count ui_hide">0</span> </a> 
@@ -151,7 +153,9 @@
     </div>
     @endforeach
   </div>  
+  <div style="float:right;">
     {!! $food->render() !!}
+  </div>
 
   <div id="modal_photo" class="bs-modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"> 
    <div class="bs-modal-dialog rst-photo-modal"> 
@@ -190,18 +194,115 @@
   <script class="usemin" src="/home/shop/js/global.8d3089f1.js"></script> 
   <script>
 
-      $('.images_shop').on('click',function(){   
-          layer.msg('以加入购物车');
-          var image_shop = $(this).attr('data-id');
-          var user_id = {{ session('home_user')->id }};
+      var images_shop = $('.images_shop').on('click',function(){  
+          var food_id = $(this).attr('data-id');
+
+          @if(session('home_user'))
+            var user_id = {{ session('home_user')->id }};
+          @else
+            var user_id = 0;
+          @endif
 
           $.ajax({
-            url:"{{ url('/home/shop/') }}",
+            url:"{{ url('/home/shop/details') }}",
+            type:'post',
+            data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
+            success:function(data){
+              console.log(data);
+              if(data == 0 ){
+                layer.msg('请先去登录');
+                setTimeout(function(){
+                  location.replace('{{ url("login") }}');
+                },3000);
+              }else{
+
+                $('.glyph-cart').removeClass('topbar-glyph');
+                $('.glyph-cart').text(data.length);
+                layer.msg('以加入购物车');
+
+                $('#tcart_loading_table').empty();
+
+                $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
+
+                $.each(data,function(i,n){
+                  $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                });
+                burron_food_add();
+                function burron_food_add(){
+                  $('.button_food_add').on('click',function(e){
+
+                      var food_id = $(this).attr('food_add');
+                      var tr = $(this).parent().parent();
+                      $.ajax({
+                        url:"{{ url('/home/shop/addfood') }}",
+                        type:'post',
+                        data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
+                        success:function(data){
+                          if(data == 0 ){
+                            layer.msg('请先去登录');
+                            setTimeout(function(){
+                              location.replace('{{ url("login") }}');
+                            },3000);
+                          }else{
+                            layer.msg('添加成功');
+                            $('#tcart_loading_table').empty();
+                            $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
+                            $.each(data,function(i,n){
+                              $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                            });
+                            burron_food_add();
+                            button_food_del();
+                          }
+                        },
+                        dataType:'json'
+                      });
+                  });
+                }
+                button_food_del();
+                function button_food_del(){
+                  $('.button_food_del').on('click',function(e){
+
+                      var food_id = $(this).attr('food_del');
+
+                      @if(session('home_user'))
+                        var user_id = {{ session('home_user')->id }};
+                      @else
+                        var user_id = 0;
+                      @endif
+
+                      var tr = $(this).parent().parent();
+                      $.ajax({
+                        url:"{{ url('/home/shop/delfood') }}",
+                        type:'post',
+                        data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
+                        success:function(data){
+                          if(data == 0 ){
+                            layer.msg('请先去登录');
+                            setTimeout(function(){
+                              location.replace('{{ url("login") }}');
+                            },3000);
+                          }else{
+                            layer.msg('删除成功');
+                            $('#tcart_loading_table').empty();
+                            $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
+                            $.each(data,function(i,n){
+                              $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                            });
+                            button_food_del();
+                            burron_food_add();
+                          }
+                        },
+                        dataType:'json'
+                      });
+                  });
+                }
+
+              }
+            },
+            dataType:'json'
           });
-
-
       });
-
+      
 
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
