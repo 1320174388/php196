@@ -10,4 +10,8 @@ class data_address_town extends Model
 
     public $timestamps = false;
 
+    public function data_rest()
+    {
+    	return $this->hasMany('App\Models\data_rest','cityCode','id');
+    }
 }

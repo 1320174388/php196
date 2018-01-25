@@ -52,7 +52,7 @@ class HasRole
         if(in_array(trim($route),$own_pers)){
             return $next($request);
         }else{
-            return redirect('auth');
+            return redirect('admin/auth');
         }
     }
 }

@@ -26,9 +26,14 @@ class data_user extends Model
     	return $this->hasMany('App\Models\data_user_addr', 'user_id', 'id');
     }
 
-    //查找当前用户的角色  多对多
+    // 查找当前用户的角色  多对多
     public function roles()
     {
         return $this->belongsToMany('App\Models\Data_Role','index_user_role','user_id','role_id');
+    }
+
+    public function data_rest_food()
+    {
+        return $this->hasMany('App\Models\data_rest_food', 'user_id', 'id');
     }
 }

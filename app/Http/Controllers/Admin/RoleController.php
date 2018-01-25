@@ -171,4 +171,8 @@ class RoleController extends Controller
         }
     }
 
+    public function hasRole(){
+        return view('admin.auth');
+    }
+
 }

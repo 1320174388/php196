@@ -79,7 +79,7 @@
       </select>
       <select id="selecte_2" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
       </select>
-      <select id="selecte_3" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
+      <select id="selecte_3" name="Province" class="address_option city_label bs-dropdown-toggle map-block dark city-toggle caret" data-toggle="bs-dropdown">
       </select>
      </div>
      <div class="module-locate map_search"> 
@@ -177,7 +177,7 @@
                 });
                 marker.setIcon(icon);
                 info.open(); 
-                info.setContent('<div style="text-align:center;white-space:nowrap;'+'margin:20px 50px;"><b><a href="#">点&nbsp;击&nbsp;购&nbsp;物</a></b></div>');
+                info.setContent('<div style="text-align:center;white-space:nowrap;'+'margin:20px 50px;"><b><a onclick="address_shop()" class="address_shop" href="javascript:;" >点&nbsp;击&nbsp;购&nbsp;物</a></b></div>');
                 info.setPosition(result.detail.location);
                 $("#aa").on('click', function(){
                     marker.setMap(null); 
@@ -258,6 +258,13 @@
       $('#selecte_3').on('change',function(){
           codeAddress();
       });
+
+      function address_shop(){
+        val3 = $('#selecte_3').val();
+        var str = '{{ url("/home/shop/index") }}/'+val3;
+        $('.address_shop').attr('href',str);
+        return false;
+      };
 
   </script>
  </body>

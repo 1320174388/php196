@@ -4,7 +4,7 @@
  
 		<div class="finance-content-middle">
 			<div class="finance-content-middle-form">
-				<form action="{{ url('/admin/user/show') }}" method="get">
+				<form action="{{ url('admin/usershow/show') }}" method="get">
 					<div class="row">
 						<div class="col-md-2">
 							<select name="num" class="form-control">

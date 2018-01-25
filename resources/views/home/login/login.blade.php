@@ -13,7 +13,7 @@
      <form id="login_form" class="login-form block" action="/login" method="post"> 
       <div class="form-item"> 
       {{ csrf_field() }}
-       <input class="inputbox" name="name" type="text" maxlength="18" minlength="6" placeholder="用户名/电子邮箱/手机号" required="" value="{{ old('name') }}"/> 
+       <input class="inputbox" name="name" type="text" minlength="6" placeholder="用户名/电子邮箱/手机号" required="" value="{{ old('name') }}"/> 
        <div class="g-error-tip hide"></div> 
       </div> 
       <div class="form-item">

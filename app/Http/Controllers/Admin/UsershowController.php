@@ -12,12 +12,35 @@ use Illuminate\Support\Facades\Validator;
 
 class UsershowController extends Controller
 {
+    // 用户列表页
+    public function show(Request $request){ 
+        $name = $request->input('name','');
+        $num = $request->input('num','10');
+        $email = $request->input('email','');
+        $phone = $request->input('phone','');
+
+        $data = \DB::table('data_users')->where('name','like','%'.$name.'%')
+                                        ->where('email','like','%'.$email.'%')
+                                        ->where('phone','like','%'.$phone.'%')
+                                        ->paginate($num);
+       return view('admin.user.ptyhlist',[
+            'data'=>$data,
+            'where'=>[
+                'name'=>$name,
+                'email'=>$email,
+                'phone'=>$phone,
+                'num' =>$num
+                ]
+            ]);
+    }
+
+    // 显示个人信息页面
     public function glyuser($name){
 
     	$data = \DB::table('data_admin_addrs')->where('name',$name)->first();
         return view('admin.user.glyshow',['data'=>$data]);
  	}
-
+    // 修改管理员个人信息
     public function update(Request $request){
         $this->validate($request,[
             'name' => 'required|min:5|max:18',
@@ -83,7 +106,7 @@ class UsershowController extends Controller
             return back()-with(['info'=>'更新失败']);
         }
     }
-
+    // 删除角色方法
     public function destroy($id)
     {
         $res = \DB::table('data_roles')->delete($id);
