@@ -132,7 +132,11 @@ class Shopcontroller extends Controller
             $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number')
                                                 ->leftJoin('data_rest_foods', 'food_id', '=', 'id')
                                                 ->get()->toArray();
-            return $arr;
+            if($arr){
+                return $arr;
+            }else{
+                return 1;
+            }
         }else{
             return 2;
         }

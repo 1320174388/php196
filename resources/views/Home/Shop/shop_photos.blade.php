@@ -238,21 +238,14 @@
                         type:'post',
                         data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
                         success:function(data){
-                          if(data == 0 ){
-                            layer.msg('请先去登录');
-                            setTimeout(function(){
-                              location.replace('{{ url("login") }}');
-                            },3000);
-                          }else{
-                            layer.msg('添加成功');
-                            $('#tcart_loading_table').empty();
-                            $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
-                            $.each(data,function(i,n){
-                              $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
-                            });
-                            burron_food_add();
-                            button_food_del();
-                          }
+                          layer.msg('添加成功');
+                          $('#tcart_loading_table').empty();
+                          $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
+                          $.each(data,function(i,n){
+                            $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                          });
+                          burron_food_add();
+                          button_food_del();
                         },
                         dataType:'json'
                       });
@@ -263,33 +256,25 @@
                   $('.button_food_del').on('click',function(e){
 
                       var food_id = $(this).attr('food_del');
-
-                      @if(session('home_user'))
-                        var user_id = {{ session('home_user')->id }};
-                      @else
-                        var user_id = 0;
-                      @endif
-
                       var tr = $(this).parent().parent();
                       $.ajax({
                         url:"{{ url('/home/shop/delfood') }}",
                         type:'post',
                         data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
                         success:function(data){
-                          if(data == 0 ){
-                            layer.msg('请先去登录');
-                            setTimeout(function(){
-                              location.replace('{{ url("login") }}');
-                            },3000);
-                          }else{
-                            layer.msg('删除成功');
+                          layer.msg('删除成功');
+                          $('#tcart_loading_table').empty();
+                          $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
+                          $.each(data,function(i,n){
+                            $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                          });
+                          console.log(data);
+                          button_food_del();
+                          burron_food_add();
+                          if(data == 1){
+                            $('.glyph-cart').text('');
+                            $('.glyph-cart').addClass('topbar-glyph');
                             $('#tcart_loading_table').empty();
-                            $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
-                            $.each(data,function(i,n){
-                              $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
-                            });
-                            button_food_del();
-                            burron_food_add();
                           }
                         },
                         dataType:'json'
