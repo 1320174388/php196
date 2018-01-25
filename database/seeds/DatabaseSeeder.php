@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DataUserDetailsTableSeeder::class);
         $this->call(DataFoodCatesTableSeeder::class);
         $this->call(DataRestFoodsTableSeeder::class);
+        $this->call(DataUserAddrsTableSeeder::class);
     }
 }

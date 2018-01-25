@@ -156,3 +156,8 @@ Route::post('/home/personal/pwd', 'Home\Personal\PersonalController@pwd');
 Route::get('/home/personal/addrindex', 'Home\Personal\PersonalController@addrindex');
 Route::post('/home/personal/addradd', 'Home\Personal\PersonalController@addradd');
 Route::post('/home/personal/delete/{id}', 'Home\Personal\PersonalController@delete');
+
+//购物车
+Route::get('/home/shop/index/{id}', 'Home\Shop\ShopController@index');
+Route::get('/home/shop/buy/{id}', 'Home\Shop\ShopController@buy');
+Route::get('/home/shop/details', 'Home\Shop\ShopController@details');

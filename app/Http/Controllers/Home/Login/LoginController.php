@@ -53,13 +53,12 @@ class LoginController extends Controller
 	public function Verification(Request $request)
 	{
 		
-		//验证输入是否符合规则
+		// 验证输入是否符合规则?
 		$this->validate($request, [
-            'name' => 'required|between:6,18',
+            'name' => 'required',
             'password' => 'required|between:6,18|alpha_dash',
         ],[
           	'name.required' => '请输入账号',
-          	'name.between' => '账号的长度必须在6-18位',
           	'password.required'=> '请输入密码',
           	'password.between' => '密码的长度必须在6-18位',
           	'password.alpha_dash' => '密码必须是字母数字下划线',

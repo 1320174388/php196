@@ -22,4 +22,9 @@ class data_user extends Model
     {
     	return $this->hasMany('App\Models\data_user_addr', 'user_id', 'id');
     }
+
+    public function data_rest_food()
+    {
+        return $this->hasMany('App\Models\data_rest_food', 'user_id', 'id');
+    }
 }
