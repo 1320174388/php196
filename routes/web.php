@@ -138,11 +138,11 @@ Route::get('home/order', 'Home\Order\OrderController@order');
 Route::post('/mail','Mail\Mail\MailController@mail');
 
 // 申请店铺
-Route::get('/shop/register','Shop\ShopController@register');
-Route::post('/shop/doreg','Shop\ShopController@doreg');
+Route::get('/shop/register','Shop\ShopController@register')->middleware('homeislogin');
+Route::post('/shop/doreg','Shop\ShopController@doreg')->middleware('homeislogin');
 
 // 店家后台
-Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['homeislogin','isshop']],function(){
+Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['shopislogin','isshop']],function(){
 
     // 店铺管理
     Route::get('admin','AdminController@index');
