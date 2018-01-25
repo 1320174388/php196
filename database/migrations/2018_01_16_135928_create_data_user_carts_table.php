@@ -13,13 +13,11 @@ class CreateDataUserCartsTable extends Migration
      */
     public function up()
     {   
-        //购物车
+    
         Schema::create('data_user_carts', function (Blueprint $table) {
-            $table->increments('id');
             $table->string('user_id');
             $table->string('food_id');
-            $table->tinyInteger('number');
-            $table->timestamps();
+            $table->integer('number');
         });
     }
 
