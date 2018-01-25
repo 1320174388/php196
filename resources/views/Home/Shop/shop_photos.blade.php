@@ -193,8 +193,13 @@
       $('.images_shop').on('click',function(){   
           layer.msg('以加入购物车');
           var image_shop = $(this).attr('data-id');
+          var user_id = {{ session('home_user')->id }};
 
-          return 
+          $.ajax({
+            url:"{{ url('/home/shop/') }}",
+          });
+
+
       });
 
 
