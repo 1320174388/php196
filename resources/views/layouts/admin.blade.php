@@ -44,7 +44,7 @@
                 <div class="menuList">
                     <a href="{{ url('admin/user') }}">管理员管理</a>
                     <a href="{{ url('admin/user/create') }}">添加管理员</a>
-                    <a href="{{ url('admin/user/show') }}">普通用户管理</a>
+                    <a href="{{ url('admin/usershow/show') }}">普通用户管理</a>
                 </div>
             </div>
             <div class="menuParent">

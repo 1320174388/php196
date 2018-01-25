@@ -67,7 +67,7 @@ Route::get('admin/logout','Admin\LoginController@logout');
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
     // 普通用户列表
-    Route::post('user/show','UserController@show');
+    Route::post('usershow/show','UsershowController@show');
 
     // 个人详情（管理员）
     Route::get('usershow/glyuser/{name}','UsershowController@glyuser');
@@ -85,10 +85,16 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     // 审核不通过
     Route::post('del','ShopController@del');
 
-    //删除
+
+    // 删除角色
     Route::resource('usershow','UsershowController');
     // 修改角色
     Route::post('role/update','RoleController@update');
+
+    // 添加管理员
+    Route::post('user/insert','UserController@insert');
+    // 管理员管理
+    Route::post('user/update','UserController@update');
 
     // 管理员授权
     Route::post('user/updategl','UserController@updategl');
@@ -104,7 +110,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
     // 角色授权页面
     Route::get('role/auth/{id}','RoleController@auth');
 
-
+    // 权限不够
+    Route::get('auth','RoleController@hasRole');
 
 });
 
@@ -116,12 +123,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['islogin','h
 
     //角色列表
     Route::resource('role','RoleController');
-
-    // 管理员管理
-    Route::post('user/update','UserController@update');
-
-    // 添加管理员
-    Route::post('user/insert','UserController@insert');
 
     //店铺路由
     //店铺列表
