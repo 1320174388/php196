@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\data_admin_addr;
 use App\Models\data_user;
+use App\Models\Data_Role;
 use Illuminate\Http\Request;
- 
+use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
@@ -108,8 +109,9 @@ class UserController extends Controller
         $data['status'] = 2; // 处理状态字段
 
         $res1 = \DB::table('data_admin_addrs')->insert($data);
+//        dd($res1);
         if($res1){
-            return redirect('/admin/user/glylist')->with(['info' => '添加成功']);
+            return redirect('/admin/user')->with(['info' => '添加成功']);
         }else{
             return back();
         }
@@ -178,6 +180,72 @@ class UserController extends Controller
             return 3;
         }
 
+    }
+
+
+
+    public function store(Request $request)
+    {
+
+    }
+
+    public function auth($id)
+    {
+//        根据id找到相关的用户U
+        $user = data_admin_addr::find($id);
+//        dd($user);
+//        获取角色列表
+        $roles = Data_Role::get();
+
+        //获取当前用户已经拥有的角色列表
+
+        $own_roles = $user->roles;
+//        dd($own_roles);
+        //存放当前用户拥有的角色的id
+        $own = [];
+        foreach ($own_roles as $v){
+            $own[] = $v->id;
+        }
+
+        return view('admin.user.auth',compact('user','roles','own'));
+    }
+
+    //处理用户授权操作
+
+    public function doAuth(Request $request)
+    {
+//        1. 获取传过来的参数（要授权的用户的ID，要授予的角色的ID）
+        $input = $request->except('_token');
+//         dd($input);
+
+
+//        2. 提交到user_role这个关联表中
+
+
+
+        //开启事务
+        DB::beginTransaction();
+
+        try{
+            //删除当前用户的所有权限
+            DB::table('index_user_role')->where('user_id', $input['id'])->delete();
+
+
+            if(!empty($input['role_id'])){
+                //关联表中记录（给用户授权）前，应该检查一下，当前用户是否已经拥有了此角色，如果没有再添加
+                foreach ($input['role_id'] as $v){
+
+                    DB::table('index_user_role')->insert(
+                        ['user_id' => $input['id'], 'role_id' => $v]);
+                }
+            }
+            DB::commit();
+            return redirect('admin/user')->with(['info' => '添加成功']);
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect()->back()
+                ->withErrors(['error' => $e->getMessage(),'info' => '授权失败']);
+        }
     }
 
 }

@@ -62,88 +62,105 @@ Route::post('admin/dologin','Admin\LoginController@dologin');
 //加密演示
 Route::get('crypt','Admin\LoginController@crypt');
 
-//后台
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
-
-//后台首页（管理员列表）
-    Route::get('index','LoginController@index');
-
 //退出登录
-    Route::get('logout','LoginController@logout');
- 
-//用户模块
-    Route::resource('user','UserController');
-    Route::get('user','UserController@index');
+Route::get('admin/logout','Admin\LoginController@logout');
 
-    // 修改权限
-    Route::post('user/update','UserController@update');
-    Route::post('user/updategl','UserController@updategl');
-
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
     // 普通用户列表
-    Route::post('user/show','UserController@show');
+    Route::post('usershow/show','UsershowController@show');
+
+    // 个人详情（管理员）
+    Route::get('usershow/glyuser/{name}','UsershowController@glyuser');
+    // 修改个人详情页面（管理员）
+    Route::post('usershow/update','UsershowController@update');
+    // 添加用户授权逻辑
+    Route::post('role/doauth','RoleController@doAuth');
+    // 添加管理员授权逻辑
+    Route::post('user/doauth','UserController@doAuth');
+
+    // 店铺详情
+    Route::post('list','ShopController@list');
+    // 审核通过
+    Route::post('details','ShopController@details');
+    // 审核不通过
+    Route::post('del','ShopController@del');
+
+
+    // 删除角色
+    Route::resource('usershow','UsershowController');
+    // 修改角色
+    Route::post('role/update','RoleController@update');
 
     // 添加管理员
     Route::post('user/insert','UserController@insert');
+    // 管理员管理
+    Route::post('user/update','UserController@update');
 
-    // 管理员详情
-    Route::get('usershow/glyuser/{name}','Admin\UsershowController@glyuser');
-    // 详情页面
-    Route::post('usershow/update','Admin\UsershowController@update');
+    // 管理员授权
+    Route::post('user/updategl','UserController@updategl');
+
+    // 修改角色（权限）
+    Route::get('role/{id}/edit','RoleController@edit');
+
+    // 用户模块
+    // 管理员授权页面
+    Route::get('user/auth/{id}','UserController@auth');
 
     //角色相关的路由
-//    用户授权页面
+    // 角色授权页面
     Route::get('role/auth/{id}','RoleController@auth');
-//    添加用户授权逻辑
-    Route::post('role/doauth','RoleController@doAuth');
-    Route::resource('role','RoleController');
 
-    //权限相关的路由
-
-    Route::resource('permission','PermissionController');
-
-    //    分类模块
-    Route::resource('cate','CateController');
-    //修改排序的路由
-    Route::post('cate/changeorder','CateController@changeOrder');
-
-    //店铺路由
-	Route::get('shop','ShopController@index');
-	Route::post('list','ShopController@list');
-	Route::post('details','ShopController@details');
+    // 权限不够
+    Route::get('auth','RoleController@hasRole');
 
 });
 
-//订单路由
-Route::get('home/order', 'Home\Order\OrderController@order');
+//后台
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['islogin','hasRole']],function(){
+
+    //后台首页（管理员列表）
+    Route::resource('user','UserController');
+
+    //角色列表
+    Route::resource('role','RoleController');
+
+    //店铺路由
+    //店铺列表
+	Route::get('shop','ShopController@index');
+
+});
+
 
 //发送邮件路由
 Route::post('/mail','Mail\Mail\MailController@mail');
 
-
-// 店家后台
 // 申请店铺
 Route::get('/shop/register','Shop\ShopController@register')->middleware('homeislogin');
 Route::post('/shop/doreg','Shop\ShopController@doreg')->middleware('homeislogin');
 
-// 店铺管理
-Route::get('/shop/admin','Shop\AdminController@index')->middleware('homeislogin');
-// 账号管理
-Route::get('/shop/admin/user','Shop\AdminController@userInfo')->middleware('homeislogin');
-// 实名认证
-Route::get('/shop/admin/ident','Shop\AdminController@identify')->middleware('homeislogin');
-// 分类管理
-Route::get('/shop/admin/addInfo','Shop\AdminController@addInfo')->middleware('homeislogin');
-// 执行添加
-Route::post('/shop/admin/doaddInfo','Shop\AdminController@doaddInfo')->middleware('homeislogin');
-// 食品管理
-Route::get('/shop/admin/webSet','Shop\AdminController@webSet')->middleware('homeislogin');
-// 添加食品
-Route::post('/shop/admin/dowebSet','Shop\AdminController@dowebSet')->middleware('homeislogin');
-// 编辑食品
-Route::post('/shop/admin/webEdit/{id}','Shop\AdminController@webEdit')->middleware('homeislogin');
-// 删除食品
-Route::get('/shop/admin/webDel/{id}','Shop\AdminController@webDel')->middleware('homeislogin');
+// 店家后台
+Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['shopislogin','isshop']],function(){
 
+    // 店铺管理
+    Route::get('admin','AdminController@index');
+    // 账号管理
+    Route::get('admin/user','AdminController@userInfo');
+    // 实名认证
+    Route::get('admin/ident','AdminController@identify');
+    // 分类管理
+    Route::get('admin/addInfo','AdminController@addInfo');
+    // 执行添加
+    Route::post('admin/doaddInfo','AdminController@doaddInfo');
+    // 食品管理
+    Route::get('admin/webSet','AdminController@webSet');
+    // 添加食品
+    Route::post('admin/dowebSet','AdminController@dowebSet');
+    // 编辑食品
+    Route::post('admin/webEdit/{id}','AdminController@webEdit');
+    // 删除食品
+    Route::get('admin/webDel/{id}','AdminController@webDel');
+
+});
 
 //个人中心页面
 Route::get('/home/personal','Home\Personal\PersonalController@personal')->middleware('homeislogin');

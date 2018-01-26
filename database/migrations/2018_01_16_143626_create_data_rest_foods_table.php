@@ -18,7 +18,7 @@ class CreateDataRestFoodsTable extends Migration
             $table->increments('id');
             $table->string('name', 50);     //食品名称
             $table->integer('cate_id');  //食品类别
-            $table->string('price',20);   //食品价格
+            $table->unsignedDecimal('price');   //食品价格
             $table->string('img', 255);     //食品图片
             $table->integer('user_id');   //user_id
         });

@@ -16,17 +16,18 @@ class RoleController extends Controller
     {
 //        根据id找到相关的用户U
         $role = Data_Role::find($id);
-
-//        获取所有的权限列表
-
+//        dd($user);
+//        获取角色列表
         $pers = Data_Permission::get();
+//        dd($roles);
 
-        //获取当前角色已经拥有的权限列表
+        //获取当前用户已经拥有的角色列表
 
-        $own_pers = $role->permission;
-        //存放当前角色拥有的权限的id
+        $own_roles = $role->permission;
+//        dd($own_roles);
+        //存放当前用户拥有的角色的id
         $own = [];
-        foreach ($own_pers as $v){
+        foreach ($own_roles as $v){
             $own[] = $v->id;
         }
 
@@ -50,7 +51,7 @@ class RoleController extends Controller
         DB::beginTransaction();
 
         try{
-            //删除当前角色的所有权限
+            //删除当前用户的所有权限
             DB::table('index_role_permission')->where('role_id', $input['role_id'])->delete();
 
 
@@ -63,19 +64,13 @@ class RoleController extends Controller
                     );
                 }
             }
-
             DB::commit();
-
-            return redirect('admin/role/auth/'.$input['role_id']);
-
-
+            return redirect('admin/role')->with(['info' => '添加成功']);
         }catch(Exception $e){
             DB::rollBack();
             return redirect()->back()
-                ->withErrors(['error' => $e->getMessage()]);
+                ->withErrors(['error' => $e->getMessage(),'info' => '授权失败']);
         }
-
-//        3. 判断是否添加成功
     }
 
 
@@ -89,6 +84,7 @@ class RoleController extends Controller
         $role = Data_Role::get();
 
         return view('admin.role.list',compact('role'));
+
     }
 
     /**
@@ -143,7 +139,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        //1 通过传过来的id获取到要修改的用户记录
+        $user = Data_Role::find($id);
+
+        return view('admin.role.edit',compact('user'));
     }
 
     /**
@@ -153,19 +152,27 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $input = $request->all();
+        $id = $request['id'];
+//        dd($id);
+
+        $user = Data_Role::find($id);
+
+        $res = $user->update($input);
+
+        if($res){
+            return redirect('admin/role')->with('msg','修改成功');
+        }else{
+            //如果添加失败，返回到修改页
+            return back()->with('msg','修改失败');
+
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function hasRole(){
+        return view('admin.auth');
     }
+
 }

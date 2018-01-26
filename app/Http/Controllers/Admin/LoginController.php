@@ -106,7 +106,7 @@ class LoginController extends Controller
 
         Session::put('admin_user',$user);
 
-        return redirect('admin/user/index');
+        return redirect('admin/usershow/show');
 
     }
 
