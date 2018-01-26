@@ -42,8 +42,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="field">
-                                    <input type="text" class="code" value="{{ old('code') }}" style="width:150px;height: 32px;margin-right: 10px"input input-big" name="code" placeholder="填写右侧的验证码" />
-                                    <img src="{{ url('admin/yzm') }}" alt="" onclick="this.src='{{ url('admin/yzm') }}?'+Math.random()">
+                                    <input type="text" class="code" value="{{ old('code') }}" style="width:180px;height: 45px;margin-right: 10px" name="code" placeholder="填写右侧的验证码" />
+                                    <img style="height: 45px;width: 138px;" src="{{ url('admin/yzm') }}" alt="" onclick="this.src='{{ url('admin/yzm') }}?'+Math.random()">
                                 </div>
                             </div>
                         </div>
