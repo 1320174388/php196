@@ -191,10 +191,10 @@
 
 
   <script class="usemin" src="/home/shop/js/vendor.7aa05b99.js"></script>
-  <script class="usemin" src="/home/shop/js/global.8d3089f1.js"></script> 
+  <script class="usemin" src="/home/shop/js/global.8d3089f1.js"></script>
   <script>
 
-      var images_shop = $('.images_shop').on('click',function(){  
+      var images_shop = $('.images_shop').on('click',function(){
           var food_id = $(this).attr('data-id');
 
           @if(session('home_user'))
@@ -209,12 +209,8 @@
             data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
             success:function(data){
               console.log(data);
-              if(data == 0 ){
-                layer.msg('请先去登录');
-                setTimeout(function(){
-                  location.replace('{{ url("login") }}');
-                },3000);
-              }else{
+
+
 
                 $('.glyph-cart').removeClass('topbar-glyph');
                 $('.glyph-cart').text(data.length);
@@ -276,12 +272,7 @@
                         type:'post',
                         data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
                         success:function(data){
-                          if(data == 0 ){
-                            layer.msg('请先去登录');
-                            setTimeout(function(){
-                              location.replace('{{ url("login") }}');
-                            },3000);
-                          }else{
+
                             layer.msg('删除成功');
                             $('#tcart_loading_table').empty();
                             $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
@@ -290,14 +281,13 @@
                             });
                             button_food_del();
                             burron_food_add();
-                          }
+                          
                         },
                         dataType:'json'
                       });
                   });
                 }
-
-              }
+              
             },
             dataType:'json'
           });
