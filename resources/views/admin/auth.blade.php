@@ -46,7 +46,7 @@
 	<div class="waveqcz">
 	</div>
 	<div class="wavegohome waveinput">
-		<a href="{{ url('admin/user') }}">回到Fc_kc首页</a>
+		<a href="{{ url('admin/usershow/show') }}">回到Fc_kc首页</a>
 	</div>
 	<div class="waveclose waveinput">
 		<a href="javascript:void(0);" onclick="history.go(-1)">返回上一页面</a>

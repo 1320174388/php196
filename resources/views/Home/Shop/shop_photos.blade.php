@@ -1,4 +1,5 @@
 @extends('layout.home.shop.shop')
+@section('title', '商品')
 @section('content')
 
   <script>
@@ -133,9 +134,7 @@
      <a class="dish-favor favor_btn" title="收藏">♥</a> 
      <a class="photo-like like_btn" title="给这张图片点赞"> 赞<span class="photo-like-count like_count ui_hide">0</span> </a> 
      <div class="album-dish"> 
-      <div class="album-dish-name food_name" title="{{ $v->name }}" >
-       {{ $v->name }}
-      </div> 
+      <div class="album-dish-name food_name" title="{{ $v->name }}" >{{ $v->name }}</div> 
       <div class="album-dish-rating"> 
        <i class="icon-d-star s0"></i>
       </div>
@@ -143,8 +142,7 @@
        <img class="icon-rst-badge" src="{{ asset('/shopUploads/'.$v->img) }}" title="" alt="" />月售20份
       </div>
       <div class="rst-d-action r_d_a">
-       <div class="unavailable symbol-rmb">
-         {{ $v->price }}
+       <div class="unavailable symbol-rmb">{{ $v->price }}
         <br />
         <span class="status">营业</span>
        </div>
@@ -184,47 +182,50 @@
   </div> 
 
   <script class="usemin" src="/home/shop/js/vendor.7aa05b99.js"></script>
-  <script class="usemin" src="/home/shop/js/global.8d3089f1.js"></script> 
+  <script class="usemin" src="/home/shop/js/global.8d3089f1.js"></script>
   <script>
 
-      var images_shop = $('.images_shop').on('click',function(){ 
-
+      $('.images_shop').on('click',function(){
           var food_id = $(this).attr('data-id');
 
           @if(session('home_user'))
             var user_id = {{ session('home_user')->id }};
           @else
+            layer.msg('请先去登录才能购物');
             var user_id = 0;
           @endif
-
+          @if(session('home_user'))
           $.ajax({
             url:"{{ url('/home/shop/details') }}",
             type:'post',
             data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
             success:function(data){
               console.log(data);
-              if(data == 0 ){
-                layer.msg('请先去登录');
-                setTimeout(function(){
-                  location.replace('{{ url("login") }}');
-                },3000);
-              }else{
+
+
+
+
+
 
                 $('.glyph-cart').removeClass('topbar-glyph');
                 $('.glyph-cart').text(data.arr.length);
                 layer.msg('以加入购物车');
 
+
                 $('#tcart_loading_table').empty();
 
+
                 $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
+
 
                 $.each(data.arr,function(i,n){
                   $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                 });
-                $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('admin') }}?price="+data.price+'">去结算</a></th></tr>');
+                $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
                 burron_food_add();
                 function burron_food_add(){
                   $('.button_food_add').on('click',function(e){
+
 
                       var food_id = $(this).attr('food_add');
                       var tr = $(this).parent().parent();
@@ -233,13 +234,14 @@
                         type:'post',
                         data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
                         success:function(data){
+                          
                           layer.msg('添加成功');
                           $('#tcart_loading_table').empty();
                           $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
                           $.each(data.arr,function(i,n){
                             $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                           });
-                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('admin') }}?price="+data.price+'">去结算</a></th></tr>');
+                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
                           burron_food_add();
                           button_food_del();
                         },
@@ -247,9 +249,12 @@
                       });
                   });
                 }
+
+
                 button_food_del();
                 function button_food_del(){
                   $('.button_food_del').on('click',function(e){
+
 
                       var food_id = $(this).attr('food_del');
                       var tr = $(this).parent().parent();
@@ -258,30 +263,34 @@
                         type:'post',
                         data:{ 'food_id':food_id,'user_id':user_id,'_token':"{{ csrf_token() }}"},
                         success:function(data){
+
+
                           layer.msg('删除成功');
                           $('#tcart_loading_table').empty();
-                          if(data == 1){
-                            $('.glyph-cart').text('');
-                            $('.glyph-cart').addClass('topbar-glyph');
-                            $('#tcart_loading_table').empty();
-                            return;
-                          }
                           $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
                           $.each(data.arr,function(i,n){
                             $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                           });
-                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('admin') }}?price="+data.price+'">去结算</a></th></tr>');
+                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
                           button_food_del();
                           burron_food_add();
+                          if(data == 1){
+                            $('.glyph-cart').text('');
+                            $('.glyph-cart').addClass('topbar-glyph');
+                            $('#tcart_loading_table').empty();
+                          }
+
+
                         },
                         dataType:'json'
                       });
                   });
                 }
-              }
+              
             },
             dataType:'json'
           });
+          @endif
       });
       
 
