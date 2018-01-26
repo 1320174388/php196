@@ -183,3 +183,7 @@ Route::get('/home/shop/buy/{id}', 'Home\Shop\ShopController@buy');
 Route::post('/home/shop/details', 'Home\Shop\ShopController@details');
 Route::post('/home/shop/addfood', 'Home\Shop\ShopController@addfood');
 Route::post('/home/shop/delfood', 'Home\Shop\ShopController@delfood');
+
+//店铺评论
+Route::get('/home/shop/comment/{id}','Home\Shop\ShopController@comment');
+Route::post('/home/shop/comment/ajax','Home\Shop\ShopController@ajax');
