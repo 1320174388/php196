@@ -131,9 +131,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['islogin','h
 });
 
 
-//订单路由
-Route::get('home/order', 'Home\Order\OrderController@order');
-
 //发送邮件路由
 Route::post('/mail','Mail\Mail\MailController@mail');
 
@@ -184,6 +181,11 @@ Route::post('/home/shop/details', 'Home\Shop\ShopController@details');
 Route::post('/home/shop/addfood', 'Home\Shop\ShopController@addfood');
 Route::post('/home/shop/delfood', 'Home\Shop\ShopController@delfood');
 
+// 订单路由
+Route::get('/home/shop/settle', 'Home\Shop\ShopController@settle');
+Route::post('/home/shop/orderss', 'Home\Shop\ShopController@orderss');
+
 //店铺评论
 Route::get('/home/shop/comment/{id}','Home\Shop\ShopController@comment');
 Route::post('/home/shop/comment/ajax','Home\Shop\ShopController@ajax');
+

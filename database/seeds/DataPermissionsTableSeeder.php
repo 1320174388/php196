@@ -12,10 +12,6 @@ class DataPermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
-
-        \DB::table('data_permissions')->delete();
-        
         \DB::table('data_permissions')->insert(array (
             0 => 
             array (

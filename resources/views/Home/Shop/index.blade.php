@@ -15,7 +15,7 @@
       <li class="carousel-block"> <a rel="nofollow" target="_blank" href="/activity/xnbonus_2015" data-id="promotion_banner_xnbonus_2015"> <img src="/home/shop/images/24afab59cadeac87ec23a51fe5e8dgif.gif" /> </a> </li> 
       <li class="carousel-block"> <a rel="nofollow" target="_blank" href="/activity/pinpaiguan1" data-id="promotion_banner_pinpaiguan1"> <img src="/home/shop/images/44b92f52c342fe1994164399fd870gif.gif" /> </a> </li> 
       <li class="carousel-block"> <a rel="nofollow" target="_blank" href="/activity/sdjb" data-id="promotion_banner_sdjb"> <img src="/home/shop/images/10ea2f228dce4ef61c56c52ae5f9agif.gif" /> </a> </li> 
-     </ul> 
+     </ul>
      <ol class="carousel_pager carousel-pager"></ol> 
     </div> 
     <div class="row favored-restaurants restaurants-row" id="favored-bar"> 
@@ -247,7 +247,7 @@
                 <a href="{{ url('/home/shop/buy') }}/{{ $v->user_id }}" target="_blank"><img class="restaurant-logo" alt="{{ $v->name }}" srcset="http://img.ivsky.com/img/tupian/pre/201711/01/huohua-008.jpg" /></a> 
                </div> 
                <div class="deliver-time-wrapper tooltip_on" data-toggle="tooltip" title="平均送达12分钟">
-                 12分钟 
+                 12分钟
                </div> 
               </div> 
               <div class="info"> 
