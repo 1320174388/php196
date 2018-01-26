@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>input</title>
-    <link type="text/css" href="/shop/css/input.css" rel="stylesheet">
+    <link type="text/css" href="/input_shop/css/input.css" rel="stylesheet">
     <style type="text/css">
         select{
             border-radius:3px;
@@ -74,8 +74,8 @@
     <div class="author">
     </div>
 </body>
-<script type="text/javascript" src="/shop/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="/shop/js/input.js"></script>
+<script type="text/javascript" src="/input_shop/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/input_shop/js/input.js"></script>
 <script type="text/javascript">
     @foreach($province as $p)
         $('#selecte_1').append('<option value="{{ $p->id }}">{{ $p->name }}</option>');
