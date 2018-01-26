@@ -33,7 +33,7 @@ body{
     font-weight:bolder;
     height: 30px;
     line-height: 30px;
-    margin: 80px auto 0 auto;
+    margin: 50px auto 0 auto;
     font-size: 13px;
     text-indent: 1px;
     text-align: center;
@@ -75,7 +75,7 @@ body{
     position: absolute;
     top: 100px;
     width:500px;
-    height: 550px;
+    height: 570px;
     display: inline-block;
     opacity: 0.5;
     left: 50%;
