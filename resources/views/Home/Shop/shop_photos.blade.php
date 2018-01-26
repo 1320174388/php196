@@ -217,16 +217,17 @@
               }else{
 
                 $('.glyph-cart').removeClass('topbar-glyph');
-                $('.glyph-cart').text(data.length);
+                $('.glyph-cart').text(data.arr.length);
                 layer.msg('以加入购物车');
 
                 $('#tcart_loading_table').empty();
 
-                $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
+                $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
 
-                $.each(data,function(i,n){
-                  $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                $.each(data.arr,function(i,n){
+                  $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                 });
+                $('#tcart_loading_table').append('<tr><td>总价格：</td><td>'+data.num+'</td><td>去结算：</td><td><a href="">结算</a></td></tr>');
                 burron_food_add();
                 function burron_food_add(){
                   $('.button_food_add').on('click',function(e){
@@ -240,10 +241,12 @@
                         success:function(data){
                           layer.msg('添加成功');
                           $('#tcart_loading_table').empty();
-                          $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
-                          $.each(data,function(i,n){
-                            $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                          $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
+                          $.each(data.arr,function(i,n){
+                            $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                           });
+                          $('#tcart_loading_table').append('<tr><td>总价格：</td><td>'+data.num+'</td><td>去结算：</td><td><a href="">结算</a></td></tr>');
+
                           burron_food_add();
                           button_food_del();
                         },
@@ -264,11 +267,11 @@
                         success:function(data){
                           layer.msg('删除成功');
                           $('#tcart_loading_table').empty();
-                          $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>操作</th></tr>');
-                          $.each(data,function(i,n){
-                            $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                          $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
+                          $.each(data.arr,function(i,n){
+                            $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                           });
-                          console.log(data);
+                          $('#tcart_loading_table').append('<tr><td>总价格：</td><td>'+data.num+'</td><td>去结算：</td><td><a href="">结算</a></td></tr>');
                           button_food_del();
                           burron_food_add();
                           if(data == 1){

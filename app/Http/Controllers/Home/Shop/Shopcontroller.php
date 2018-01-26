@@ -9,6 +9,7 @@ use App\Models\data_user;
 use Illuminate\Support\Facades\Redis;
 use App\Models\data_user_cart;
 use App\Models\data_rest_food;
+use App\FunClass\ShopClass;
 
 class Shopcontroller extends Controller
 {
@@ -61,13 +62,19 @@ class Shopcontroller extends Controller
         $rest->user_id = $user_id;
         $rest->number = $number;
 
+        $food_price = data_rest_food::where('id',$food_id)->first()->price;
+        $rest->price = $food_price * $number;
+
         $res = $rest->save();
 
+
+
         if($res){
-            $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number')
+            $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number','data_user_carts.price')
                                                 ->leftJoin('data_rest_foods', 'food_id', '=', 'id')
                                                 ->get()->toArray();
-            return $arr;
+            $num = ShopClass::Total_price($arr);
+            return ['num'=>$num,'arr'=>$arr];
         }else{
             return 2;
         }
@@ -90,16 +97,20 @@ class Shopcontroller extends Controller
 
         if($rows){
             $number = $rows->number + 1;
-            $res = \DB::table('data_user_carts')->where('food_id',$food_id)->update(['number'=>$number]);
+            $food_price = data_rest_food::where('id',$food_id)->first()->price;
+            $food_price = $food_price * $number;
+
+            $res = \DB::table('data_user_carts')->where('food_id',$food_id)->update(['number'=>$number,'price'=>$food_price]);
         }else{
             $number = 1;
         }
 
         if($res){
-            $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number')
+            $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number','data_user_carts.price')
                                                 ->leftJoin('data_rest_foods', 'food_id', '=', 'id')
                                                 ->get()->toArray();
-            return $arr;
+            $num = ShopClass::Total_price($arr);
+            return ['num'=>$num,'arr'=>$arr];
         }else{
             return 2;
         }
@@ -123,17 +134,22 @@ class Shopcontroller extends Controller
 
         if($rows->number > 1){
             $number = $rows->number - 1;
-            $res = \DB::table('data_user_carts')->where('food_id',$food_id)->update(['number'=>$number]);
+
+            $food_price = data_rest_food::where('id',$food_id)->first()->price;
+            $food_price = $food_price * $number;
+
+            $res = \DB::table('data_user_carts')->where('food_id',$food_id)->update(['number'=>$number,'price'=>$food_price]);
         }else{
             $res = $data_user_cart->delete();
         }
 
         if($res){
-            $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number')
+            $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number','data_user_carts.price')
                                                 ->leftJoin('data_rest_foods', 'food_id', '=', 'id')
                                                 ->get()->toArray();
             if($arr){
-                return $arr;
+                $num = ShopClass::Total_price($arr);
+                return ['num'=>$num,'arr'=>$arr];
             }else{
                 return 1;
             }

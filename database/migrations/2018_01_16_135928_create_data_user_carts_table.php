@@ -18,6 +18,7 @@ class CreateDataUserCartsTable extends Migration
             $table->string('user_id');
             $table->string('food_id');
             $table->integer('number');
+            $table->unsignedDecimal('price');
         });
     }
 
