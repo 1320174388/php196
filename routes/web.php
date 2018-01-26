@@ -181,3 +181,7 @@ Route::post('/home/personal/delete/{id}', 'Home\Personal\PersonalController@dele
 Route::get('/home/shop/index/{id}', 'Home\Shop\ShopController@index');
 Route::get('/home/shop/buy/{id}', 'Home\Shop\ShopController@buy');
 Route::get('/home/shop/details', 'Home\Shop\ShopController@details');
+
+//店铺评论
+Route::get('/home/shop/comment/{id}','Home\Shop\ShopController@comment');
+Route::post('/home/shop/comment/ajax','Home\Shop\ShopController@ajax');
