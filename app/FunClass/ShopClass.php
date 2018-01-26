@@ -43,4 +43,12 @@ class ShopClass
         }
         return $num;
     }
+
+    static function Total_num($arr){
+        $num = 0;
+        foreach($arr as $k=>$v){
+            $num += $v->number;
+        }
+        return $num;
+    }
 }

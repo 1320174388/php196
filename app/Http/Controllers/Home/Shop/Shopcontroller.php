@@ -73,8 +73,9 @@ class Shopcontroller extends Controller
             $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number','data_user_carts.price')
                                                 ->leftJoin('data_rest_foods', 'food_id', '=', 'id')
                                                 ->get()->toArray();
-            $num = ShopClass::Total_price($arr);
-            return ['num'=>$num,'arr'=>$arr];
+            $price = ShopClass::Total_price($arr);
+            $num = ShopClass::Total_num($arr);
+            return ['price'=>$price,'num'=>$num,'arr'=>$arr];
         }else{
             return 2;
         }
@@ -109,8 +110,9 @@ class Shopcontroller extends Controller
             $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number','data_user_carts.price')
                                                 ->leftJoin('data_rest_foods', 'food_id', '=', 'id')
                                                 ->get()->toArray();
-            $num = ShopClass::Total_price($arr);
-            return ['num'=>$num,'arr'=>$arr];
+            $price = ShopClass::Total_price($arr);
+            $num = ShopClass::Total_num($arr);
+            return ['price'=>$price,'num'=>$num,'arr'=>$arr];
         }else{
             return 2;
         }
@@ -148,8 +150,9 @@ class Shopcontroller extends Controller
                                                 ->leftJoin('data_rest_foods', 'food_id', '=', 'id')
                                                 ->get()->toArray();
             if($arr){
-                $num = ShopClass::Total_price($arr);
-                return ['num'=>$num,'arr'=>$arr];
+                $price = ShopClass::Total_price($arr);
+                $num = ShopClass::Total_num($arr);
+                return ['price'=>$price,'num'=>$num,'arr'=>$arr];
             }else{
                 return 1;
             }

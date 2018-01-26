@@ -227,7 +227,7 @@
                 $.each(data.arr,function(i,n){
                   $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                 });
-                $('#tcart_loading_table').append('<tr><td>总价格：</td><td>'+data.num+'</td><td>去结算：</td><td><a href="">结算</a></td></tr>');
+                $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('admin') }}?price="+data.price+'">去结算</a></th></tr>');
                 burron_food_add();
                 function burron_food_add(){
                   $('.button_food_add').on('click',function(e){
@@ -245,8 +245,7 @@
                           $.each(data.arr,function(i,n){
                             $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                           });
-                          $('#tcart_loading_table').append('<tr><td>总价格：</td><td>'+data.num+'</td><td>去结算：</td><td><a href="">结算</a></td></tr>');
-
+                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('admin') }}?price="+data.price+'">去结算</a></th></tr>');
                           burron_food_add();
                           button_food_del();
                         },
@@ -271,7 +270,7 @@
                           $.each(data.arr,function(i,n){
                             $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                           });
-                          $('#tcart_loading_table').append('<tr><td>总价格：</td><td>'+data.num+'</td><td>去结算：</td><td><a href="">结算</a></td></tr>');
+                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('admin') }}?price="+data.price+'">去结算</a></th></tr>');
                           button_food_del();
                           burron_food_add();
                           if(data == 1){
