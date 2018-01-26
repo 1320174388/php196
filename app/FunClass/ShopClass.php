@@ -35,4 +35,20 @@ class ShopClass
             }
         }
     }
+
+    static function Total_price($arr){
+        $num = 0;
+        foreach($arr as $k=>$v){
+            $num += $v->price;
+        }
+        return $num;
+    }
+
+    static function Total_num($arr){
+        $num = 0;
+        foreach($arr as $k=>$v){
+            $num += $v->number;
+        }
+        return $num;
+    }
 }
