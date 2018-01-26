@@ -12,17 +12,17 @@ class CreateDataOrdersTable extends Migration
      * @return void
      */
     public function up()
-    {   
-        // 订单表
+    {
         Schema::create('data_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_number');  //订单号
-            $table->integer('user_id'); //用户id
-            $table->integer('rest_id'); //餐点id
-            $table->tinyInteger('status'); //订单状态
-            $table->string('order_time', 255); //订单日期
-            $table->string('address_id', 255);  //用户地址
-            $table->timestamps();
+            $table->string('order_number',50)->unique();
+            $table->integer('user_id');
+            $table->integer('rest_id');
+            $table->integer('status');
+            $table->integer('price');
+            $table->string('order_time',50);
+            $table->string('address',50);
+            $table->string('text',50);
         });
     }
 

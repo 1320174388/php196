@@ -180,3 +180,5 @@ Route::get('/home/shop/buy/{id}', 'Home\Shop\ShopController@buy');
 Route::post('/home/shop/details', 'Home\Shop\ShopController@details');
 Route::post('/home/shop/addfood', 'Home\Shop\ShopController@addfood');
 Route::post('/home/shop/delfood', 'Home\Shop\ShopController@delfood');
+Route::get('/home/shop/settle', 'Home\Shop\ShopController@settle');
+Route::post('/home/shop/orderss', 'Home\Shop\ShopController@orderss');
