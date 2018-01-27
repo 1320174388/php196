@@ -69,11 +69,10 @@
 					</dt>
 					<dd class="padding-big">
 						<div class="account-class text-hidden">
-							<a href="#">未支付订单</a>
-							<a href="#">已支付订单</a>
-							<a href="#">处理中订单</a>
-							<a href="#">以完成订单</a>
-							<a href="#">收支记录表</a>
+							<a href="#">支付订单</a>
+							<a href="#">处理订单</a>
+							<a href="#">完成订单</a>
+							<a href="#">收支列表</a>
 						</div>
 					</dd>
 				</dl>

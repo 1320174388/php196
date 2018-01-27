@@ -159,6 +159,10 @@ Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['shopislogin',
     Route::post('admin/webEdit/{id}','AdminController@webEdit');
     // 删除食品
     Route::get('admin/webDel/{id}','AdminController@webDel');
+    // 提交订单
+    Route::get('admin/order_index','OrderController@index');
+    // 订单详情
+    Route::post('admin/order_detail','OrderController@detail');
 
 });
 

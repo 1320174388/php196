@@ -12,9 +12,10 @@
 		<script type="text/javascript" src="/Tpshop/Js/haidao.offcial.general.js"></script>
 		<script type="text/javascript" src="/Tpshop/Js/select.js"></script>
 		<script type="text/javascript" src="/Tpshop/Js/haidao.validate.js"></script>
+		
 		@section('script')
 			
-		@stop
+		@show
 		@section('css')
 
 		@show
@@ -143,27 +144,21 @@
 						</div>
 						<ul class="sidebar-trans">
 							<li>
-								<a href="order.html">
+								<a href="{{ url('shop/admin/order_index') }}">
 									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_order.png" width="16" height="16" /></b>
-									<span class="text-normal">未支付订单</span>
+									<span class="text-normal">支付订单</span>
 								</a>
 							</li>
 							<li>
 								<a href="order.html">
 									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_order.png" width="16" height="16" /></b>
-									<span class="text-normal">已支付订单</span>
+									<span class="text-normal">处理订单</span>
 								</a>
 							</li>
 							<li>
 								<a href="order.html">
 									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_order.png" width="16" height="16" /></b>
-									<span class="text-normal">处理中订单</span>
-								</a>
-							</li>
-							<li>
-								<a href="order.html">
-									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_order.png" width="16" height="16" /></b>
-									<span class="text-normal">以完成订单</span>
+									<span class="text-normal">完成订单</span>
 								</a>
 							</li>
 						</ul>
