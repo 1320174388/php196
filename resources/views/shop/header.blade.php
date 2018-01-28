@@ -12,9 +12,10 @@
 		<script type="text/javascript" src="/Tpshop/Js/haidao.offcial.general.js"></script>
 		<script type="text/javascript" src="/Tpshop/Js/select.js"></script>
 		<script type="text/javascript" src="/Tpshop/Js/haidao.validate.js"></script>
+
 		@section('script')
 			
-		@stop
+		@show
 		@section('css')
 
 		@show
@@ -32,25 +33,6 @@
 			</div>
 			<div class="topbar-info">
 				<ul class="fr">
-					<li class="fl dropdown topbar-notice topbar-btn">
-					<a href="#" class="dropdown-toggle">
-					<span class="icon-notice"></span>
-					<span class="topbar-num have">2</span>
-					<!--have表示有消息，没有消息去掉have-->
-					</a>
-					</li>
-					<li class="fl topbar-info-item">
-					<div class="dropdown">
-						<a href="#" class="topbar-btn">
-						<span class="fl text-normal">设置</span>
-						<span class="icon-arrow-down"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="{{ url('shop/admin/user') }}">个人信息</a></li>
-							<li><a href="#">餐店信息</a></li>
-						</ul>
-					</div>
-					</li>
 					<li class="fl topbar-info-item">
 					<div class="dropdown">
 						<a href="#" class="topbar-btn">
@@ -58,7 +40,9 @@
 						<span class="icon-arrow-down"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="{{ url('logout') }}">退出</a></li>
+							<li><a href="{{ url('home/personal') }}">个人中心</a></li>
+							<li><a href="{{ url('shop/admin/user') }}">个人信息</a></li>
+							<li><a href="{{ url('logout') }}">退出账号</a></li>
 						</ul>
 					</div>
 					</li>
@@ -99,31 +83,9 @@
 						</div>
 						<ul class="sidebar-trans">
 							<li>
-								<a href="message.html">
-									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_news.png" width="16" height="16" /></b>
-									<span class="text-normal">消息中心</span>
-								</a>
-							</li>
-							<li>
-								<a href="money.html">
-									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_gold.png" width="16" height="16" /></b>
-									<span class="text-normal">收支列表</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="sidebar-nav">
-						<div class="sidebar-title">
-							<a>
-								<span class="icon"><b class="fl icon-arrow-down"></b></span>
-								<span class="text-normal">食品管理</span>
-							</a>
-						</div>
-						<ul class="sidebar-trans">
-							<li>
 								<a href="{{ url('shop/admin/addInfo') }}">
 									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_market.png" width="16" height="16" /></b>
-									<span class="text-normal">分类添加</span>
+									<span class="text-normal">添加分类</span>
 								</a>
 							</li>
 							<li>
@@ -143,27 +105,21 @@
 						</div>
 						<ul class="sidebar-trans">
 							<li>
-								<a href="order.html">
+								<a href="{{ url('shop/admin/order_index') }}">
 									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_order.png" width="16" height="16" /></b>
-									<span class="text-normal">未支付订单</span>
+									<span class="text-normal">支付订单</span>
 								</a>
 							</li>
 							<li>
-								<a href="order.html">
+								<a href="{{ url('shop/admin/order_handle') }}">
 									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_order.png" width="16" height="16" /></b>
-									<span class="text-normal">已支付订单</span>
+									<span class="text-normal">处理订单</span>
 								</a>
 							</li>
 							<li>
-								<a href="order.html">
+								<a href="{{ url('shop/admin/order_show') }}">
 									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_order.png" width="16" height="16" /></b>
-									<span class="text-normal">处理中订单</span>
-								</a>
-							</li>
-							<li>
-								<a href="order.html">
-									<b class="sidebar-icon"><img src="/Tpshop/Images/icon_order.png" width="16" height="16" /></b>
-									<span class="text-normal">以完成订单</span>
+									<span class="text-normal">完成订单</span>
 								</a>
 							</li>
 						</ul>
