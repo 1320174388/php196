@@ -163,6 +163,12 @@ Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['shopislogin',
     Route::get('admin/order_index','OrderController@index');
     // 订单详情
     Route::post('admin/order_detail','OrderController@detail');
+    // 处理订单提交
+    Route::post('admin/order_edit','OrderController@edit');
+    // 处理中订单
+    Route::get('admin/order_handle','OrderController@handle');
+    // 完成订单
+    Route::get('admin/order_show','OrderController@show');
 
 });
 

@@ -30,7 +30,7 @@
         </div>
         <div class="manage-head">
 			<div class="offcial-table tr-border margin-big-top clearfix hhh">
-			<form action="{{ url('shop/admin/order_index') }}" method="get">
+			<form action="{{ url('shop/admin/order_show') }}" method="get">
 				<div style="color:black;" class="td w15">
 					<b>订单编号 : </b>
 				</div>
@@ -70,8 +70,8 @@
 		            <div class="tr-td clearfix">
 		                <div class="td w15 text-center">{{ $v->order_number }}</div>
 		                <div class="td w10 text-center">
-							@if($v->status == 0)
-								<span style="color:green;">新订单</span>
+							@if($v->status == 2)
+								<span style="color:blue;">以完成</span>
 							@endif
 		                </div>
                 		<div class="td w10 text-center">{{ $v->name }}</div>
@@ -80,10 +80,7 @@
 		                <div class="td w15 text-center">{{ $v->order_time }}</div>
 		                <div class="td w20 text-center">
 		                	<a href="javascript:;">
-		                		<button order="{{ $v->order_number }}" class="button order_details" style="width:49%; color:blue;">订单详情</button>
-		                	</a>
-		                	<a href="javascript:;">
-		                		<button order="{{ $v->order_number }}" class="button order_edit" style="width:49%; color:green;">处理订单</button>
+		                		<button order="{{ $v->order_number }}" class="button order_details" style="width:99%; color:blue;">订单详情</button>
 		                	</a>
 		                </div>
 		            </div>
@@ -135,28 +132,6 @@
 						  content: str
 						});
 						s = 0;
-					},
-					dataType:'json'
-				});
-			}
-		});
-		var v = 0;
-		$('.order_edit').on('click',function(){
-			if(v == 0){
-				v++;
-				var order = $(this).attr('order');
-				$.ajax({
-					url:"{{ url('shop/admin/order_edit') }}",
-					type:'post',
-					data:{'order_number':order,'_token':"{{ csrf_token() }}"},
-					success:function(data){
-						if(data == 1){
-							layer.msg('订单已处理');
-							location.reload();
-						}else{
-							layer.msg('处理失败');
-						}
-						v = 0;
 					},
 					dataType:'json'
 				});
