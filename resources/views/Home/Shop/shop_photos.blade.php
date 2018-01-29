@@ -13,8 +13,7 @@
   </script> 
   <script class="usemin" src="/home/shop/js/modernizr.custom.min.f49cdc05.js"></script> 
   <script type="text/javascript" src="{{ asset('/home/spigPet/js/jquery-3.2.1.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('
-    /layer/layer.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('/layer/layer.js') }}"></script>
 <!-- //res.layui.com/layui/dist/css/layui.css -->
  <body id="restaurant"> 
   
@@ -267,7 +266,6 @@
             layer.msg('请先去登录才能购物');
             var user_id = 0;
           @endif
-          @if(session('home_user'))
           $.ajax({
             url:"{{ url('/home/shop/details') }}",
             type:'post',
@@ -282,7 +280,7 @@
                 $.each(data.arr,function(i,n){
                   $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                 });
-                $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
+                $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+user_id+'">去结算</a></th></tr>');
                 burron_food_add();
                 function burron_food_add(){
                   $('.button_food_add').on('click',function(e){
@@ -299,7 +297,7 @@
                           $.each(data.arr,function(i,n){
                             $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                           });
-                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
+                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+user_id+'">去结算</a></th></tr>');
                           burron_food_add();
                           button_food_del();
                         },
@@ -329,7 +327,7 @@
                           $.each(data.arr,function(i,n){
                             $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
                           });
-                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
+                          $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+user_id+'">去结算</a></th></tr>');
                           button_food_del();
                           burron_food_add();
                         },
@@ -340,7 +338,6 @@
             },
             dataType:'json'
           });
-          @endif
       });
 
 

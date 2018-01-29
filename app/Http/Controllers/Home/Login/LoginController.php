@@ -89,11 +89,7 @@ class LoginController extends Controller
         //查询
         $user = data_user::where($name,$data['name'])->first();
 
-        if($user->status == 0){
-       		return back()->with('errors','您的用户已经被禁用')->withInput();
-       	}
-
-       		//如果没有此用户,返回用户名错误
+        //如果没有此用户,返回用户名错误
        	if(!$user){
        		return back()->with('errors','用户名或密码错误')->withInput();
        	}
@@ -101,8 +97,9 @@ class LoginController extends Controller
        	if(Crypt::decrypt($user->password) != $data['password']){
        		return back()->with('errors','用户名或密码错误');
        	}
-
-
+        if($user->status == 0){
+          return back()->with('errors','您的用户已经被禁用')->withInput();
+        }
 
        	// 如果有效就登录到后台，验证失败就返回到添加页面
 		// 将用户的登录状态保存到session
