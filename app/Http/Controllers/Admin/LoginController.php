@@ -88,6 +88,11 @@ class LoginController extends Controller
         $user = data_admin_addr::where('name',$input['username'])->first();
         //如果没有此用户，返回没有此用户的错误提示
         // dd($user);
+        $sta = $user->status;
+//        dd($sta);
+        if($sta == 3){
+            return back()->with('errors','抱歉，你的账号已被停用');
+        }
         if (! $user) {
           return back()->with('errors','无此用户');
         }
