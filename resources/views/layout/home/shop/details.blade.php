@@ -31,16 +31,23 @@
       <li><a class="tnav-link" href="gift.html">礼品中心</a></li> 
       <li><a id="tdp_link" class="tnav-link hide" href="http://t.dianping.com" target="_blank">附近团购</a></li> 
       <li><a class="tnav-link" href="support.html">联系客服</a></li> 
+      <li><a class="tnav-link" href="{{ url('/home/personal') }}">个人中心</a></li> 
      </ul> 
-     <div id="topbar_cart" class="eleme_dropdown topbar-widget topbar-cart empty"> 
-      <a class="e_toggle twidget-toggle"> <span id="tcart_total" class="tcart-total twidget-total">0</span> <i class="glyph-cart topbar-glyph"></i> </a> 
-      <div class="e_dropdown twidget-dropdown"> 
-       <div id="tcart_loading" class="twidget-loading"></div> 
-       <div id="tcart_wrapper"></div> 
+
+     <div class="eleme_dropdown topbar-widget topbar-cart empty" height="200px;">
+      <a class="e_toggle twidget-toggle"> <span id="tcart_total" class="tcart-total twidget-total">0</span><i class="glyph-cart topbar-glyph"></i></a> 
+      <div class="e_dropdown twidget-dropdown" > 
+       <div id="tcart_loading" >
+          <table id="tcart_loading_table" border="1" cellpadding="5" style="margin:5px auto; color:green;">
+            
+          </table>
+       </div> 
       </div> 
      </div> 
+
+
      <div id="topbar_msg" class="eleme_dropdown topbar-widget empty"> 
-      <a class="e_toggle twidget-toggle"> <span id="tmsg_total" class="tmsg-total twidget-total">0</span> <i class="glyph-message topbar-glyph"></i> </a> 
+     
       <div class="e_dropdown twidget-dropdown"> 
        <div id="tmsg_loading" class="twidget-loading"></div> 
        <div id="tmsg_wrapper"></div> 
@@ -56,11 +63,18 @@
        <li class="divider"></li> 
        <li><a id="topbar_logout" class="tuser-link" href="http://ele.me/logout"><i class="glyph-off"></i>退出登录</a></li> 
       </ul> 
-     </div> 
-     <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 
+     </div>
+     @if(!session('home_user'))
+      <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 
       <a href="login.html">登录</a> / 
       <a href="register.html">注册</a> 
      </div> 
+      @else
+      <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 
+      <a href="">{{ session('home_user')->name }}</a>
+      
+     </div> 
+     @endif
     </nav> 
    </div> 
   </header> 
@@ -72,13 +86,11 @@
 
   @section('liebiao')
     <nav class="rst-header-nav"> 
-     <a class="rst-header-nav-item" href="/kxljmlt-pt">菜单</a> 
      <div class="inline-block relative"> 
       <span class="rst-header-nav-tip">看图点菜</span> 
       <a class="rst-header-nav-item" href="/kxljmlt-pt/photowall">美食墙</a> 
      </div> 
      <a class="rst-header-nav-item ui_active" href="{{ url('home/shop/comment/.$id') }}">评价</a> 
-     <a class="rst-header-nav-item" href="/kxljmlt-pt/comment">留言</a> 
     </nav> 
   @show
 

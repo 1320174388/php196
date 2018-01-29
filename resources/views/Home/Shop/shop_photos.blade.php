@@ -13,7 +13,8 @@
   </script> 
   <script class="usemin" src="/home/shop/js/modernizr.custom.min.f49cdc05.js"></script> 
   <script type="text/javascript" src="{{ asset('/home/spigPet/js/jquery-3.2.1.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('/layer/layer.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('
+    /layer/layer.js') }}"></script>
 <!-- //res.layui.com/layui/dist/css/layui.css -->
  <body id="restaurant"> 
   
@@ -21,11 +22,11 @@
    <div class="container rst_header_con"> 
     <article class="rst-header-main rst-header-toggle rst_info_header" itemscope="" itemtype="http://schema.org/Restaurant"> 
      <header class="rst-header-info group"> 
-      <a class="rst-logo" href="" itemprop="url"> <img class="rst-logo-img" srcset="{{ asset('/home/shop/images/eb03dacae9b81a6aecc59ea8a6930189.png') }}" alt="云窗小语" itemprop="logo" /> <i class="icon-rst-badge v v-person" title="该商家已通过个人身份认证"></i> </a> 
+      <a class="rst-logo" href="" itemprop="url"> <img class="rst-logo-img" srcset="http://fuss10.elemecdn.com/e/61/4b14dc708583d288b62c73491e12cjpeg.jpeg?w=48&amp;h=48 1x, http://fuss10.elemecdn.com/e/61/4b14dc708583d288b62c73491e12cjpeg.jpeg?w=96&amp;h=96 2x" alt="云窗小语" itemprop="logo" /> <i class="icon-rst-badge v v-person" title="该商家已通过个人身份认证"></i> </a> 
       <div class="rst-basic-info"> 
        <div class="rst-name-wrapper "> 
-        <a class="rst-name text-overflow" href="#" data-toggle="bs-tooltip" title="弄啥" itemprop="name">云窗小语</a> 
-       </div> 
+        <a class="rst-name text-overflow" href="#" data-toggle="bs-tooltip" title="" itemprop="name">{{ $rest_id->name }}</a>
+       </div>
        <div class="rst-misc"> 
         <a id="rst_rating" class="rst-rating" href="/home/shop//bsycxy/rating"> <span class="rating-stars"> <i class="glyph-rating-star">★</i><i class="glyph-rating-star">★</i><i class="glyph-rating-star">★</i><i class="glyph-rating-star">★</i><i class="glyph-rating-star off">★</i></span> 4.2 </a> 
         <span class="rst-status">营业中</span> 
@@ -56,13 +57,11 @@
      </div> 
     </article> 
     <nav class="rst-header-nav"> 
-     <a class="rst-header-nav-item" href="/home/shop//bsycxy">菜单</a> 
      <div class="inline-block relative"> 
       <span class="rst-header-nav-tip">看图点菜</span> 
       <a class="rst-header-nav-item ui_active" href="/home/shop//bsycxy/photowall">美食墙</a> 
      </div> 
      <a class="rst-header-nav-item" href="{{ url('/home/shop/comment/'.$id) }}">评价</a> 
-     <a class="rst-header-nav-item" href="/home/shop//bsycxy/comment">留言</a> 
     </nav> 
     <ul class="rst-header-aside group rst_info_panel"> 
      <li class="rst-data-block"> 
@@ -186,6 +185,8 @@
   <script class="usemin" src="/home/shop/js/vendor.7aa05b99.js"></script>
   <script class="usemin" src="/home/shop/js/global.8d3089f1.js"></script>
   <script>
+
+@if(session('home_user'))
   $.ajax({
     url:"{{ url('/home/shop/details') }}",
     type:'post',
@@ -257,6 +258,7 @@
     },
     dataType:'json'
   });
+@endif
       $('.images_shop').on('click',function(){
           var food_id = $(this).attr('data-id');
           @if(session('home_user'))
@@ -340,6 +342,7 @@
           });
           @endif
       });
+
 
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

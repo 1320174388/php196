@@ -46,6 +46,7 @@
      <header class="rst-header-info group"> 
       <a class="rst-logo" href="/kxljmlt-pt" itemprop="url"> <img class="rst-logo-img" srcset="http://fuss10.elemecdn.com/e/61/4b14dc708583d288b62c73491e12cjpeg.jpeg?w=48&amp;h=48 1x, http://fuss10.elemecdn.com/e/61/4b14dc708583d288b62c73491e12cjpeg.jpeg?w=96&amp;h=96 2x" alt="开心罗记麻辣烫" itemprop="logo" /> <i class="icon-rst-badge v v-person" title="该商家已通过个人身份认证"></i> </a> 
       <div class="rst-basic-info"> 
+      
        <!-- <div class="rst-name-wrapper caret">  -->
         <a class="rst-name text-overflow" href="/kxljmlt-pt" data-toggle="bs-tooltip" title="{{ $rest->name }}" itemprop="name">{{ $rest->name }}</a> 
        <!-- </div>  -->
@@ -85,13 +86,13 @@
 
 @section('liebiao')
     <nav class="rst-header-nav"> 
-     <a class="rst-header-nav-item" href="/kxljmlt-pt">菜单</a> 
+
      <div class="inline-block relative"> 
       <span class="rst-header-nav-tip">看图点菜</span> 
-      <a class="rst-header-nav-item" href="/kxljmlt-pt/photowall">美食墙</a> 
+      <a class="rst-header-nav-item" href="{{ url('/home/shop/buy/'.$id) }}">美食墙</a> 
      </div> 
      <a class="rst-header-nav-item ui_active" href="{{ url('home/shop/comment/'.$id) }}">评价</a> 
-     <a class="rst-header-nav-item" href="/kxljmlt-pt/comment">留言</a> 
+
     </nav>
     <div class="rst-fav-wrapper"> 
      <div id="rst_fav" class="rst-block rst-fav"> 
@@ -254,12 +255,91 @@
               }else if(data == 2){
                   layer.msg('评价失败');
                   location.reload();
+              }else if(data == 3){
+                  layer.msg('请登录后在进行评论');
               }
           },
           dataType:'json',
         })
 
-    })
+    });
+
+@if(!empty(session('home_user')))
+
+    $.ajax({
+    url:"{{ url('/home/shop/details') }}",
+    type:'post',
+    async:false,
+    data:{ 'food_id':0,'user_id':{{ session('home_user')->id }},'_token':"{{ csrf_token() }}"},
+    success:function(data){
+        $('.glyph-cart').removeClass('topbar-glyph');
+        $('.glyph-cart').text(data.arr.length);
+        $('#tcart_loading_table').empty();
+        $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
+        $.each(data.arr,function(i,n){
+          $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+        });
+        $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
+        burron_food_add();
+        function burron_food_add(){
+          $('.button_food_add').on('click',function(e){
+              var food_id = $(this).attr('food_add');
+              var tr = $(this).parent().parent();
+              $.ajax({
+                url:"{{ url('/home/shop/addfood') }}",
+                type:'post',
+                data:{ 'food_id':food_id,'user_id':{{ session('home_user')->id }},'_token':"{{ csrf_token() }}"},
+                success:function(data){
+                  layer.msg('添加成功');
+                  $('#tcart_loading_table').empty();
+                  $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
+                  $.each(data.arr,function(i,n){
+                    $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                  });
+                  $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
+                  burron_food_add();
+                  button_food_del();
+                },
+                dataType:'json'
+              });
+          });
+        }
+        button_food_del();
+        function button_food_del(){
+          $('.button_food_del').on('click',function(e){
+              var food_id = $(this).attr('food_del');
+              var tr = $(this).parent().parent();
+              $.ajax({
+                url:"{{ url('/home/shop/delfood') }}",
+                type:'post',
+                data:{ 'food_id':food_id,'user_id':{{ session('home_user')->id }},'_token':"{{ csrf_token() }}"},
+                success:function(data){
+                  if(data == 1){
+                    $('.glyph-cart').text('');
+                    $('.glyph-cart').addClass('topbar-glyph');
+                    $('#tcart_loading_table').empty();
+                    return;s
+                  }
+                  layer.msg('删除成功');
+                  $('#tcart_loading_table').empty();
+                  $('#tcart_loading_table').append('<tr><th>食品</th><th>数量</th><th>价格</th><th>操作</th></tr>');
+                  $.each(data.arr,function(i,n){
+                    $('#tcart_loading_table').append('<tr trvalue="'+n.food_id+'"><td class="td_food_id">'+n.name+'</td><td>'+n.number+'</td><td class="td_food_id">'+n.price+'</td><td><a class="button_food_add" food_add="'+n.food_id+'">添加 </a><a class="button_food_del" food_del="'+n.food_id+'"> 删除</a></td></tr>');
+                  });
+                  $('#tcart_loading_table').append('<tr><th>合计</th><th>'+data.num+'</th><th>'+data.price+'</th><th><a href="'+"{{ url('/home/shop/settle') }}?price="+data.price+'&user_id='+{{ session('home_user')->id }}+'">去结算</a></th></tr>');
+                  button_food_del();
+                  burron_food_add();
+                },
+                dataType:'json'
+              });
+          });
+        }
+    },
+    dataType:'json'
+  });
+
+@endif
+      
 
   </script>
 
