@@ -8,30 +8,45 @@ use App\Models\data_user_detail;
 use App\Models\data_user;
 use Illuminate\Support\Facades\Validator;
 use App\Models\data_user_addr;
+use App\Models\data_order_detail;
+use App\Models\data_order;
 use Illuminate\Support\Facades\Redis;
 
 
 class PersonalController extends Controller
 {
-    
+
     //显示个人中心页面
     public function personal(Request $request)
     {
 
-        // if($request->session()->has('home_user'))
-        // {
-        //     return 1111;
-        // }
+        $user_id = session('home_user')->id;
 
-        // $user = data_user::find(1);
-        // dd($user['name']);
-    	return view('Home.personal.member_index');
+        $order = data_order::where('user_id', $user_id)->get();
+        // dd($user_id);
+        // $oarr = [];
+        // foreach($user_id as $k=>$v)
+        // {
+        //     $oarr->$k = $v;
+        // }
+        // dd($oarr);
+        // $onum = data_order::get()->data_order_detail();
+        // dd($onum);
+
+        $arr = [];
+        foreach($order as $k=>$v){
+           $arr[$k]= json_decode($v,true);
+        }
+        
+        // dd($arr);
+    	return view('Home.personal.member_index', compact('order'));
         // , compact('user')
     }
 
     public function upload(Request $request)
-    {
-    
+    {   
+        
+        dd($data);
     	//是否有图片
     	if($request->hasFile('himg')){
     		//获取上传图片
@@ -42,12 +57,19 @@ class PersonalController extends Controller
                 $ext = $file->getClientOriginalExtension();
                 $filename = time().mt_rand(10000,99999).'.'.$ext;
 
-                $res = $file->move('/home',$filename);
-                $filepath = 'home/'.$res;
+                $res = $file->move('/home/avatar',$filename);
+                $filepath = '/home/avatar/'.$res;
 
                 return $filepath;
             }
+            
         }
+
+        // $file = new data_user;
+        // $file->avatar = ;
+        
+
+
     }
 
     public function crypt()
@@ -77,7 +99,7 @@ class PersonalController extends Controller
             return back()->with('errors', '您输入的原密码不正确！');
         }else
         {
-            
+        
             $rule = [
                 'old_password' => 'required|between:6,18|dash',
                 'new_password' => 'required|between:6,18|dash',
@@ -113,7 +135,6 @@ class PersonalController extends Controller
                 {
                     return back()->with('errors', '修改失败！');
                 }
-
             }
         }
     }
@@ -121,7 +142,9 @@ class PersonalController extends Controller
     public function addrindex()
     {
 
-        $user_addr = data_user_addr::get();
+        $did = session('home_user')->id;
+
+        $user_addr = data_user_addr::where('user_id', $did)->get();
 
         return view('home.personal.member_addrindex', compact('user_addr'));
     }

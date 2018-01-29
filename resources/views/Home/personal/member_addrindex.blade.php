@@ -34,7 +34,7 @@
          <tr class="stable_address">
           <td class="col-address">{{ $v->address }}</td>
           <td class="col-phone">{{ $v->addr_phone }}</td>
-          <td class="col-action"> <span>默认地址</span> | <a class="gray_link" href="javascript:;" onclick="del({{ $v->id }})">删除</a> </td>
+          <td class="col-action"> <span></span> | <a class="gray_link" href="javascript:;" onclick="del({{ $v->id }})">删除</a> </td>
          </tr> 
           @endforeach
 
@@ -52,7 +52,7 @@
         <input type="text" name="addr_phone" id="address_phone" /> 
         <p>（请保证外卖员能打通该号码）</p> 
         <div class="ui-form-footer">
-         <button id="add_address_submit" class="btn btn-yellow">保存</button> 
+         <button id="add_address_submit" class="btn btn-yellow">保存</button>
         </div> 
        </form> 
       </div> 

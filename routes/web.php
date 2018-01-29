@@ -184,18 +184,26 @@ Route::get('/home/personal/addrindex', 'Home\Personal\PersonalController@addrind
 Route::post('/home/personal/addradd', 'Home\Personal\PersonalController@addradd');
 Route::post('/home/personal/delete/{id}', 'Home\Personal\PersonalController@delete');
 
-//购物车
-Route::get('/home/shop/index/{id}', 'Home\Shop\ShopController@index');
-Route::get('/home/shop/buy/{id}', 'Home\Shop\ShopController@buy');
-Route::post('/home/shop/details', 'Home\Shop\ShopController@details');
-Route::post('/home/shop/addfood', 'Home\Shop\ShopController@addfood');
-Route::post('/home/shop/delfood', 'Home\Shop\ShopController@delfood');
-
-// 订单路由
-Route::get('/home/shop/settle', 'Home\Shop\ShopController@settle');
-Route::post('/home/shop/orderss', 'Home\Shop\ShopController@orderss');
-
 //店铺评论
 Route::get('/home/shop/comment/{id}','Home\Shop\ShopController@comment');
 Route::post('/home/shop/comment/ajax','Home\Shop\ShopController@ajax');
+
+//购物车，订单
+Route::group(['prefix'=>'home/shop', 'namespace' => 'Home\Shop'],function(){
+        Route::get('index/{id}', 'ShopController@index');
+        Route::get('buy/{id}', 'ShopController@buy');
+        Route::post('details', 'ShopController@details');
+        Route::post('addfood', 'ShopController@addfood');
+        Route::post('delfood', 'ShopController@delfood');
+        Route::get('settle', 'ShopController@settle');
+        Route::post('orderss', 'ShopController@orderss');
+});
+
+Route::group(['prefix' => 'home/order', 'namespace' => 'Home\Order'], function(){
+    Route::get('neworder', 'OrderController@neworder');
+    Route::get('overorder', 'OrderController@overorder');
+    Route::post('detail', 'OrderController@detail');
+    Route::get('handle', 'OrderController@handle');
+    Route::post('edit', 'OrderController@edit');
+});
 

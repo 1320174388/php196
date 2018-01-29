@@ -94,77 +94,7 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
  </head> 
 
  <body> 
-  <link href="{{ asset('/home/shop/css/background.css') }}" type="text/css" rel="stylesheet" /> 
-  <div id="background" style="background-position:1px -10810.138888889px;" class=" night "> 
-   <div id="sun"></div> 
-   <div id="moon"></div> 
-   <div id="clouds"> 
-    <div id="cloudGroup1"> 
-     <img src="/home/shop/images/clouds.png" alt="" id="cloudPiece1" class="cloudPiece" /> 
-     <img src="/home/shop/images/clouds.png" alt="" id="cloudPiece2" class="cloudPiece" /> 
-     <img src="/home/shop/images/clouds.png" alt="" id="cloudPiece3" class="cloudPiece" /> 
-    </div> 
-    <div id="cloudGroup2"> 
-     <img src="/home/shop/images/clouds.png" alt="" id="cloudPiece4" class="cloudPiece" /> 
-     <img src="/home/shop/images/clouds.png" alt="" id="cloudPiece5" class="cloudPiece" /> 
-     <img src="/home/shop/images/clouds.png" alt="" id="cloudPiece6" class="cloudPiece" /> 
-    </div> 
-    <div id="cloudGroup3"> 
-     <img src="/home/shop/images/clouds.png" alt="" id="cloudPiece7" class="cloudPiece" /> 
-     <img src="/home/shop/images/clouds.png" alt="" id="cloudPiece8" class="cloudPiece" /> 
-    </div> 
-   </div> 
-   <div id="bg_stars"> 
-    <div class="star_type_1_big"> 
-     <div class="bg_star" id="star1_1"></div> 
-     <div class="bg_star" id="star1_2"></div> 
-     <div class="bg_star" id="star1_3"></div> 
-     <div class="bg_star" id="star1_4"></div> 
-     <!--             <div class="bg_star" id="star1_5"></div>
-            <div class="bg_star" id="star1_6"></div> --> 
-    </div> 
-    <div class="star_type_1_normal"> 
-     <div class="bg_star" id="star1_7"></div> 
-     <div class="bg_star" id="star1_8"></div> 
-     <div class="bg_star" id="star1_9"></div> 
-     <div class="bg_star" id="star1_10"></div> 
-     <div class="bg_star" id="star1_11"></div> 
-     <div class="bg_star" id="star1_12"></div> 
-    </div> 
-    <div class="star_type_1_small"> 
-     <div class="bg_star" id="star1_13"></div> 
-     <div class="bg_star" id="star1_14"></div> 
-     <div class="bg_star" id="star1_15"></div> 
-     <div class="bg_star" id="star1_16"></div> 
-     <div class="bg_star" id="star1_17"></div> 
-     <div class="bg_star" id="star1_18"></div> 
-    </div> 
-    <div class="star_type_2_big"> 
-     <div class="bg_star" id="star2_1"></div> 
-     <div class="bg_star" id="star2_2"></div> 
-     <div class="bg_star" id="star2_3"></div> 
-     <div class="bg_star" id="star2_4"></div> 
-     <!--             <div class="bg_star" id="star2_5"></div>
-            <div class="bg_star" id="star2_6"></div> --> 
-    </div> 
-    <div class="star_type_2_normal"> 
-     <div class="bg_star" id="star2_7"></div> 
-     <div class="bg_star" id="star2_8"></div> 
-     <div class="bg_star" id="star2_9"></div> 
-     <div class="bg_star" id="star2_10"></div> 
-     <div class="bg_star" id="star2_11"></div> 
-     <div class="bg_star" id="star2_12"></div> 
-    </div> 
-    <div class="star_type_2_small"> 
-     <div class="bg_star" id="star2_13"></div> 
-     <div class="bg_star" id="star2_14"></div> 
-     <div class="bg_star" id="star2_15"></div> 
-     <div class="bg_star" id="star2_16"></div> 
-     <div class="bg_star" id="star2_17"></div> 
-     <div class="bg_star" id="star2_18"></div> 
-    </div> 
-   </div> 
-  </div> 
+
   <div class="full-content-wrapper"> 
 <header id="topbar" class="site-topbar" role="banner"> 
    <div class="container"> 
@@ -196,6 +126,7 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
       <li><a class="tnav-link" href="/home/shop/gift.html">礼品中心</a></li> 
       <li><a id="tdp_link" class="tnav-link hide" href="/home/shop/http://t.dianping.com" target="_blank">附近团购</a></li> 
       <li><a class="tnav-link" href="/home/shop/support.html">联系客服</a></li> 
+      <li><a class="tnav-link" href="{{ url('/home/personal') }}">个人中心</a></li> 
      </ul> 
 
      <div class="eleme_dropdown topbar-widget topbar-cart empty" height="200px;">

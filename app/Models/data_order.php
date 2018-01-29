@@ -11,4 +11,10 @@ class data_order extends Model
     public $primaryKey = "id";
 
     public $timestamps = false;
+
+    public function data_order_detail()
+    {
+    	return $this->hasMany('App\Models\data_order_detail', 'order_number', 'order_number');
+    }
+    
 }
