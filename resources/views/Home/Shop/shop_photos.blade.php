@@ -21,14 +21,14 @@
    <div class="container rst_header_con"> 
     <article class="rst-header-main rst-header-toggle rst_info_header" itemscope="" itemtype="http://schema.org/Restaurant"> 
      <header class="rst-header-info group"> 
-      <a class="rst-logo" href="" itemprop="url"> <img class="rst-logo-img" srcset="" alt="云窗小语" itemprop="logo" /> <i class="icon-rst-badge v v-person" title="该商家已通过个人身份认证"></i> </a> 
+      <a class="rst-logo" href="" itemprop="url"> <img class="rst-logo-img" srcset="{{ asset('/home/shop/images/eb03dacae9b81a6aecc59ea8a6930189.png') }}" alt="云窗小语" itemprop="logo" /> <i class="icon-rst-badge v v-person" title="该商家已通过个人身份认证"></i> </a> 
       <div class="rst-basic-info"> 
        <div class="rst-name-wrapper "> 
         <a class="rst-name text-overflow" href="#" data-toggle="bs-tooltip" title="弄啥" itemprop="name">云窗小语</a> 
        </div> 
        <div class="rst-misc"> 
         <a id="rst_rating" class="rst-rating" href="/home/shop//bsycxy/rating"> <span class="rating-stars"> <i class="glyph-rating-star">★</i><i class="glyph-rating-star">★</i><i class="glyph-rating-star">★</i><i class="glyph-rating-star">★</i><i class="glyph-rating-star off">★</i></span> 4.2 </a> 
-        <span class="rst-status">休息中</span> 
+        <span class="rst-status">营业中</span> 
        </div> 
       </div> 
      </header> 
@@ -292,7 +292,6 @@
           });
           @endif
       });
-      
 
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
