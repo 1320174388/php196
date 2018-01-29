@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>订单处理__湖北民院校园购物网</title>
+ <title>订单生成</title>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  <meta name="description" content=""/>
  <meta name="format-detection" content="telephone=no" />
@@ -181,23 +181,22 @@
  <s class="J_Marker marker"></s>
  <span class="marker-tip">寄送至</span>
    <div class="address-info">
- <a href="#" class="J_Modify modify J_MakePoint" data-point-url="">修改本地址</a>
-
+ <h4>您还可以去<a href="{{ url('/home/personal/addrindex') }}">填写地址</a></h4>
 @foreach($arrdz as $k=>$v)
+@if(!$v->address)
  <label name="address" for="" class="user-address">
-           <input type="radio" value="{{ $v->address }}" name="address"> 地址： {{ $v->address }} <br />
-   </label>
- @endforeach
+      <input type="radio" value="{{ $v->address }}" name="address"> 地址： {{ $v->address }} <br />
+ </label>
+ @endif
+@endforeach
 
  </div>
      </li>
      <li class="J_Addr J_MakePoint clearfix"
  data-point-url="http://log.mmstat.com/buy.1.20" >
  <s class="J_Marker marker"></s>
-
    <div class="address-info">
  <a href="#" class="J_Modify modify J_MakePoint" data-point-url="#">修改本地址</a>
-
  </div>
    </li>
      </ul>
@@ -205,7 +204,13 @@
 
 </div>
  <li><em>收货人:</em><span name="user_name" value="{{ session('home_user')->name }}" id="J_AddrNameConfirm">{{ session('home_user')->name }}  </span></li>
+ 
+
+ @foreach($arrdz as $k=>$v)
+
  <li><em>电话:</em><span name="addr_phone" value="{{ $v->addr_phone }}" id="J_AddrNameConfirm">{{ $v->addr_phone }} </span></li>
+
+ @endforeach
  </ul>
      </div>
  </div>

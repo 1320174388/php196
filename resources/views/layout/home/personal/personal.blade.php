@@ -22,6 +22,9 @@
     <!-- // <script type="text/javascript" src="{{ asset('home/js/foot_201503262210.js') }}"></script>  -->
   <script type="text/javascript" src="{{ asset('/home/js/profile_201503262210.js') }}"></script> 
   <script type="text/javascript" src="{{ asset('/layer/layer.js') }}"></script>
+  @section('css')
+
+  @show
  </head> 
  <!--[if IE 8]><body class="lt-ie9 lt-ie10"><![endif]--> 
  <!--[if IE 9]><body class="lt-ie10"><![endif]--> 
@@ -126,13 +129,15 @@
      </div> 
      <nav class="topbar-nav" role="navigation"> 
       <ul class="topbar-site-nav"> 
+
        <li><a class="tnav-link current" rel="nofollow" href="member_order.html">我的饿单</a></li> 
        <li><a class="tnav-link" rel="nofollow" href="gift.html">礼品中心</a></li> 
        <li><a class="tnav-link" rel="nofollow" href="http://t.dianping.com/home?latitude=31.239567&amp;longitude=121.437477&amp;distance=500&amp;utm_source=eleme1&amp;utm_medium=eleme&amp;utm_term=pc&amp;utm_content=1&amp;utm_campaign=f" target="_blank">附近团购</a></li> 
        <li><a class="tnav-link" rel="nofollow" href="support.html">联系客服</a></li> 
+       <li><a class="tnav-link" href="{{ url('/home/personal') }}">个人中心</a></li> 
       </ul> 
       <div id="topbar_cart" class="eleme_dropdown topbar-widget topbar-cart"> 
-       <a class="e_toggle twidget-toggle"> <span id="tcart_total" class="tcart-total twidget-total">1</span> <i class="icon-tcart"></i> </a> 
+       <a href="javascript:history.go(-1);" class="e_toggle twidget-toggle"> <span id="tcart_total" class="tcart-total twidget-total">1</span> <i class="icon-tcart"></i> </a> 
        <div class="e_dropdown twidget-dropdown"> 
         <div id="tcart_loading" class="twidget-loading"></div> 
         <div id="tcart_wrapper"></div> 
@@ -159,22 +164,22 @@
      </nav> 
     </div> 
    </header> 
-   <div class="container"> 
+   <div class="container">
     <nav class="breadcrumb" data-geohash="wtw3equp"> 
      <a href="/place/-615736186413943440">登科保洁(长寿路店)</a> 
-     <a class="breadcrumb-switch" href="city.html">[切换地址]</a> 
+     <a class="breadcrumb-switch" href="{{ url('/') }}">[切换地址]</a> 
     <span class="breadcrumb-divider">/</span> @section('name')
     </nav>
     <div class="wash-paper clearfix" id="profile">
     <nav class="profile-nav"> 
       <ul class="nav nav-list"> 
-       <li> <a href="{{ url('/home/personal') }}"> <i class="icon-user"></i> 个人中心 </a> </li> 
+       <li> <a href="{{ url('/home/order/personal') }}"> <i class="icon-user"></i> 个人中心 </a> </li> 
        <li class="divider"></li> 
-       <li class="nav-header">饿单中心</li> 
-       <li> <a href="member_order.html"> <i class="icon-calendar"></i> 最近一个月 </a> </li> 
-       <li> <a href="member_order_month.html"> <i class="icon-list-alt"></i> 一个月之前 </a> </li> 
-       <li> <a href="member_comments.html"> <i class="icon-star-empty"></i> 未点评饿单 </a> </li> 
-       <li> <a href="member_order_refund.html"> <i class="icon-file"></i> 退单中饿单 </a> </li> 
+       <li class="nav-header">定单中心</li> 
+       <li> <a href="{{ url('/home/order/neworder') }}"> <i class="icon-list-alt"></i> 新提交订单 </a> </li> 
+       <li> <a href="{{ url('/home/order/handle') }}"> <i class="icon-star-empty"></i> 处理中订单 </a> </li> 
+       <li> <a href="{{ url('/home/order/overorder') }}"> <i class="icon-calendar"></i> 已完成订单 </a> </li> 
+
        <li class="divider"></li> 
        <li class="nav-header">我的收藏</li> 
        <li> <a href="member_collect_shop.html"> <i class="icon-heart"></i> 我收藏的餐厅 </a> </li> 
@@ -186,8 +191,7 @@
        <li class="divider"></li> 
        <li class="nav-header">安全中心</li> 
        <li> <a href="{{ url('/home/personal/pwdindex') }}"> <i class="icon-cog"></i> 修改密码 </a> </li> 
-  
-        
+
 
        <li> <a href="member_safe_set.html"> <i class="icon-lock"></i> 安全设置 </a> </li> 
        <li class="divider"></li> 
@@ -198,19 +202,12 @@
 
      <div class="main-content"> 
       <div class="content-header"> 
-    
 
 @section('content')
   
   
 
 @show
-
-<!-- 
-@section('zuo')
-
-@show -->
-    
  
    <footer class="site-footer"> 
     <p class="sfooter-link-list"> <a class="sfooter-link" href="http://kaidian.ele.me">我要开店</a> <a class="sfooter-link" href="contact.html">联系我们</a> <a class="sfooter-link" href="agreement.html">服务条款和协议</a> <a class="sfooter-link" href="sitemaps.html">站点地图</a> <a class="sfooter-link" href="http://jobs.ele.me">加入我们</a> </p> 
@@ -226,6 +223,7 @@
                 }
             });
   </script>
+
 
 @section('js')
 

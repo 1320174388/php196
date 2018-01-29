@@ -159,6 +159,16 @@ Route::group(['prefix'=>'shop','namespace'=>'Shop','middleware'=>['shopislogin',
     Route::post('admin/webEdit/{id}','AdminController@webEdit');
     // 删除食品
     Route::get('admin/webDel/{id}','AdminController@webDel');
+    // 提交订单
+    Route::get('admin/order_index','OrderController@index');
+    // 订单详情
+    Route::post('admin/order_detail','OrderController@detail');
+    // 处理订单提交
+    Route::post('admin/order_edit','OrderController@edit');
+    // 处理中订单
+    Route::get('admin/order_handle','OrderController@handle');
+    // 完成订单
+    Route::get('admin/order_show','OrderController@show');
 
 });
 
@@ -174,11 +184,23 @@ Route::get('/home/personal/addrindex', 'Home\Personal\PersonalController@addrind
 Route::post('/home/personal/addradd', 'Home\Personal\PersonalController@addradd');
 Route::post('/home/personal/delete/{id}', 'Home\Personal\PersonalController@delete');
 
-//购物车
-Route::get('/home/shop/index/{id}', 'Home\Shop\ShopController@index');
-Route::get('/home/shop/buy/{id}', 'Home\Shop\ShopController@buy');
-Route::post('/home/shop/details', 'Home\Shop\ShopController@details');
-Route::post('/home/shop/addfood', 'Home\Shop\ShopController@addfood');
-Route::post('/home/shop/delfood', 'Home\Shop\ShopController@delfood');
-Route::get('/home/shop/settle', 'Home\Shop\ShopController@settle');
-Route::post('/home/shop/orderss', 'Home\Shop\ShopController@orderss');
+
+//购物车，订单
+Route::group(['prefix'=>'home/shop', 'namespace' => 'Home\Shop'],function(){
+        Route::get('index/{id}', 'ShopController@index');
+        Route::get('buy/{id}', 'ShopController@buy');
+        Route::post('details', 'ShopController@details');
+        Route::post('addfood', 'ShopController@addfood');
+        Route::post('delfood', 'ShopController@delfood');
+        Route::get('settle', 'ShopController@settle');
+        Route::post('orderss', 'ShopController@orderss');
+});
+
+Route::group(['prefix' => 'home/order', 'namespace' => 'Home\Order'], function(){
+    Route::get('neworder', 'OrderController@neworder');
+    Route::get('overorder', 'OrderController@overorder');
+    Route::post('detail', 'OrderController@detail');
+    Route::get('handle', 'OrderController@handle');
+    Route::post('edit', 'OrderController@edit');
+});
+

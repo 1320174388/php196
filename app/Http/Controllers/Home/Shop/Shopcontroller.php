@@ -37,7 +37,7 @@ class Shopcontroller extends Controller
     }
     // 执行 ajax 购物车添加 操作
     public function details(Request $request)
-    {      
+    {
 
         $food_id = $request->input('food_id');
         $user_id = $request->input('user_id');
@@ -224,7 +224,7 @@ class Shopcontroller extends Controller
         }
         $order_row = $data_order->save();
         $details_row = \DB::table('data_order_details')->insert($data);
-
+        
         if($cart && $order_row && $details_row){
             \DB::commit();
             return redirect('/');
