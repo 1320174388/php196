@@ -141,7 +141,6 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
      </div> 
 
      <div id="topbar_msg" class="eleme_dropdown topbar-widget empty"> 
-      <a class="e_toggle twidget-toggle"> <span id="tmsg_total" class="tmsg-total twidget-total">0</span> <i class="glyph-message topbar-glyph"></i> </a> 
       <div class="e_dropdown twidget-dropdown"> 
        <div id="tmsg_loading" class="twidget-loading"></div> 
        <div id="tmsg_wrapper"></div> 
@@ -158,10 +157,18 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
        <li><a id="topbar_logout" class="tuser-link" href="/home/shop/http://ele.me/logout"><i class="glyph-off"></i>退出登录</a></li> 
       </ul> 
      </div> 
-     <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 
-      <a href="/home/shop/login.html">登录</a> / 
-      <a href="/home/shop/register.html">注册</a> 
+     @if(!session('home_user'))
+      <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 
+      <a href="{{ url('/login') }}">登录</a> / 
+      <a href="{{ url('/login') }}">注册</a> 
      </div> 
+      
+      @else
+      <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 
+      <a href="">{{ session('home_user')->name }}</a>
+      
+     </div> 
+     @endif
     </nav> 
    </div> 
   </header> 

@@ -17,24 +17,27 @@ use App\Models\data_rest_comment;
 class Shopcontroller extends Controller
 {
     public function index($id)
-    {
+    {   
 
     	$address = data_address_town::find($id);
 
     	$name = $address->name; // 获取地址名称
 
-		$rest = $address->data_rest()->get();
+		$rest = $address->data_rest()->where('status', 2)->get();
 		// dd($rest);
     	return view('home.shop.index', compact('name', 'rest'));
     }
 
     public function buy($id)
-    {
+    {   
+
     	$food = data_user::where('id', $id)->first();
 
     	$food = $food->data_rest_food()->paginate(8);
 
-    	return view('home.shop.shop_photos', compact('food','id'));
+        $rest_id = data_rest::where('user_id', $id)->first();
+
+    	return view('home.shop.shop_photos', compact('food', 'id', 'rest_id'));
     }
     // 执行 ajax 购物车添加 操作
     public function details(Request $request)
@@ -224,22 +227,26 @@ class Shopcontroller extends Controller
     public function ajax(Request $request)
     {
         $all = $request->all();
+       if(session('home_user')){
+            $user_id = session('home_user')->id;
 
-        $user_id = session('home_user')->id;
+            $comment = new data_rest_comment;
+            $comment->user_id = $user_id;
+            $comment->rest_id = $all['rid'];
+            $comment->content = $all['txar'];
+            $comment->status = $all['stf'];
+            $comment->time = time();
+            $res = $comment->save();
 
-        $comment = new data_rest_comment;
-        $comment->user_id = $user_id;
-        $comment->rest_id = $all['rid'];
-        $comment->content = $all['txar'];
-        $comment->status = $all['stf'];
-        $comment->time = time();
-        $res = $comment->save();
-
-        if($res){
-            return 1;
-        }else{
-            return 2;
-        }
+            if($res){
+                return 1;
+            }else{
+                return 2;
+            }
+       }else{
+            return 3;
+       }
+      
 
     }
 
