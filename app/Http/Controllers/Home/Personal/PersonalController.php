@@ -140,8 +140,7 @@ class PersonalController extends Controller
     }
 
     public function addrindex()
-    {
-
+    { 
         $did = session('home_user')->id;
 
         $user_addr = data_user_addr::where('user_id', $did)->get();
@@ -151,7 +150,15 @@ class PersonalController extends Controller
 
     public function addradd(Request $request)
     {
-
+        $this->validate($request,[
+            'address'=>'required',
+            'addr_phone'=>'required|numeric|digits_between:10,11',
+        ],[
+            'address.required'=>'请填写详细地址',
+            'addr_phone.required'=>'请填写正确手机号',
+            'addr_phone.digits_between'=>'请填写正确手机号',
+            'addr_phone.numeric'=>'请填写正确手机号',
+        ]);
         $newaddr = $request->except('_token');
         // dd($newaddr);
         $addr = new data_user_addr;

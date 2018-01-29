@@ -60,6 +60,13 @@
     </div> 
    </div> 
    <script>
+   var add_address_submit = 0;
+   $('#add_address_submit').on('click',function(){
+    if(add_address_submit >= 1){
+      return false;
+    }
+    add_address_submit++;
+   });
         function del(id){
   
             //询问框

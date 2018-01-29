@@ -52,16 +52,21 @@
     <h1 class="header-logo"><i class="glyph-logo-eleme glyph"></i>php196,外卖系统</h1> 
     @if(session('home_user'))
       <div id="home_user_true" class="header-account"> 
-       <a class="link" href="">{{ session('home_user')->name }}</a> / 
-       <a  class="link" href="{{ url('/logout') }}">退出</a>
+        <a class="link" href="{{ url('home/personal') }}">{{ session('home_user')->name }}</a> / 
+        <a  class="link" href="{{ url('/logout') }}">退出</a> / 
+        @if(session('home_user_rest'))
+          <a class="link" href="{{ url('/shop/admin') }}" target="_blank">我的店铺</a> 
+        @else
+          <a class="link" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
+        @endif
       </div> 
     @else
       <div id="home_user_true" class="header-account"> 
-       <a class="link" href="{{ url('login') }}">登录</a> / 
-       <a class="link" href="{{ url('register') }}">注册</a> 
+        <a class="link" href="{{ url('login') }}">登录</a> / 
+        <a class="link" href="{{ url('register') }}">注册</a> / 
+        <a class="link" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
       </div> 
     @endif
-    
    </header> 
    <div class="map-container"> 
     <div id="mask" class="map-mask ui_hide"></div> 
@@ -111,16 +116,6 @@
      点击地图直接定位
     </div> 
    </div> 
-   <footer class="homepage-footer"> 
-    <a class="footer-nav" href="http://ele.me/mobile" target="_blank">手机应用</a>
-    @if(session('home_user_rest'))
-      <a class="footer-nav" href="{{ url('/shop/admin') }}" target="_blank">我的店铺</a> 
-    @else
-      <a class="footer-nav" href="{{ url('shop/register') }}" target="_blank">我要开店</a> 
-    @endif 
-    <a class="footer-nav" href="http://ele.me/links" target="_blank">友情链接</a> 
-    <a class="footer-nav" href="http://ele.me/sitemap" target="_blank">网站地图</a> 
-   </footer> 
   </div> 
   <script src="http://map.qq.com/api/js?v=2.exp&amp;key=IZIBZ-73ARP-2SPDH-LXOGG-BRP3K-4WFCZ"></script>
   <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>

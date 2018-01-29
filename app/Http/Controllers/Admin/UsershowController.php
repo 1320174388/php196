@@ -101,7 +101,7 @@ class UsershowController extends Controller
         }
 
         if($user){
-            return redirect('/admin/user/index')->with(['info' => '更新成功']);
+            return redirect('/admin/user')->with(['info' => '更新成功']);
         }else{
             return back()-with(['info'=>'更新失败']);
         }

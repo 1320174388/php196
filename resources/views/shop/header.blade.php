@@ -25,7 +25,7 @@
 		<div class="view-topbar">
 			<div class="topbar-console">
 				<div class="tobar-head fl">
-					<a href="#" class="topbar-logo fl">
+					<a href="{{ url('/') }}" class="topbar-logo fl">
 					<span><img src="/Tpshop/Images/logo.png" width="20" height="20"/></span>
 					</a>
 					<a href="{{ url('shop/admin') }}" class="topbar-home-link topbar-btn text-center fl"><span>@yield('shop')</span></a>

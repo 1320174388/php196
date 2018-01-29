@@ -181,10 +181,10 @@
  <s class="J_Marker marker"></s>
  <span class="marker-tip">寄送至</span>
    <div class="address-info">
-@if($arrdz)
+@if(!empty($arrdz))
   @foreach($arrdz as $k=>$v)
    <label name="address" for="" class="user-address">
-        <input type="radio" value="{{ $v->address }}" name="address"> 地址： {{ $v->address }} <br />
+        <input type="radio" value="{{ $v->address }}" name="address"> 地址： {{ $v->address }} 电话: {{ $v->addr_phone }} <br />
    </label>
   @endforeach
   <h4><a href="{{ url('/home/personal/addrindex') }}" target="_blank">填写新地址</a></h4>
@@ -206,10 +206,6 @@
 
 </div>
  <li><em>收货人:</em><span name="user_name" value="{{ session('home_user')->name }}" id="J_AddrNameConfirm">{{ session('home_user')->name }}  </span></li>
- 
-@if($arrdz)
-    <li><em>电话:</em><span name="addr_phone" value="{{ $v->addr_phone }}" id="J_AddrNameConfirm">{{ $arrdz[0]->addr_phone }} </span></li>
-@endif
  </ul>
      </div>
  </div>

@@ -117,7 +117,7 @@ class AdminController extends Controller
             }
 
             $data = data_food_cate::where('id',$id)->first();
-            $data = $data->data_rest_food()->get();
+            $data = $data->data_rest_food()->get()->toArray();
 
             if($data){
                 return back()->with('shop_error_3','1');

@@ -48,29 +48,30 @@ class Shopcontroller extends Controller
             return 0;
         }
 
-        $data_user_cart = data_user_cart::where('food_id',$food_id);
-        $rows = $data_user_cart->first();
+        if($food_id != 0 ){
+            $data_user_cart = data_user_cart::where('food_id',$food_id);
+            $rows = $data_user_cart->first();
 
-        if($rows){
-            $number = $rows->number + 1;
-            $data_user_cart->delete();
+            if($rows){
+                $number = $rows->number + 1;
+                $data_user_cart->delete();
+            }else{
+                $number = 1;
+            }
+     
+            $rest = new data_user_cart;
+            
+            $rest->food_id = $food_id;
+            $rest->user_id = $user_id;
+            $rest->number = $number;
+
+            $food_price = data_rest_food::where('id',$food_id)->first()->price;
+            $rest->price = $food_price * $number;
+
+            $res = $rest->save();
         }else{
-            $number = 1;
+            $res = 1;
         }
-        
- 
-        $rest = new data_user_cart;
-        
-        $rest->food_id = $food_id;
-        $rest->user_id = $user_id;
-        $rest->number = $number;
-
-        $food_price = data_rest_food::where('id',$food_id)->first()->price;
-        $rest->price = $food_price * $number;
-
-        $res = $rest->save();
-
-
 
         if($res){
             $arr = \DB::table('data_user_carts')->select('data_user_carts.food_id', 'data_rest_foods.name','data_user_carts.number','data_user_carts.price')
@@ -266,8 +267,7 @@ class Shopcontroller extends Controller
     }
 
     public function orderss(Request $request)
-    {   
-
+    {
         $this->validate($request,[
             'address'=>'required',
             'text' => 'max:30',
@@ -302,10 +302,12 @@ class Shopcontroller extends Controller
         }
         $order_row = $data_order->save();
         $details_row = \DB::table('data_order_details')->insert($data);
-        
+
+        $id = $request->input('rest_id');
+
         if($cart && $order_row && $details_row){
             \DB::commit();
-            return redirect('/');
+            return redirect('/home/shop/buy/'. $id);
         }else{
             \DB::rollback();
             return back();
