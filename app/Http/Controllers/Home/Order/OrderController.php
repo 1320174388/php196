@@ -21,7 +21,7 @@ class OrderController extends Controller
                                           ->paginate(6);
 
 		return view('home.order.neworder', compact('order'));
-	
+
 	}
 
 	public function overorder()
