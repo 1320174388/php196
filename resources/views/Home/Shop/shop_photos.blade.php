@@ -84,12 +84,14 @@
        <span class="rst-data-info unit">起送价/元</span> 
       </div> </li> 
     </ul> 
-    <div class="rst-fav-wrapper"> 
-     <div id="rst_fav" class="rst-block rst-fav"> 
-      <i class="glyph">♥</i> 
-      <span class="status" data-unfaved="收藏 餐厅" data-faved="已收藏">收藏 餐厅</span> 
-     </div> 
-    </div> 
+
+                    <div class="rst-fav-wrapper">
+                       <div id="rst_fav" class="rst-block rst-fav">
+                          <i shoucang="1" class="glyph shoucang">♥</i>
+                          <span class="status " data-unfaved="收藏 餐厅" data-faved="已收藏">收藏 餐厅</span>
+                       </div>
+                    </div> 
+
    </div> 
   </div> 
 
@@ -456,4 +458,36 @@
     }();
 
     </script> 
+
+  
+  <script type="text/javascript">
+
+          $(".shoucang").on('click', function(){
+              $.ajax({
+                  url:"{{ url('/shoucang') }}",
+                  data: { 'id': {{ $id }}, '_token':"{{ csrf_token() }}" },
+                  type:'post',
+                  success:function(data){
+                    console.log(data);
+                    if(data == 1)
+                    {
+                      
+                      layer.msg('收藏成功');
+                      $('.shoucang').attr('style','color:red');
+                    }
+                    else if(data == 2){
+
+                      layer.msg('取消收藏');
+                      $('.shoucang').attr('style','color:#ccc');
+                    }
+
+
+                  },
+                  dateType:'json'
+            });
+          });
+
+  </script>
+
+
 @endsection

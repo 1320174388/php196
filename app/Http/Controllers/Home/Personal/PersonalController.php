@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\data_user_addr;
 use App\Models\data_order_detail;
 use App\Models\data_order;
+use App\Models\shoucang;
 use Illuminate\Support\Facades\Redis;
 
 
@@ -187,7 +188,6 @@ class PersonalController extends Controller
 
             $res = data_user_addr::find($id)->delete();
 
-
             if($res){
             $data = [
                 'status'=>0,
@@ -204,5 +204,38 @@ class PersonalController extends Controller
 //        json_encode($data);
 
         return $data;
+    }
+
+    public function shoucang(Request $request)
+    {
+
+        $sc = new shoucang;
+
+        $rest_id = $request->input('id');
+        
+        $user_id = session('home_user')->id;
+
+        $row = shoucang::where('user_id', $user_id)->where('rest_id', $rest_id);
+        $rows = $row->first();
+
+        if($rows)
+        {
+            $row->delete();
+            $res = 0;
+        }else
+        {
+            $sc->rest_id = $rest_id;
+            $sc->user_id = $user_id;
+            $res = $sc->save();
+        }
+
+        if($res)
+        {
+            return 1;
+
+        }else
+        {
+            return 2;
+        }
     }
 }

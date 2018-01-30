@@ -20,7 +20,7 @@ class ShopController extends Controller
     	// 获取当前城市的信息
     	$city_addr = $pro_addr->data_address_city()->first();
 		// 获取所有区县的信息
-    	$town = $city_addr->data_address_town()->get(); 
+    	$town = $city_addr->data_address_town()->get();
 
     	return view('shop.register',['province'=>$province,'city'=>$city,'town'=>$town,'town'=>$town]);
     }

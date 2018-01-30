@@ -30,13 +30,12 @@ class Shopcontroller extends Controller
 
     public function buy($id)
     {   
-
     	$food = data_user::where('id', $id)->first();
-
+        
     	$food = $food->data_rest_food()->paginate(8);
 
-        $rest_id = data_rest::where('user_id', $id)->first();
-
+        $rest_id = data_rest::where('user_id', $id)->find($id);
+        
     	return view('home.shop.shop_photos', compact('food', 'id', 'rest_id'));
     }
     // 执行 ajax 购物车添加 操作
