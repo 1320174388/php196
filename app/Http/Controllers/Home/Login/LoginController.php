@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home\Login;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_user;
+use App\Models\data_user_detail;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 
@@ -170,21 +171,30 @@ class LoginController extends Controller
       $data['status'] = 1;
       $data['avatar'] = 'default.jpg';
       
+      \DB::beginTransaction();
+
+        //发送添加
+      $res = data_user::create($data);
+      $data_user_detail = new data_user_detail;
 
         //实例化一个model表
-      $data_user = new data_user;
+      $arr = [];
+      $arr['money'] = 0;
+      $arr['user_id'] = $res->id;
 
-        //添加数据
-      foreach($data as $k=>$v){
-        $data_user->$k = $v;
+      //添加数据
+      foreach($arr as $k=>$v){
+        $data_user_detail->$k = $v;
       }
         //发送添加
-      $res = $data_user -> save();
+      $resd = $data_user_detail -> save();
 
         //判断是否添加成功
-      if($res){
+      if($res && $resd){
+        \DB::commit();
        	return redirect('/login')->with('errors','注册成功,请登录');
       }else{
+        \DB::rollback();
        	return back()->with('errors','注册失败')->withInput();
       }
       

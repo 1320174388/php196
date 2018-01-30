@@ -9,6 +9,8 @@ class data_user_detail extends Model
 
 	public $table = 'data_user_details';
 
+	public $timestamps = false;
+
 	public function data_user()
     {	
         return $this->belongsTo('App\Models\data_user','user_id','id');

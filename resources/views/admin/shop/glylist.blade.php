@@ -6,6 +6,7 @@
 			<div class="finance-content-middle-title">
 				<h4>店铺列表</h4>
 			</div>
+				<center>
 			<div>
 			<form id="frm" action="shop" method="get" class="form-inline">
 				<div class="form-group">
@@ -43,10 +44,6 @@
 				    <input type="text" name="name" class="form-control" id="exampleInputName2" value="{{ $where['name'] }}">
 				  </div>
 				  <div class="form-group">
-				    <label for="exampleInputName2">店主名称</label>
-				    <input type="text" name="user_id" class="form-control" id="exampleInputName2">
-				  </div>
-				  <div class="form-group">
 					<label for="exampleInputName2">店铺状态</label>
 					<select id="select"  class="form-control">
 					  <option value=""
@@ -74,6 +71,8 @@
 				  <button id="btn" type="submit" class="btn btn-default">查询</button>
 			</form>
 			</div>
+
+				  </center>
 			<div class="finance-content-middle-form">
 				<div class="finance-add-agent finance-add-agent-color">
 					<table>

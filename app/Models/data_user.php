@@ -8,6 +8,8 @@ class data_user extends Model
 {
 	public $table = 'data_users';
 
+    public $guarded = [];
+
 //    定义关联表的主键
     public $primaryKey = 'id';
 

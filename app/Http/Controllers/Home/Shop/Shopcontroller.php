@@ -170,7 +170,7 @@ class Shopcontroller extends Controller
     }
     // 评论
     public function comment($id)
-    {  
+    {
         $rest = data_rest::where('user_id',$id)->first();
 
         $users = \DB::table('data_rest_comments')
@@ -181,7 +181,7 @@ class Shopcontroller extends Controller
             ->orderBy('id','desc')
             ->paginate(10);
 
-        $obj = data_rest_comment::where('user_id',$id)->get();
+        $obj = data_rest_comment::where('rest_id',$id)->get();
         $arr = $obj->toArray();
         $num = count($arr);
 

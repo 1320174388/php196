@@ -187,7 +187,7 @@
   <script type="text/javascript">
   @if($users)
     @foreach($users as $v)
-      $('#80s').append('<section class="rst_rating_wrap"><div class="rst-block rst-rating-block"><p class="rst-rating-dish"><img style="width:30px;border-radius:50%;" src="/uploads/{{ $v->avatar }}"><i class="icon-d-star s{{ $v->status }}"></i> <span style="font-size:20px;color:blue;">{{ $v->name }}</span></p><p class="rst-rating-text">{{ $v->content }}</p><p class="rst-rating-info">{{ date("Y-m-d H:i:s",$v->time) }}</p></div></section>');
+      $('#80s').append('<section class="rst_rating_wrap"><div class="rst-block rst-rating-block"><p class="rst-rating-dish"><img style="width:30px;border-radius:50%;" src="{{ url('/uploads/'.$v->avatar) }}"><i class="icon-d-star s{{ $v->status }}"></i> <span style="font-size:20px;color:blue;">{{ $v->name }}</span></p><p class="rst-rating-text">{{ $v->content }}</p><p class="rst-rating-info">{{ date("Y-m-d H:i:s",$v->time) }}</p></div></section>');
     @endforeach
   @endif
 
