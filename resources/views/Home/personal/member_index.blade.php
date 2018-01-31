@@ -1,6 +1,5 @@
 @extends('layout.home.personal.personal')
 
-
 @section('content')
     @section('name', '个人中心')
        <h2>个人中心</h2>

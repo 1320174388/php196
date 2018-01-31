@@ -1,4 +1,4 @@
-@extends('layout.home.shop.shop')
+@extends('layout.home.shop.details')
 @section('title', '商品')
 @section('content')
 
@@ -136,7 +136,7 @@
      <a class="dish-favor favor_btn" title="收藏">♥</a> 
      <a class="photo-like like_btn" title="给这张图片点赞"> 赞<span class="photo-like-count like_count ui_hide">0</span> </a> 
      <div class="album-dish"> 
-      <div class="album-dish-name food_name" title="{{ $v->name }}" >{{ $v->name }}</div> 
+      <div class="album-dish-name food_name" title="{{ $v->name }}" >{{ $v->name }}</div>
       <div class="album-dish-rating"> 
        <i class="icon-d-star s0"></i>
       </div>
@@ -459,9 +459,7 @@
 
     </script> 
 
-  
-  <script type="text/javascript">
-
+<script type="text/javascript">
           $(".shoucang").on('click', function(){
               $.ajax({
                   url:"{{ url('/shoucang') }}",
@@ -471,23 +469,17 @@
                     console.log(data);
                     if(data == 1)
                     {
-                      
                       layer.msg('收藏成功');
                       $('.shoucang').attr('style','color:red');
                     }
                     else if(data == 2){
-
                       layer.msg('取消收藏');
                       $('.shoucang').attr('style','color:#ccc');
                     }
-
-
                   },
                   dateType:'json'
             });
           });
-
-  </script>
-
+</script>
 
 @endsection

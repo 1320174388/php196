@@ -119,15 +119,15 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
       <a id="ts_clear" class="icon-tsclear hide"></a> 
      </form> 
      <div id="tsearch_autocomplete" class="tsearch-autocomplete"></div> 
-    </div> 
-    <nav class="topbar-nav" role="navigation"> 
+    </div>
+    <nav class="topbar-nav" role="navigation">
+
      <ul class="topbar-site-nav"> 
       <li><a class="tnav-link" href="/home/shop/http://ele.me/profile/order">我的饿单</a></li> 
       <li><a class="tnav-link" href="/home/shop/gift.html">礼品中心</a></li> 
-      <li><a id="tdp_link" class="tnav-link hide" href="/home/shop/http://t.dianping.com" target="_blank">附近团购</a></li> 
-      <li><a class="tnav-link" href="/home/shop/support.html">联系客服</a></li> 
+      <li><a class="tnav-link" href="{{ url('/home/shoucang') }}">我的收藏</a></li> 
       <li><a class="tnav-link" href="{{ url('/home/personal') }}">个人中心</a></li> 
-     </ul> 
+     </ul>
 
      <div class="eleme_dropdown topbar-widget topbar-cart empty" height="200px;">
       <a class="e_toggle twidget-toggle"> <span id="tcart_total" class="tcart-total twidget-total">0</span><i class="glyph-cart topbar-glyph"></i></a> 
@@ -161,12 +161,12 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
       <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 
       <a href="{{ url('/login') }}">登录</a> / 
       <a href="{{ url('/login') }}">注册</a> 
-     </div> 
-      
+     </div>
+
       @else
       <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 
       <a href="">{{ session('home_user')->name }}</a>
-      
+
      </div> 
      @endif
     </nav> 
@@ -175,13 +175,7 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
    @section('content')
 
    @show
-    
-   <div id="site_fixed" class="site-fixed"> 
-<!--     <a id="back_top" class="btn-back-top ui_invisible" role="button" title="回顶部"><i class="icon-backtop"></i></a> 
-    <div class="btn-app-qrcode"> 
-     <i class="icon-qrcode"></i> 
-     <img class="img-qrcode" src="{{ asset('/home/shop/images/app-qrcode.png') }}" alt="扫描二维码免费下载手机App" /> 
-    </div>  -->
+   <div id="site_fixed" class="site-fixed">
     <a class="btn-setup-shop" href="http://kaidian.ele.me" target="_blank">我要开店</a>
     <a class="btn-setup-shop" href="help.html" target="_blank">热门问题</a> 
     <!-- Live800在线客服图标:在线客服[文本图标] 开始--> 
@@ -190,13 +184,13 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
           document.getElementById('customerservice').href=
             "/customerservice?jid=1820947377&companyID=402791&configID=123801&title="+encodeURIComponent(document.title);
           </script> 
-    <!-- 在线客服图标:在线客服 结束--> 
-   </div> 
+    <!-- 在线客服图标:在线客服 结束-->
+   </div>
 
    <footer class="site-footer"> 
     <p class="sfooter-link-list"> <a class="sfooter-link" href="http://kaidian.ele.me">我要开店</a> <a class="sfooter-link" href="contact.html">联系我们</a> <a class="sfooter-link" href="agreement.html">服务条款和协议</a> <a class="sfooter-link" href="sitemaps.html">站点地图</a> <a class="sfooter-link" href="http://jobs.ele.me">加入我们</a> </p> 
     <p> 增值电信业务许可证：<a class="sfooter-link sfooter-link-zero" target="_blank" rel="nofollow" href="http://www.shca.gov.cn">沪B2-20150033</a> <a class="sfooter-link" target="_blank" rel="nofollow" href="http://www.miibeian.gov.cn">沪ICP备 09007032</a> <a class="sfooter-link" target="_blank" rel="nofollow" href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&amp;entyId=20120305173227823">上海工商行政管理</a> Copyright &copy;2008-2015 ele.me, All Rights Reserved. </p> 
-   </footer> 
+   </footer>
 
    <div id="modal_globalLogin" class="modal-global-login modal hide fade" aria-hidden="true" tabindex="-1"> 
     <a class="close" aria-hidden="true">&times;</a> 
@@ -204,6 +198,5 @@ if(!window.CDNReady){var d=new Date;d.setHours(d.getHours()+6);document.cookie="
    </div> 
 
   </div>
- 
  </body>
 </html>

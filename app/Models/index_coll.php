@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class shoucang extends Model
+class index_coll extends Model
 {
-    public $table = "shoucang";
+    public $table = "index_colls";
 
     public $timestamps = false;
+
 }
+
+

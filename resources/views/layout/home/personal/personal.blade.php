@@ -154,7 +154,7 @@
        <a class="e_toggle tnav-link tnav-username" data-id="175519">{{ session('home_user')->name }}<i class="caret"></i></a> 
        <ul class="e_dropdown topbar-user-dropdown"> 
         <li><a rel="nofollow" href="member_index.html"><i class="icon-profile"></i>个人中心</a></li> 
-        <li><a rel="nofollow" href="member_collect_shop.html"><i class="icon-fav"></i>我的收藏</a></li> 
+        <li><a rel="nofollow" href="#"><i class="icon-fav"></i>我的收藏</a></li> 
         <li><a rel="nofollow" href="member_addr.html"><i class="icon-address"></i>我的地址</a></li> 
         <li><a rel="nofollow" href="member_safe_set.html"><i class="icon-config"></i>安全设置</a></li> 
         <li class="divider"></li>
@@ -182,7 +182,7 @@
 
        <li class="divider"></li> 
        <li class="nav-header">我的收藏</li> 
-       <li> <a href="member_collect_shop.html"> <i class="icon-heart"></i> 我收藏的餐厅 </a> </li> 
+       <li> <a href="{{ url('/home/shoucang') }}"> <i class="icon-heart"></i> 我收藏的餐厅 </a> </li> 
        <li> <a href="member_collect_food.html"> <i class="icon-star"></i> 我收藏的美食 </a> </li> 
        <li class="divider"></li> 
        <li class="nav-header">账户相关</li> 

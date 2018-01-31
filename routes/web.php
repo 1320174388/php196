@@ -207,5 +207,6 @@ Route::group(['prefix' => 'home/order', 'namespace' => 'Home\Order'], function()
     Route::post('edit', 'OrderController@edit');
 });
 
-Route::post('/shoucang', 'home\personal\PersonalController@shoucang');
-
+Route::post('/shoucang', 'home\Personal\PersonalController@shoucang');
+Route::get('/home/shoucang', 'home\Personal\PersonalController@scindex');
+Route::post('/home/removesc', 'home\Personal\PersonalController@removesc');

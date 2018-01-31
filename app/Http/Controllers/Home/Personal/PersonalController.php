@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\data_user_addr;
 use App\Models\data_order_detail;
 use App\Models\data_order;
-use App\Models\shoucang;
+use App\Models\index_coll;
 use Illuminate\Support\Facades\Redis;
 
 
@@ -185,7 +185,6 @@ class PersonalController extends Controller
     public function delete($id)
     {
 
-
             $res = data_user_addr::find($id)->delete();
 
             if($res){
@@ -208,14 +207,13 @@ class PersonalController extends Controller
 
     public function shoucang(Request $request)
     {
-
-        $sc = new shoucang;
+        $sc = new index_coll;
 
         $rest_id = $request->input('id');
         
         $user_id = session('home_user')->id;
 
-        $row = shoucang::where('user_id', $user_id)->where('rest_id', $rest_id);
+        $row = index_coll::where('user_id', $user_id)->where('rest_id', $rest_id);
         $rows = $row->first();
 
         if($rows)
@@ -237,5 +235,36 @@ class PersonalController extends Controller
         {
             return 2;
         }
+    }
+
+    public function scindex()
+    {   
+        
+        $user_id = session('home_user')->id;
+
+        $rests = \DB::table('index_colls')->select('index_colls.rest_id', 'data_rests.*')
+                                          ->leftJoin('data_rests', 'data_rests.user_id', '=', 'index_colls.rest_id')
+                                          ->where('index_colls.user_id', $user_id)
+                                          ->get();
+
+        // dd($rest_id);
+        return view('home.personal.member_collect', compact('rests'));
+    }
+
+    public function removesc(Request $request)
+    {
+        $rest_id = $request->input('rest_id');
+        $user_id = $request->input('user_id');
+        // return $rest_id;
+        $res = \DB::table('index_colls')->where('rest_id', $rest_id)->where('user_id', $user_id)->delete();
+
+        if($res)
+        {
+            return 1;
+        }else
+        {
+            return 2;
+        }
+
     }
 }

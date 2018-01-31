@@ -30,7 +30,7 @@
       <li><a class="tnav-link" href="http://ele.me/profile/order">我的饿单</a></li> 
       <li><a class="tnav-link" href="gift.html">礼品中心</a></li> 
       <li><a id="tdp_link" class="tnav-link hide" href="http://t.dianping.com" target="_blank">附近团购</a></li> 
-      <li><a class="tnav-link" href="support.html">联系客服</a></li> 
+      <li><a class="tnav-link" href="{{ url('/home/personal/shoucang') }}">我的收藏</a></li>
       <li><a class="tnav-link" href="{{ url('/home/personal') }}">个人中心</a></li> 
      </ul> 
 
@@ -57,12 +57,12 @@
       <a id="t_username" class="e_toggle tnav-link tnav-username caret"></a> 
       <ul class="e_dropdown topbar-user-dropdown"> 
        <li><a class="tuser-link" href="http://ele.me/profile"><i class="glyph-user"></i>个人中心</a></li> 
-       <li><a class="tuser-link" href="http://ele.me/profile/favor_restaurant"><i class="glyph-fav"></i>我的收藏</a></li> 
+       <li><a class="tuser-link" href="#"><i class="glyph-fav"></i>我的收藏</a></li> 
        <li><a class="tuser-link" href="http://ele.me/profile/address"><i class="glyph-location"></i>我的地址</a></li> 
        <li><a class="tuser-link" href="http://ele.me/profile/security"><i class="glyph-config"></i>安全设置</a></li> 
        <li class="divider"></li> 
        <li><a id="topbar_logout" class="tuser-link" href="http://ele.me/logout"><i class="glyph-off"></i>退出登录</a></li> 
-      </ul> 
+      </ul>
      </div>
      @if(!session('home_user'))
       <div id="topbar_logreg" class="topbar-user-nav tnav-link"> 

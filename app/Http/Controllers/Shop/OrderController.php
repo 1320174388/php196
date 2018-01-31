@@ -17,8 +17,8 @@ class OrderController extends Controller
     	$name = $request->input('name');
     	$order_time = $request->input('order_time');
 
-    	$order = \DB::table('data_orders')->select('data_orders.*','data_users.name')
-                                          ->leftJoin('data_users', 'data_orders.user_id','=','data_users.id')
+    	$order = \DB::table('data_orders')->select('data_orders.*','.name')
+                                          ->leftJoin('data_users', 'datadata_users_orders.user_id','=','data_users.id')
                                           ->where('data_orders.rest_id',$rest_id)
                                           ->where('data_orders.status',0)
                                           ->where('data_orders.order_number','like',"%".$order_number."%")
