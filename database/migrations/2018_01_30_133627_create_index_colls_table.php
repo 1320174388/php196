@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShoucangTable extends Migration
+class CreateIndexCollsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateShoucangTable extends Migration
      */
     public function up()
     {
-        Schema::create('shoucang', function (Blueprint $table) {
+        Schema::create('index_colls', function (Blueprint $table) {
             $table->integer('rest_id');
             $table->integer('user_id');
         });
@@ -26,6 +26,6 @@ class CreateShoucangTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shoucang');
+        Schema::dropIfExists('index_colls');
     }
 }

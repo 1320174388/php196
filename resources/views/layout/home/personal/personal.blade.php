@@ -131,7 +131,6 @@
       <ul class="topbar-site-nav"> 
 
        <li><a class="tnav-link current" rel="nofollow" href="member_order.html">我的饿单</a></li> 
-       <li><a class="tnav-link" rel="nofollow" href="gift.html">礼品中心</a></li> 
        <li><a class="tnav-link" rel="nofollow" href="http://t.dianping.com/home?latitude=31.239567&amp;longitude=121.437477&amp;distance=500&amp;utm_source=eleme1&amp;utm_medium=eleme&amp;utm_term=pc&amp;utm_content=1&amp;utm_campaign=f" target="_blank">附近团购</a></li> 
        <li><a class="tnav-link" rel="nofollow" href="support.html">联系客服</a></li> 
        <li><a class="tnav-link" href="{{ url('/home/personal') }}">个人中心</a></li> 
