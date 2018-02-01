@@ -182,7 +182,7 @@
        <li class="divider"></li> 
        <li class="nav-header">我的收藏</li> 
        <li> <a href="{{ url('/home/shoucang') }}"> <i class="icon-heart"></i> 我收藏的餐厅 </a> </li> 
-       <li> <a href="member_collect_food.html"> <i class="icon-star"></i> 我收藏的美食 </a> </li> 
+       <li> <a href="{{ url('/colls/food') }}"> <i class="icon-star"></i> 我收藏的美食 </a> </li> 
        <li class="divider"></li> 
        <li class="nav-header">账户相关</li> 
        <li> <a href="{{ url('/home/personal/addrindex') }}"> <i class="icon-list"></i> 我的地址 </a> </li> 

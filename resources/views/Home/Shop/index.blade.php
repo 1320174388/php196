@@ -252,7 +252,7 @@
               </div> 
               <div class="info"> 
                <div class="name"> 
-                <a class="restaurant-link" href="{{ url('/home/shop/buy') }}/{{ $v->user_id }}" target="_blank">{{ $v->name }}</a> 
+                <a class="restaurant-link" href="{{ url('/home/shop/buy') }}/{{ $v->user_id }}" target="_self">{{ $v->name }}</a> 
                </div>
                <div class="flavors ">
                  中式 

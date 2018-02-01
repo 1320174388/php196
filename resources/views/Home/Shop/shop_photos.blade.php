@@ -87,7 +87,7 @@
 
                     <div class="rst-fav-wrapper">
                        <div id="rst_fav" class="rst-block rst-fav">
-                          <i shoucang="1" class="glyph shoucang">♥</i>
+                          <i class="glyph shoucang" id="shoucang">♥</i>
                           <span class="status " data-unfaved="收藏 餐厅" data-faved="已收藏">收藏 餐厅</span>
                        </div>
                     </div> 
@@ -134,7 +134,7 @@
      <img data-id="{{ $v->id }}" class="images_shop album-cover-img food_img" src="{{ asset('/shopUploads/'.$v->img) }}"/> </a> 
      
      <a class="dish-favor favor_btn" title="收藏">♥</a> 
-     <a class="photo-like like_btn" title="给这张图片点赞"> 赞<span class="photo-like-count like_count ui_hide">0</span> </a> 
+     <a class="photo-like like_btn" title="给这张图片点赞"> 收藏 <span class="photo-like-count like_count ui_hide"></span> </a> 
      <div class="album-dish"> 
       <div class="album-dish-name food_name" title="{{ $v->name }}" >{{ $v->name }}</div>
       <div class="album-dish-rating"> 
@@ -458,14 +458,22 @@
     }();
 
     </script> 
-
+<div id="btn" style="width;500px;height:300px;background:red"></div>
 <script type="text/javascript">
-          $(".shoucang").on('click', function(){
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $("#shoucang").on('click', function(){
+             // alert(123);
               $.ajax({
                   url:"{{ url('/shoucang') }}",
                   data: { 'id': {{ $id }}, '_token':"{{ csrf_token() }}" },
                   type:'post',
+                  dateType:'json',
                   success:function(data){
+                    // alert(123);
                     console.log(data);
                     if(data == 1)
                     {
@@ -477,7 +485,7 @@
                       $('.shoucang').attr('style','color:#ccc');
                     }
                   },
-                  dateType:'json'
+                  
             });
           });
 </script>

@@ -210,3 +210,5 @@ Route::group(['prefix' => 'home/order', 'namespace' => 'Home\Order'], function()
 Route::post('/shoucang', 'home\Personal\PersonalController@shoucang')->middleware('homeislogin');
 Route::get('/home/shoucang', 'home\Personal\PersonalController@scindex')->middleware('homeislogin');
 Route::post('/home/removesc', 'home\Personal\PersonalController@removesc')->middleware('homeislogin');
+
+Route::get('/colls/food', 'home\Personal\PersonalController@colls');

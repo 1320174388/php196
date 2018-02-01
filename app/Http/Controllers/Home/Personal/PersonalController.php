@@ -207,6 +207,9 @@ class PersonalController extends Controller
 
     public function shoucang(Request $request)
     {
+
+        // echo json_encode(['msg'=>'成功']);
+        
         $sc = new index_coll;
 
         $rest_id = $request->input('id');
@@ -266,5 +269,10 @@ class PersonalController extends Controller
             return 2;
         }
 
+    }
+
+    public function colls()
+    {
+        return ;
     }
 }
